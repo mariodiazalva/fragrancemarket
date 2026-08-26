@@ -16,6 +16,7 @@ type ProductCardProps = {
   compareAtPrice?: number;
   image?: string;
   imageAlt?: string;
+  imageSizes?: string;
   rating?: number;
   badges?: string[];
   footer?: ReactNode;
@@ -31,6 +32,7 @@ export function ProductCard({
   compareAtPrice,
   image,
   imageAlt,
+  imageSizes = "(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw",
   rating,
   badges = [],
   footer,
@@ -53,7 +55,7 @@ export function ProductCard({
             src={image}
             alt={imageAlt ?? `${name} de ${brand}`}
             fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            sizes={imageSizes}
             className="object-cover transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         ) : (

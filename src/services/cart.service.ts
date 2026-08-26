@@ -45,3 +45,26 @@ export function pickCartRecommendations(
 
   return [...featured, ...rest].slice(0, limit);
 }
+
+export function toRecommendationProduct(product: Product): Product {
+  return {
+    id: product.id,
+    name: product.name,
+    brand: product.brand,
+    slug: product.slug,
+    description: "",
+    gender: product.gender,
+    category: product.category,
+    type: product.type,
+    price: product.price,
+    compareAtPrice: product.compareAtPrice,
+    images: product.images.slice(0, 1),
+    sizes: product.sizes,
+    notes: { top: [], heart: [], base: [] },
+    fragranceFamily: [],
+    occasions: [],
+    featured: product.featured,
+    bestseller: product.bestseller,
+    stock: product.stock,
+  };
+}

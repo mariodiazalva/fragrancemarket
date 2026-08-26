@@ -35,6 +35,30 @@ const PRODUCT_SELECT = `
   product_notes ( stage, position, fragrance_notes ( name ) )
 `;
 
+const PRODUCT_CARD_SELECT = `
+  id,
+  name,
+  slug,
+  type,
+  gender,
+  price,
+  compare_at_price,
+  stock,
+  fragrance_family,
+  occasions,
+  intensity,
+  rating,
+  rating_count,
+  featured,
+  bestseller,
+  created_at,
+  updated_at,
+  brands ( name ),
+  categories ( slug ),
+  product_variants ( label, volume_ml, price, compare_at_price, stock, sku, sort_order ),
+  product_images ( url, alt, position )
+`;
+
 function mapRows(data: unknown): Product[] {
   return ((data ?? []) as ProductQueryRow[]).map(mapProductRow);
 }
@@ -54,11 +78,26 @@ export const listPublishedProductsFromSupabase = cache(async (): Promise<Product
   return mapRows(data);
 });
 
+export const listPublishedProductCardsFromSupabase = cache(async (): Promise<Product[]> => {
+  const supabase = createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select(PRODUCT_CARD_SELECT)
+    .eq("published", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    throw new Error(`No se pudieron leer los productos del catálogo: ${error.message}`);
+  }
+
+  return mapRows(data);
+});
+
 export async function listFeaturedProductsFromSupabase(limit: number): Promise<Product[]> {
   const supabase = createSupabaseServerClient();
   const { data, error } = await supabase
     .from("products")
-    .select(PRODUCT_SELECT)
+    .select(PRODUCT_CARD_SELECT)
     .eq("published", true)
     .eq("featured", true)
     .order("sort_order", { ascending: true })

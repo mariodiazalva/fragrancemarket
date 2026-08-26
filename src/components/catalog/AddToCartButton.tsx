@@ -2,16 +2,14 @@
 
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
-import { productToCartDraft } from "@/services/cart.service";
-import type { Product } from "@/types";
+import type { CartDraft } from "@/types/cart";
 
 type AddToCartButtonProps = {
-  product: Product;
+  draft: CartDraft;
 };
 
-export function AddToCartButton({ product }: AddToCartButtonProps) {
+export function AddToCartButton({ draft }: AddToCartButtonProps) {
   const { add } = useCart();
-  const draft = productToCartDraft(product);
   const selected = draft.variants.find((variant) => variant.label === draft.sizeLabel);
   const soldOut = (selected?.stock ?? 0) <= 0;
 

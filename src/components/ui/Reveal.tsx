@@ -15,6 +15,10 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      return;
+    }
+
     const node = ref.current;
 
     if (!node) {

@@ -341,3 +341,54 @@ a,
     animation: none;
   }
 }
+
+/* Phones only: skip decorative motion. Desktop styles stay as they are. */
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    text-rendering: optimizeSpeed;
+  }
+
+  #contenido main > section ~ *,
+  [data-reveal],
+  .reveal,
+  .site-footer,
+  .reveal-stagger > *,
+  .reveal.is-visible,
+  [data-reveal].is-visible,
+  .site-footer.is-visible,
+  .is-visible .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+    animation: none;
+  }
+
+  .elova-fade-in,
+  .elova-fade-up,
+  .elova-hero-media,
+  .cart-badge-pop,
+  .cart-line-enter,
+  .mobile-nav[data-open="true"] li {
+    animation: none;
+  }
+
+  .group:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .group:hover img {
+    transform: none !important;
+  }
+
+  #contenido main > * + *,
+  .site-footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 32rem;
+  }
+}

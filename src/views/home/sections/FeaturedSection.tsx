@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getProductBadges } from "@/lib/product";
+import { productToCartDraft } from "@/services/cart.service";
 import type { Product } from "@/types";
 
 type FeaturedSectionProps = {
@@ -36,10 +37,11 @@ export function FeaturedSection({ products }: FeaturedSectionProps) {
                 price={product.price}
                 compareAtPrice={product.compareAtPrice}
                 image={product.images[0]}
+                imageSizes="(max-width: 767px) 85vw, (max-width: 1280px) 33vw, 25vw"
                 rating={product.rating}
                 badges={getProductBadges(product)}
                 footer={
-                  <AddToCartButton product={product} />
+                  <AddToCartButton draft={productToCartDraft(product)} />
                 }
               />
             </div>

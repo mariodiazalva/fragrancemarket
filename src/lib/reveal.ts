@@ -1,4 +1,5 @@
 const REVEAL_CLASS = "is-visible";
+const SKIP_REVEAL_MOTION = "(max-width: 767px), (prefers-reduced-motion: reduce)";
 
 function viewportBottom() {
   const visual = window.visualViewport;
@@ -45,7 +46,7 @@ export function observeReveal(
     });
   };
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (window.matchMedia(SKIP_REVEAL_MOTION).matches) {
     pending.forEach((node) => reveal(node));
     return () => {};
   }

@@ -36,6 +36,10 @@ export function ScrollReveal() {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      return;
+    }
+
     const targets = collectTargets();
 
     if (targets.length === 0) {

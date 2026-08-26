@@ -2,7 +2,7 @@ import { cache } from "react";
 
 import { productSlugAliases } from "@/data/catalog-overrides";
 import { combosComingSoon, withoutHiddenSetProducts } from "@/data/combos";
-import { listFeaturedProducts, listPublishedProducts } from "@/data-access/products";
+import { listFeaturedProducts, listPublishedProductCards, listPublishedProducts } from "@/data-access/products";
 import { productMatchesQuery } from "@/services/search.service";
 import type {
   CatalogFacets,
@@ -135,6 +135,11 @@ function buildFacets(products: Product[]): CatalogFacets {
 
 export async function getProducts(filters?: ProductFilters): Promise<Product[]> {
   const products = withoutHiddenSetProducts(await listPublishedProducts());
+  return applyFilters(products, filters);
+}
+
+export async function getProductCards(filters?: ProductFilters): Promise<Product[]> {
+  const products = withoutHiddenSetProducts(await listPublishedProductCards());
   return applyFilters(products, filters);
 }
 

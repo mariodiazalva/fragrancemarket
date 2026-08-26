@@ -121,7 +121,11 @@ export function CartDrawer() {
           )}
 
           <div className="py-6">
-            <CartRecommendations excludeProductIds={excludeIds} compact />
+            <CartRecommendations
+              excludeProductIds={excludeIds}
+              compact
+              active={isOpen}
+            />
           </div>
         </div>
 

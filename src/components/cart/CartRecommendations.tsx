@@ -14,11 +14,13 @@ import type { Product } from "@/types/product";
 type CartRecommendationsProps = {
   excludeProductIds: string[];
   compact?: boolean;
+  active?: boolean;
 };
 
 export function CartRecommendations({
   excludeProductIds,
   compact = false,
+  active = true,
 }: CartRecommendationsProps) {
   const { add } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
@@ -26,6 +28,12 @@ export function CartRecommendations({
   const limit = compact ? 3 : 4;
 
   useEffect(() => {
+    const isPhone = window.matchMedia("(max-width: 767px)").matches;
+
+    if (isPhone && !active) {
+      return;
+    }
+
     const params = new URLSearchParams({ limit: String(limit) });
 
     if (excludeKey) {
@@ -50,7 +58,7 @@ export function CartRecommendations({
     return () => {
       cancelled = true;
     };
-  }, [excludeKey, limit]);
+  }, [active, excludeKey, limit]);
 
   if (products.length === 0) {
     return null;

@@ -5,7 +5,7 @@ export type ProductQueryRow = {
   id: string;
   name: string;
   slug: string;
-  description: string;
+  description?: string | null;
   type: string;
   gender: string;
   price: number | string;
@@ -14,8 +14,8 @@ export type ProductQueryRow = {
   fragrance_family: string[] | null;
   occasions: string[] | null;
   intensity: number | null;
-  seo_title: string | null;
-  seo_description: string | null;
+  seo_title?: string | null;
+  seo_description?: string | null;
   rating: number | string | null;
   rating_count: number | null;
   featured: boolean;
@@ -42,7 +42,7 @@ export type ProductQueryRow = {
         position: number | null;
       }[]
     | null;
-  product_notes:
+  product_notes?:
     | {
         stage: string;
         position: number | null;

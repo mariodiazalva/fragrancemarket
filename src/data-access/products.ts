@@ -46,3 +46,13 @@ export async function listPublishedProducts(): Promise<Product[]> {
   const { listPublishedProductsFromSupabase } = await loadSupabaseProducts();
   return withProductOverrides(await listPublishedProductsFromSupabase());
 }
+
+export async function listPublishedProductCards(): Promise<Product[]> {
+  if (!isSupabaseConfigured()) {
+    warnMockFallback("Catálogo");
+    return withProductOverrides(listPublishedProductsFromMock());
+  }
+
+  const { listPublishedProductCardsFromSupabase } = await loadSupabaseProducts();
+  return withProductOverrides(await listPublishedProductCardsFromSupabase());
+}

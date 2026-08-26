@@ -1,6 +1,7 @@
 import { AddToCartButton } from "@/components/catalog/AddToCartButton";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { getProductBadges } from "@/lib/product";
+import { productToCartDraft } from "@/services/cart.service";
 import type { Product } from "@/types";
 
 type ProductGridProps = {
@@ -33,7 +34,7 @@ export function ProductGrid({ products, headingLevel = "h2" }: ProductGridProps)
           badges={getProductBadges(product)}
           headingLevel={headingLevel}
           footer={
-            <AddToCartButton product={product} />
+            <AddToCartButton draft={productToCartDraft(product)} />
           }
         />
       ))}

@@ -126,7 +126,7 @@ export function mapProductRow(row: ProductQueryRow): Product {
     name: row.name,
     brand: relationName(row.brands),
     slug: row.slug,
-    description: row.description,
+    description: row.description ?? "",
     gender: asGender(row.gender),
     category: asCategory(relationSlug(row.categories)),
     type: asType(row.type),
