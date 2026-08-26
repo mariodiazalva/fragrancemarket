@@ -112,6 +112,18 @@ import {
   azzaroTheMostWantedParfum,
   azzaroTheMostWantedParfumSlugs,
 } from "@/data/azzaro-the-most-wanted-parfum";
+import {
+  lattafaYaraMoi,
+  lattafaYaraMoiSlugs,
+} from "@/data/lattafa-yara-moi";
+import {
+  lattafaYaraElixir,
+  lattafaYaraElixirSlugs,
+} from "@/data/lattafa-yara-elixir";
+import {
+  lattafaYaraTous,
+  lattafaYaraTousSlugs,
+} from "@/data/lattafa-yara-tous";
 import type { Product } from "@/types";
 
 const sharedNotes = {
@@ -775,6 +787,72 @@ export const catalogExtraProducts: Product[] = [
     { three: 22, five: 32, ten: 52 },
     "2026-08-26",
     "designer",
+  ),
+  decantFrom(
+    {
+      name: lattafaYaraMoi.name,
+      brand: lattafaYaraMoi.brand,
+      description: lattafaYaraMoi.description,
+      gender: lattafaYaraMoi.gender,
+      notes: lattafaYaraMoi.notes,
+      fragranceFamily: lattafaYaraMoi.fragranceFamily,
+      occasions: lattafaYaraMoi.occasions,
+      intensity: lattafaYaraMoi.intensity,
+      intensityScore: lattafaYaraMoi.intensityScore,
+      projection: lattafaYaraMoi.projection,
+      longevity: lattafaYaraMoi.longevity,
+      rating: lattafaYaraMoi.rating,
+      images: lattafaYaraMoi.images,
+      bestseller: false,
+    },
+    lattafaYaraMoiSlugs.perfume,
+    { three: 15, five: 17, ten: 22 },
+    "2026-08-26",
+    "arabian",
+  ),
+  decantFrom(
+    {
+      name: lattafaYaraElixir.name,
+      brand: lattafaYaraElixir.brand,
+      description: lattafaYaraElixir.description,
+      gender: lattafaYaraElixir.gender,
+      notes: lattafaYaraElixir.notes,
+      fragranceFamily: lattafaYaraElixir.fragranceFamily,
+      occasions: lattafaYaraElixir.occasions,
+      intensity: lattafaYaraElixir.intensity,
+      intensityScore: lattafaYaraElixir.intensityScore,
+      projection: lattafaYaraElixir.projection,
+      longevity: lattafaYaraElixir.longevity,
+      rating: lattafaYaraElixir.rating,
+      images: lattafaYaraElixir.images,
+      bestseller: false,
+    },
+    lattafaYaraElixirSlugs.perfume,
+    { three: 16, five: 19, ten: 25 },
+    "2026-08-26",
+    "arabian",
+  ),
+  decantFrom(
+    {
+      name: lattafaYaraTous.name,
+      brand: lattafaYaraTous.brand,
+      description: lattafaYaraTous.description,
+      gender: lattafaYaraTous.gender,
+      notes: lattafaYaraTous.notes,
+      fragranceFamily: lattafaYaraTous.fragranceFamily,
+      occasions: lattafaYaraTous.occasions,
+      intensity: lattafaYaraTous.intensity,
+      intensityScore: lattafaYaraTous.intensityScore,
+      projection: lattafaYaraTous.projection,
+      longevity: lattafaYaraTous.longevity,
+      rating: lattafaYaraTous.rating,
+      images: lattafaYaraTous.images,
+      bestseller: false,
+    },
+    lattafaYaraTousSlugs.perfume,
+    { three: 15, five: 17, ten: 21 },
+    "2026-08-26",
+    "arabian",
   ),
   decantFrom(
     {

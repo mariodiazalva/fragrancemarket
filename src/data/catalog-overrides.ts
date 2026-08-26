@@ -172,6 +172,24 @@ import {
   azzaroTheMostWantedParfumPerfumeSizes,
   azzaroTheMostWantedParfumSlugs,
 } from "@/data/azzaro-the-most-wanted-parfum";
+import {
+  lattafaYaraMoi,
+  lattafaYaraMoiDecantSizes,
+  lattafaYaraMoiPerfumeSizes,
+  lattafaYaraMoiSlugs,
+} from "@/data/lattafa-yara-moi";
+import {
+  lattafaYaraElixir,
+  lattafaYaraElixirDecantSizes,
+  lattafaYaraElixirPerfumeSizes,
+  lattafaYaraElixirSlugs,
+} from "@/data/lattafa-yara-elixir";
+import {
+  lattafaYaraTous,
+  lattafaYaraTousDecantSizes,
+  lattafaYaraTousPerfumeSizes,
+  lattafaYaraTousSlugs,
+} from "@/data/lattafa-yara-tous";
 import type { Product, ProductSize } from "@/types";
 import type { SetItem } from "@/types/content";
 
@@ -827,6 +845,72 @@ const replacements: CatalogReplacement[] = [
     perfumeStock: 10,
     decantStock: 18,
     injectDecantId: "c0000000-0000-4000-8000-000000000062",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "yara-moi",
+      "prod-yara-moi",
+      "c0000000-0000-4000-8000-000000000063",
+    ]),
+    legacyDecantKeys: new Set([
+      "yara-moi-decant",
+      "decant-yara-moi",
+      "c0000000-0000-4000-8000-000000000064",
+    ]),
+    perfumeSlug: lattafaYaraMoiSlugs.perfume,
+    decantSlug: lattafaYaraMoiSlugs.decant,
+    content: lattafaYaraMoi,
+    perfumeSizes: lattafaYaraMoiPerfumeSizes,
+    decantSizes: lattafaYaraMoiDecantSizes,
+    perfumePrice: 133,
+    decantPrice: 17,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000064",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "yara-elixir",
+      "prod-yara-elixir",
+      "c0000000-0000-4000-8000-000000000065",
+    ]),
+    legacyDecantKeys: new Set([
+      "yara-elixir-decant",
+      "decant-yara-elixir",
+      "c0000000-0000-4000-8000-000000000066",
+    ]),
+    perfumeSlug: lattafaYaraElixirSlugs.perfume,
+    decantSlug: lattafaYaraElixirSlugs.decant,
+    content: lattafaYaraElixir,
+    perfumeSizes: lattafaYaraElixirPerfumeSizes,
+    decantSizes: lattafaYaraElixirDecantSizes,
+    perfumePrice: 168,
+    decantPrice: 19,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000066",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "yara-tous",
+      "prod-yara-tous",
+      "c0000000-0000-4000-8000-000000000067",
+    ]),
+    legacyDecantKeys: new Set([
+      "yara-tous-decant",
+      "decant-yara-tous",
+      "c0000000-0000-4000-8000-000000000068",
+    ]),
+    perfumeSlug: lattafaYaraTousSlugs.perfume,
+    decantSlug: lattafaYaraTousSlugs.decant,
+    content: lattafaYaraTous,
+    perfumeSizes: lattafaYaraTousPerfumeSizes,
+    decantSizes: lattafaYaraTousDecantSizes,
+    perfumePrice: 128,
+    decantPrice: 17,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000068",
   },
 ];
 
