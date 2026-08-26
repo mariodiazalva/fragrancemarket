@@ -21,7 +21,10 @@ insert into public.brands (id, name, slug) values
   ('a0000000-0000-4000-8000-000000000016', 'Xerjoff', 'xerjoff'),
   ('a0000000-0000-4000-8000-000000000017', 'Carolina Herrera', 'carolina-herrera'),
   ('a0000000-0000-4000-8000-000000000018', 'French Avenue', 'french-avenue'),
-  ('a0000000-0000-4000-8000-000000000019', 'Al Haramain', 'al-haramain')
+  ('a0000000-0000-4000-8000-000000000019', 'Al Haramain', 'al-haramain'),
+  ('a0000000-0000-4000-8000-000000000020', 'Parfums de Marly', 'parfums-de-marly'),
+  ('a0000000-0000-4000-8000-000000000021', 'Yves Saint Laurent', 'yves-saint-laurent'),
+  ('a0000000-0000-4000-8000-000000000022', 'Azzaro', 'azzaro')
 on conflict (slug) do nothing;
 
 insert into public.categories (id, name, slug) values

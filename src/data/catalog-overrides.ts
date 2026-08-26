@@ -118,6 +118,60 @@ import {
   lattafaKhamrahPerfumeSizes,
   lattafaKhamrahSlugs,
 } from "@/data/lattafa-khamrah";
+import {
+  afnan9amDive,
+  afnan9amDiveDecantSizes,
+  afnan9amDivePerfumeSizes,
+  afnan9amDiveSlugs,
+} from "@/data/afnan-9-am-dive";
+import {
+  parfumsDeMarlyLayton,
+  parfumsDeMarlyLaytonDecantSizes,
+  parfumsDeMarlyLaytonPerfumeSizes,
+  parfumsDeMarlyLaytonSlugs,
+} from "@/data/parfums-de-marly-layton";
+import {
+  lattafaTheKingdom,
+  lattafaTheKingdomDecantSizes,
+  lattafaTheKingdomPerfumeSizes,
+  lattafaTheKingdomSlugs,
+} from "@/data/lattafa-the-kingdom";
+import {
+  lattafaIshqAlShuyukhSilver,
+  lattafaIshqAlShuyukhSilverDecantSizes,
+  lattafaIshqAlShuyukhSilverPerfumeSizes,
+  lattafaIshqAlShuyukhSilverSlugs,
+} from "@/data/lattafa-ishq-al-shuyukh-silver";
+import {
+  lattafaAsadBourbon,
+  lattafaAsadBourbonDecantSizes,
+  lattafaAsadBourbonPerfumeSizes,
+  lattafaAsadBourbonSlugs,
+} from "@/data/lattafa-asad-bourbon";
+import {
+  lattafaFakharBlack,
+  lattafaFakharBlackDecantSizes,
+  lattafaFakharBlackPerfumeSizes,
+  lattafaFakharBlackSlugs,
+} from "@/data/lattafa-fakhar-black";
+import {
+  yvesSaintLaurentMyslf,
+  yvesSaintLaurentMyslfDecantSizes,
+  yvesSaintLaurentMyslfPerfumeSizes,
+  yvesSaintLaurentMyslfSlugs,
+} from "@/data/yves-saint-laurent-myslf";
+import {
+  yvesSaintLaurentYEauDeParfum,
+  yvesSaintLaurentYEauDeParfumDecantSizes,
+  yvesSaintLaurentYEauDeParfumPerfumeSizes,
+  yvesSaintLaurentYEauDeParfumSlugs,
+} from "@/data/yves-saint-laurent-y-eau-de-parfum";
+import {
+  azzaroTheMostWantedParfum,
+  azzaroTheMostWantedParfumDecantSizes,
+  azzaroTheMostWantedParfumPerfumeSizes,
+  azzaroTheMostWantedParfumSlugs,
+} from "@/data/azzaro-the-most-wanted-parfum";
 import type { Product, ProductSize } from "@/types";
 import type { SetItem } from "@/types/content";
 
@@ -575,6 +629,204 @@ const replacements: CatalogReplacement[] = [
     perfumeStock: 10,
     decantStock: 18,
     injectDecantId: "c0000000-0000-4000-8000-000000000044",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "9-am-dive",
+      "prod-9-am-dive",
+      "c0000000-0000-4000-8000-000000000045",
+    ]),
+    legacyDecantKeys: new Set([
+      "9-am-dive-decant",
+      "decant-9-am-dive",
+      "c0000000-0000-4000-8000-000000000046",
+    ]),
+    perfumeSlug: afnan9amDiveSlugs.perfume,
+    decantSlug: afnan9amDiveSlugs.decant,
+    content: afnan9amDive,
+    perfumeSizes: afnan9amDivePerfumeSizes,
+    decantSizes: afnan9amDiveDecantSizes,
+    perfumePrice: 150,
+    decantPrice: 18,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000046",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "layton",
+      "prod-layton",
+      "c0000000-0000-4000-8000-000000000047",
+    ]),
+    legacyDecantKeys: new Set([
+      "layton-decant",
+      "decant-layton",
+      "c0000000-0000-4000-8000-000000000048",
+    ]),
+    perfumeSlug: parfumsDeMarlyLaytonSlugs.perfume,
+    decantSlug: parfumsDeMarlyLaytonSlugs.decant,
+    content: parfumsDeMarlyLayton,
+    perfumeSizes: parfumsDeMarlyLaytonPerfumeSizes,
+    decantSizes: parfumsDeMarlyLaytonDecantSizes,
+    perfumePrice: 990,
+    decantPrice: 87,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000048",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "the-kingdom",
+      "prod-the-kingdom",
+      "c0000000-0000-4000-8000-000000000049",
+    ]),
+    legacyDecantKeys: new Set([
+      "the-kingdom-decant",
+      "decant-the-kingdom",
+      "c0000000-0000-4000-8000-000000000050",
+    ]),
+    perfumeSlug: lattafaTheKingdomSlugs.perfume,
+    decantSlug: lattafaTheKingdomSlugs.decant,
+    content: lattafaTheKingdom,
+    perfumeSizes: lattafaTheKingdomPerfumeSizes,
+    decantSizes: lattafaTheKingdomDecantSizes,
+    perfumePrice: 145,
+    decantPrice: 18,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000050",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "ishq-al-shuyukh-silver",
+      "prod-ishq-al-shuyukh-silver",
+      "c0000000-0000-4000-8000-000000000051",
+    ]),
+    legacyDecantKeys: new Set([
+      "ishq-al-shuyukh-silver-decant",
+      "decant-ishq-al-shuyukh-silver",
+      "c0000000-0000-4000-8000-000000000052",
+    ]),
+    perfumeSlug: lattafaIshqAlShuyukhSilverSlugs.perfume,
+    decantSlug: lattafaIshqAlShuyukhSilverSlugs.decant,
+    content: lattafaIshqAlShuyukhSilver,
+    perfumeSizes: lattafaIshqAlShuyukhSilverPerfumeSizes,
+    decantSizes: lattafaIshqAlShuyukhSilverDecantSizes,
+    perfumePrice: 145,
+    decantPrice: 18,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000052",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "asad-bourbon",
+      "prod-asad-bourbon",
+      "c0000000-0000-4000-8000-000000000053",
+    ]),
+    legacyDecantKeys: new Set([
+      "asad-bourbon-decant",
+      "decant-asad-bourbon",
+      "c0000000-0000-4000-8000-000000000054",
+    ]),
+    perfumeSlug: lattafaAsadBourbonSlugs.perfume,
+    decantSlug: lattafaAsadBourbonSlugs.decant,
+    content: lattafaAsadBourbon,
+    perfumeSizes: lattafaAsadBourbonPerfumeSizes,
+    decantSizes: lattafaAsadBourbonDecantSizes,
+    perfumePrice: 160,
+    decantPrice: 18,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000054",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "fakhar-black",
+      "prod-fakhar-black",
+      "c0000000-0000-4000-8000-000000000055",
+    ]),
+    legacyDecantKeys: new Set([
+      "fakhar-black-decant",
+      "decant-fakhar-black",
+      "c0000000-0000-4000-8000-000000000056",
+    ]),
+    perfumeSlug: lattafaFakharBlackSlugs.perfume,
+    decantSlug: lattafaFakharBlackSlugs.decant,
+    content: lattafaFakharBlack,
+    perfumeSizes: lattafaFakharBlackPerfumeSizes,
+    decantSizes: lattafaFakharBlackDecantSizes,
+    perfumePrice: 143,
+    decantPrice: 17,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000056",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "myslf",
+      "prod-myslf",
+      "c0000000-0000-4000-8000-000000000057",
+    ]),
+    legacyDecantKeys: new Set([
+      "myslf-decant",
+      "decant-myslf",
+      "c0000000-0000-4000-8000-000000000058",
+    ]),
+    perfumeSlug: yvesSaintLaurentMyslfSlugs.perfume,
+    decantSlug: yvesSaintLaurentMyslfSlugs.decant,
+    content: yvesSaintLaurentMyslf,
+    perfumeSizes: yvesSaintLaurentMyslfPerfumeSizes,
+    decantSizes: yvesSaintLaurentMyslfDecantSizes,
+    perfumePrice: 660,
+    decantPrice: 45,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000058",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "y-eau-de-parfum",
+      "prod-y-eau-de-parfum",
+      "c0000000-0000-4000-8000-000000000059",
+    ]),
+    legacyDecantKeys: new Set([
+      "y-eau-de-parfum-decant",
+      "decant-y-eau-de-parfum",
+      "c0000000-0000-4000-8000-000000000060",
+    ]),
+    perfumeSlug: yvesSaintLaurentYEauDeParfumSlugs.perfume,
+    decantSlug: yvesSaintLaurentYEauDeParfumSlugs.decant,
+    content: yvesSaintLaurentYEauDeParfum,
+    perfumeSizes: yvesSaintLaurentYEauDeParfumPerfumeSizes,
+    decantSizes: yvesSaintLaurentYEauDeParfumDecantSizes,
+    perfumePrice: 570,
+    decantPrice: 41,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000060",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "the-most-wanted-parfum",
+      "prod-the-most-wanted-parfum",
+      "c0000000-0000-4000-8000-000000000061",
+    ]),
+    legacyDecantKeys: new Set([
+      "the-most-wanted-parfum-decant",
+      "decant-the-most-wanted-parfum",
+      "c0000000-0000-4000-8000-000000000062",
+    ]),
+    perfumeSlug: azzaroTheMostWantedParfumSlugs.perfume,
+    decantSlug: azzaroTheMostWantedParfumSlugs.decant,
+    content: azzaroTheMostWantedParfum,
+    perfumeSizes: azzaroTheMostWantedParfumPerfumeSizes,
+    decantSizes: azzaroTheMostWantedParfumDecantSizes,
+    perfumePrice: 415,
+    decantPrice: 32,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000062",
   },
 ];
 
