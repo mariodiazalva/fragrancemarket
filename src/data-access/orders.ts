@@ -59,7 +59,9 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
 
   for (const item of input.items) {
     if (!UUID_PATTERN.test(item.productId)) {
-      throw new Error("Hay un producto inválido en el carrito.");
+      throw new Error(
+        "Hay un producto antiguo en el carrito. Vacía el carrito y vuelve a agregar las piezas.",
+      );
     }
 
     if (!item.sizeLabel.trim() || item.quantity < 1 || item.quantity > 12) {

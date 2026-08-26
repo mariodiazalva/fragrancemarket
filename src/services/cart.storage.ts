@@ -1,6 +1,9 @@
 import type { CartItem, CartVariant } from "@/types/cart";
 
-export const CART_STORAGE_KEY = "elova.cart.v1";
+export const CART_STORAGE_KEY = "elova.cart.v2";
+
+const PRODUCT_ID_PATTERN =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export type CartStorage = {
   read: () => CartItem[];
@@ -36,6 +39,7 @@ function isCartItem(value: unknown): value is CartItem {
   return (
     typeof item.lineId === "string" &&
     typeof item.productId === "string" &&
+    PRODUCT_ID_PATTERN.test(item.productId) &&
     typeof item.slug === "string" &&
     typeof item.name === "string" &&
     typeof item.brand === "string" &&
