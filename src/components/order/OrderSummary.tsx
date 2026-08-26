@@ -1,5 +1,5 @@
 import { formatPrice } from "@/lib/utils";
-import { formatShippingAddress } from "@/lib/shipping";
+import { formatBillingAddress, formatShippingAddress } from "@/lib/shipping";
 import { orderStatusLabel, type OrderPaymentSummary } from "@/types/order";
 
 type OrderSummaryProps = {
@@ -43,6 +43,12 @@ export function OrderSummary({ order }: OrderSummaryProps) {
       {order.shipping ? (
         <p className="mt-5 text-sm leading-relaxed text-text-secondary">
           Envío por Shalom a {formatShippingAddress(order.shipping)}
+        </p>
+      ) : null}
+
+      {order.billing ? (
+        <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+          Facturación: {formatBillingAddress(order.billing)}
         </p>
       ) : null}
 

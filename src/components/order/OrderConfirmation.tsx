@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { PaymentInstructions } from "@/components/order/PaymentInstructions";
 import { storePaymentDetails } from "@/data/payments";
 import {
+  billingAddressLines,
   customerFirstName,
   formatPhoneDisplay,
   orderItemCount,
@@ -40,6 +41,9 @@ export function OrderConfirmation({
   const showPayment = phase !== "paid" && order.status !== "paid";
   const addressLines = order.shipping
     ? shippingAddressLines(order.shipping, order.customer)
+    : [];
+  const billingLines = order.billing
+    ? billingAddressLines(order.billing, order.customer)
     : [];
 
   return (
@@ -134,9 +138,9 @@ export function OrderConfirmation({
                 </DetailBlock>
               ) : null}
 
-              {order.shipping ? (
+              {billingLines.length > 0 ? (
                 <DetailBlock title="Dirección de facturación">
-                  {addressLines.map((line) => (
+                  {billingLines.map((line) => (
                     <p key={`billing-${line}`}>{line}</p>
                   ))}
                 </DetailBlock>

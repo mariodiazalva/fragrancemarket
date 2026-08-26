@@ -35,6 +35,7 @@ export function CheckoutView() {
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
   const [agencyId, setAgencyId] = useState("");
+  const [billingLine, setBillingLine] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -136,6 +137,13 @@ export function CheckoutView() {
             carrier: "Shalom",
             agencyId: agency.id,
           },
+          billing: {
+            line: billingLine,
+            district: district || agency.district,
+            city: city || agency.city,
+            department: department || agency.region,
+            dni,
+          },
           items: items.map((item) => ({
             productId: item.productId,
             sizeLabel: item.sizeLabel,
@@ -165,13 +173,21 @@ export function CheckoutView() {
           Checkout
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-text-secondary">
-          Deja tus datos y elige una agencia Shalom. En el siguiente paso te
-          mostramos Yape, Plin y transferencia BCP. El envío a todo el Perú
-          queda en {formatPrice(0)} hasta definir el flete.
+          Deja tus datos de facturación y elige una agencia Shalom. En el
+          siguiente paso te mostramos Yape, Plin y transferencia BCP. El envío a
+          todo el Perú queda en {formatPrice(0)} hasta definir el flete.
         </p>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
-          <form className="space-y-5" onSubmit={onSubmit}>
+          <form className="space-y-8" onSubmit={onSubmit}>
+            <fieldset className="space-y-5">
+              <legend className="font-serif text-xl tracking-[-0.02em] text-text-primary">
+                Facturación
+              </legend>
+              <p className="text-sm leading-relaxed text-text-secondary">
+                Estos datos salen en la factura. El envío va por agencia Shalom,
+                aparte.
+              </p>
             <Input
               label="Nombres (obligatorio)"
               name="firstName"
@@ -217,6 +233,17 @@ export function CheckoutView() {
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
+            />
+            <Input
+              label="Dirección de facturación (obligatorio)"
+              name="billingLine"
+              autoComplete="street-address"
+              required
+              minLength={5}
+              maxLength={160}
+              hint="Calle, número y referencia de tu domicilio."
+              value={billingLine}
+              onChange={(event) => setBillingLine(event.target.value)}
             />
             <div className="flex w-full flex-col gap-2">
               <label
@@ -306,6 +333,12 @@ export function CheckoutView() {
                 ))}
               </select>
             </div>
+            </fieldset>
+
+            <fieldset className="space-y-5">
+              <legend className="font-serif text-xl tracking-[-0.02em] text-text-primary">
+                Envío
+              </legend>
             <ShalomAgencyPicker
               department={department}
               district={district}
@@ -329,6 +362,7 @@ export function CheckoutView() {
                 className="w-full min-w-0 border border-elova-border bg-surface px-4 py-3 text-base text-text-primary placeholder:text-text-secondary/70 focus:border-elova-gold/50 focus:outline-none sm:text-sm"
               />
             </div>
+            </fieldset>
             {error ? (
               <p className="text-sm text-red-700" role="alert">
                 {error}

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { parseShippingAddress } from "@/lib/shipping";
+import { parseBillingAddress, parseShippingAddress } from "@/lib/shipping";
 import { createSupabaseSessionClient } from "@/lib/supabase/session";
 import type { AdminOrder, AdminOrderCustomer, OrderPaymentItem } from "@/types/order";
 
@@ -98,6 +98,7 @@ function mapAdminOrder(value: unknown): AdminOrder | null {
     createdAt,
     notes,
     shipping: parseShippingAddress(row.shipping),
+    billing: parseBillingAddress(row.billing),
     customer: mapCustomer(row.customer),
     items: mapItems(row.items),
   };

@@ -1,4 +1,4 @@
-import type { ShippingAddress } from "@/lib/shipping";
+import type { BillingAddress, ShippingAddress } from "@/lib/shipping";
 
 export type PlaceOrderItem = {
   productId: string;
@@ -13,6 +13,7 @@ export type PlaceOrderInput = {
   dni: string;
   notes?: string;
   shipping: ShippingAddress;
+  billing: BillingAddress;
   items: PlaceOrderItem[];
 };
 
@@ -51,6 +52,7 @@ export type OrderPaymentSummary = {
   currency: string;
   shippingAmount: number;
   shipping: ShippingAddress | null;
+  billing: BillingAddress | null;
   customer: OrderCustomer | null;
   items: OrderPaymentItem[];
 };
@@ -69,6 +71,7 @@ export type AdminOrder = {
   createdAt: string;
   notes: string;
   shipping: ShippingAddress | null;
+  billing: BillingAddress | null;
   customer: AdminOrderCustomer | null;
   items: OrderPaymentItem[];
 };

@@ -1,7 +1,7 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { SubmitButton } from "@/components/account/SubmitButton";
 import { Container } from "@/components/ui/Container";
-import { formatShippingAddress } from "@/lib/shipping";
+import { formatBillingAddress, formatShippingAddress } from "@/lib/shipping";
 import { formatPrice } from "@/lib/utils";
 import { setAdminOrderStatusAction } from "@/services/admin-order.actions";
 import {
@@ -130,7 +130,13 @@ function AdminOrderCard({ order }: { order: AdminOrder }) {
 
       {order.shipping ? (
         <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-          {formatShippingAddress(order.shipping)}
+          Envío: {formatShippingAddress(order.shipping)}
+        </p>
+      ) : null}
+
+      {order.billing ? (
+        <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+          Facturación: {formatBillingAddress(order.billing)}
         </p>
       ) : null}
 

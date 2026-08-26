@@ -1,6 +1,6 @@
 import "server-only";
 
-import { parseShippingAddress } from "@/lib/shipping";
+import { parseBillingAddress, parseShippingAddress } from "@/lib/shipping";
 import { getSignedInEmail } from "@/data-access/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseSessionClient } from "@/lib/supabase/session";
@@ -27,7 +27,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
   const dni = (input.dni ?? "").replace(/\D/g, "");
   const extraNotes = input.notes?.trim() ?? "";
   const shipping = parseShippingAddress(input.shipping);
-  const notes = extraNotes ? `DNI: ${dni}\n${extraNotes}` : `DNI: ${dni}`;
+  const billing = parseBillingAddress({ ...input.billing, dni });
 
   if (!isEmail(email)) {
     throw new Error("El correo no es válido.");
@@ -47,6 +47,10 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
 
   if (!shipping || shipping.carrier !== "Shalom") {
     throw new Error("Elige una agencia Shalom para el envío.");
+  }
+
+  if (!billing) {
+    throw new Error("Completa la dirección de facturación.");
   }
 
   if (!input.items.length) {
@@ -74,24 +78,29 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
     p_email: email,
     p_full_name: fullName,
     p_phone: phoneDigits,
-    p_notes: notes,
+    p_notes: extraNotes,
     p_items: input.items.map((item) => ({
       product_id: item.productId,
       size_label: item.sizeLabel,
       quantity: item.quantity,
     })),
     p_shipping: shipping,
+    p_billing: billing,
   });
 
   if (error) {
     if (/Could not find the function/i.test(error.message)) {
       throw new Error(
-        "El checkout aún no está activo. Ejecuta supabase/migrations/20260818190000_order_shipping.sql.",
+        "El checkout aún no está activo. Ejecuta supabase/migrations/20260826010000_order_billing.sql.",
       );
     }
 
     if (/invalid_shipping/i.test(error.message)) {
       throw new Error("Completa la dirección de envío.");
+    }
+
+    if (/invalid_billing/i.test(error.message)) {
+      throw new Error("Completa la dirección de facturación.");
     }
 
     throw new Error("No se pudo registrar el pedido. Inténtalo de nuevo.");
@@ -222,6 +231,7 @@ function mapOrderSummary(value: unknown): OrderPaymentSummary | null {
     currency,
     shippingAmount: asNumber(row.shippingAmount ?? row.shipping_amount),
     shipping: parseShippingAddress(row.shipping),
+    billing: parseBillingAddress(row.billing),
     customer: mapCustomer(row.customer),
     items,
   };

@@ -1,4 +1,4 @@
-import type { ShippingAddress } from "@/lib/shipping";
+import type { BillingAddress, ShippingAddress } from "@/lib/shipping";
 import { findShalomAgency } from "@/lib/shalom";
 import type { OrderCustomer, OrderPaymentItem, OrderPaymentSummary } from "@/types/order";
 import type { Product } from "@/types/product";
@@ -39,10 +39,26 @@ export function shippingAddressLines(
   customer?: OrderCustomer | null,
 ): string[] {
   return [
-    customer?.fullName,
+    customer?.fullName ? `Destinatario: ${customer.fullName}` : null,
     shipping.line,
     shipping.district,
     [shipping.city, shipping.department].filter(Boolean).join(", "),
+    "Perú",
+  ]
+    .map((line) => line?.trim())
+    .filter((line): line is string => Boolean(line));
+}
+
+export function billingAddressLines(
+  billing: BillingAddress,
+  customer?: OrderCustomer | null,
+): string[] {
+  return [
+    customer?.fullName,
+    billing.dni ? `DNI ${billing.dni}` : null,
+    billing.line,
+    billing.district,
+    [billing.city, billing.department].filter(Boolean).join(", "),
     "Perú",
     formatPhoneDisplay(customer?.phone),
   ]

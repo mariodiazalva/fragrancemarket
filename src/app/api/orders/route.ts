@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
       dni: String(body.dni ?? ""),
       notes: body.notes ? String(body.notes) : "",
       shipping: body.shipping,
+      billing: body.billing,
       items: Array.isArray(body.items) ? body.items : [],
     });
 

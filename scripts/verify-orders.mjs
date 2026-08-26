@@ -70,6 +70,7 @@ const { error } = await supabase.rpc("place_order", {
   p_notes: "",
   p_items: [],
   p_shipping: {},
+  p_billing: {},
 });
 
 if (!error) {
@@ -78,7 +79,7 @@ if (!error) {
 }
 
 if (/Could not find the function/i.test(error.message)) {
-  console.error("Falta la función. Ejecuta supabase/migrations/20260818190000_order_shipping.sql.");
+  console.error("Falta la función. Ejecuta supabase/migrations/20260826010000_order_billing.sql.");
   process.exit(1);
 }
 

@@ -37,6 +37,14 @@ export type ShippingAddress = {
   agencyId?: string;
 };
 
+export type BillingAddress = {
+  line: string;
+  district?: string;
+  city: string;
+  department: PeruDepartment;
+  dni: string;
+};
+
 export function isPeruDepartment(value: string): value is PeruDepartment {
   return (peruDepartments as readonly string[]).includes(value);
 }
@@ -76,5 +84,45 @@ export function parseShippingAddress(value: unknown): ShippingAddress | null {
     ...(district ? { district } : {}),
     ...(carrier ? { carrier } : {}),
     ...(agencyId ? { agencyId } : {}),
+  };
+}
+
+export function formatBillingAddress(address: BillingAddress): string {
+  return [address.line, address.district, address.city, address.department, `DNI ${address.dni}`]
+    .map((part) => part?.trim())
+    .filter(Boolean)
+    .join(" · ");
+}
+
+export function parseBillingAddress(value: unknown): BillingAddress | null {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const row = value as Record<string, unknown>;
+  const line = typeof row.line === "string" ? row.line.trim() : "";
+  const district = typeof row.district === "string" ? row.district.trim() : "";
+  const city = typeof row.city === "string" ? row.city.trim() : "";
+  const department = typeof row.department === "string" ? row.department.trim() : "";
+  const dni = typeof row.dni === "string" ? row.dni.replace(/\D/g, "") : "";
+
+  if (!line || !city || !isPeruDepartment(department)) {
+    return null;
+  }
+
+  if (line.length < 5 || line.length > 160 || city.length > 80 || district.length > 80) {
+    return null;
+  }
+
+  if (dni.length < 8 || dni.length > 9) {
+    return null;
+  }
+
+  return {
+    line,
+    city,
+    department,
+    dni,
+    ...(district ? { district } : {}),
   };
 }
