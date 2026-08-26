@@ -1,18 +1,18 @@
 /** Public pay-to details shown to customers. Not a payment gateway. */
 
 export const storePaymentDetails = {
-  holderName: "Mario Alonso Diaz Alva",
-  yapePlinPhoneDisplay: "926 628 289",
-  yapePlinPhoneDigits: "926628289",
-  yapePlinTelHref: "tel:+51926628289",
+  holderName: "Felix Enzo Farid Cabrera Castillo",
+  yapePlinPhoneDisplay: "973 043 302",
+  yapePlinPhoneDigits: "973043302",
+  yapePlinTelHref: "tel:+51973043302",
   bankName: "BCP",
   currencyLabel: "Soles",
-  bcpAccount: "57073368233079",
-  cci: "00257017336823307905",
-  qrSrc: "/images/payments/yape-qr.png",
-  qrWidth: 663,
+  bcpAccount: "57097829878010",
+  cci: "00257019782987801003",
+  qrSrc: "/images/payments/yape-qr.jpg",
+  qrWidth: 666,
   qrHeight: 1024,
-  qrAlt: "Código QR de Yape para pagar a Mario Alonso Diaz Alva",
+  qrAlt: "Código QR de Yape para pagar a Felix Enzo Farid Cabrera Castillo",
 } as const;
 
 export function paymentReceiptWhatsAppUrl(orderReference: string): string {
