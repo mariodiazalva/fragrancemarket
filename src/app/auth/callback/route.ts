@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { exchangeAuthCode } from "@/data-access/auth";
+import { isAdminPath } from "@/lib/admin";
 
-function safeNextPath(value: string | null): "/cuenta" | "/admin/pedidos" {
-  return value === "/admin/pedidos" ? "/admin/pedidos" : "/cuenta";
+function safeNextPath(value: string | null): string {
+  return value && isAdminPath(value) ? value : "/cuenta";
 }
 
 export async function GET(request: NextRequest) {

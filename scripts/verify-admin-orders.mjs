@@ -63,19 +63,35 @@ const supabase = createClient(url, anonKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
-const { error } = await supabase.rpc("list_admin_orders");
+const rpcs = [
+  ["list_admin_orders", {}],
+  ["get_admin_dashboard", {}],
+  ["list_admin_customers", {}],
+  ["list_admin_inventory", {}],
+  [
+    "admin_delete_order",
+    { p_order_id: "00000000-0000-4000-8000-000000000000" },
+  ],
+  [
+    "admin_delete_customer",
+    { p_customer_id: "00000000-0000-4000-8000-000000000000" },
+  ],
+];
 
-if (!error) {
-  console.error("list_admin_orders respondió sin sesión.");
-  process.exit(1);
+for (const [name, args] of rpcs) {
+  const { error } = await supabase.rpc(name, args);
+
+  if (!error) {
+    console.error(`${name} respondió sin sesión.`);
+    process.exit(1);
+  }
+
+  if (/Could not find the function/i.test(error.message)) {
+    console.error(
+      `Falta ${name}. Ejecuta supabase/migrations/20260826150000_admin_intranet.sql.`,
+    );
+    process.exit(1);
+  }
 }
 
-if (/Could not find the function/i.test(error.message)) {
-  console.error(
-    "Falta list_admin_orders. Ejecuta supabase/migrations/20260820140000_admin_orders.sql.",
-  );
-  process.exit(1);
-}
-
-console.log("OK — list_admin_orders no es pública para anon.");
-console.log(`Rechazó una consulta sin sesión: ${error.message}`);
+console.log("OK — las funciones del intranet no son públicas para anon.");

@@ -17,6 +17,30 @@ export async function getSignedInEmail(): Promise<string | null> {
   return data.user.email.toLowerCase();
 }
 
+export async function signInWithPassword(email: string, password: string): Promise<void> {
+  const trimmed = email.trim().toLowerCase();
+
+  if (!isEmail(trimmed) || password.length < 1) {
+    throw new Error("credentials");
+  }
+
+  const supabase = await createSupabaseSessionClient();
+  const { error } = await supabase.auth.signInWithPassword({
+    email: trimmed,
+    password,
+  });
+
+  if (!error) {
+    return;
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    console.warn("[elova] No se pudo entrar al intranet:", error.message);
+  }
+
+  throw new Error("credentials");
+}
+
 export async function requestMagicLink(email: string, redirectTo: string): Promise<void> {
   const trimmed = email.trim().toLowerCase();
 

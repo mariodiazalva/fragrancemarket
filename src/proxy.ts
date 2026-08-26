@@ -10,6 +10,7 @@ export const config = {
   matcher: [
     "/cuenta",
     "/cuenta/:path*",
+    "/admin",
     "/admin/:path*",
     "/auth/:path*",
     "/api/auth/:path*",

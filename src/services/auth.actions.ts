@@ -2,7 +2,9 @@
 
 import { redirect } from "next/navigation";
 
-import { requestMagicLink, signOutSession } from "@/data-access/auth";
+import { isStoreAdmin } from "@/data-access/admin-orders";
+import { requestMagicLink, signInWithPassword, signOutSession } from "@/data-access/auth";
+import { isAdminPath, safeAdminPath } from "@/lib/admin";
 import { SITE_URL } from "@/lib/constants";
 
 function authSendErrorCode(
@@ -55,18 +57,17 @@ function authSendErrorCode(
   return "send";
 }
 
-function safeAuthNext(value: string): "/admin/pedidos" | "/cuenta" {
-  return value === "/admin/pedidos" ? "/admin/pedidos" : "/cuenta";
+function safeAuthNext(value: string): string {
+  return isAdminPath(value) ? value : "/cuenta";
 }
 
 export async function requestMagicLinkAction(formData: FormData) {
   const email = String(formData.get("email") ?? "");
   const next = safeAuthNext(String(formData.get("next") ?? ""));
   const origin = new URL(SITE_URL).origin;
-  const redirectTo =
-    next === "/admin/pedidos"
-      ? `${origin}/auth/callback?next=/admin/pedidos`
-      : `${origin}/auth/callback`;
+  const redirectTo = isAdminPath(next)
+    ? `${origin}/auth/callback?next=${encodeURIComponent(next)}`
+    : `${origin}/auth/callback`;
 
   try {
     await requestMagicLink(email, redirectTo);
@@ -77,7 +78,31 @@ export async function requestMagicLinkAction(formData: FormData) {
   redirect(`${next}?sent=1`);
 }
 
+export async function signInAdminAction(formData: FormData) {
+  const email = String(formData.get("email") ?? "");
+  const password = String(formData.get("password") ?? "");
+  const next = safeAdminPath(String(formData.get("next") ?? "/admin"));
+
+  try {
+    await signInWithPassword(email, password);
+  } catch {
+    redirect(`${next}?error=credentials`);
+  }
+
+  if (!(await isStoreAdmin())) {
+    await signOutSession();
+    redirect(`${next}?error=admin`);
+  }
+
+  redirect(next);
+}
+
 export async function signOutAction() {
   await signOutSession();
   redirect("/cuenta");
+}
+
+export async function signOutAdminAction() {
+  await signOutSession();
+  redirect("/admin");
 }

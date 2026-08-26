@@ -70,8 +70,8 @@ export function AccountView({
             <p className="text-sm text-text-primary">{sessionEmail}</p>
             <div className="flex flex-wrap gap-3">
               {isAdmin ? (
-                <ButtonLink href="/admin/pedidos" variant="outline" size="sm">
-                  Pedidos de la tienda
+                <ButtonLink href="/admin" variant="outline" size="sm">
+                  Intranet
                 </ButtonLink>
               ) : null}
               <form action={signOutAction}>
