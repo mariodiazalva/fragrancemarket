@@ -22,7 +22,7 @@ insert into public.products (
     'Una fragancia masculina dulce, cítrica y moderna que combina la frescura de la mandarina con un corazón gourmand y un fondo cálido y amaderado. Odyssey Mandarin Sky ofrece un aroma llamativo, juvenil y seductor, ideal para el día a día, citas y salidas nocturnas.',
     'perfume',
     'masculine',
-    155,
+    160,
     null,
     10,
     array['cítrico', 'frutal', 'ámbar', 'gourmand', 'amaderado']::text[],
@@ -74,7 +74,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000041', '100 ml', 100, 155, null, 10, 'ELOVA-MANDARIN-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000041', '100 ml', 100, 160, null, 10, 'ELOVA-MANDARIN-100', true, 1),
   ('c0000000-0000-4000-8000-000000000042', '3 ml', 3, 15, null, 22, 'ELOVA-MANDARIN-3', false, 1),
   ('c0000000-0000-4000-8000-000000000042', '5 ml', 5, 18, null, 18, 'ELOVA-MANDARIN-5', false, 2),
   ('c0000000-0000-4000-8000-000000000042', '10 ml', 10, 24, null, 11, 'ELOVA-MANDARIN-10', false, 3)

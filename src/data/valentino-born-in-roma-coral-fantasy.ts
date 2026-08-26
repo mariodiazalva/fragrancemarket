@@ -26,7 +26,7 @@ export const valentinoBornInRomaCoralFantasy = {
 };
 
 export const valentinoBornInRomaCoralFantasyPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 502, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 550, stock: 10 },
 ];
 
 export const valentinoBornInRomaCoralFantasyDecantSizes: ProductSize[] = [

@@ -18,7 +18,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia masculina, intensa y sofisticada, diseñada para destacar durante la noche. 9 PM Night Out combina acordes especiados y aromáticos con un fondo cálido y amaderado, creando una esencia elegante, seductora y moderna, perfecta para citas, fiestas y ocasiones especiales.',
   gender = 'masculine',
-  price = 230,
+  price = 155,
   compare_at_price = null,
   stock = 14,
   fragrance_family = array['ámbar', 'aromático', 'especiado', 'amaderado']::text[],
@@ -49,7 +49,7 @@ where id = 'c0000000-0000-4000-8000-000000000014'
    or slug in ('citrus-atlas-decant', '9-pm-night-out-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 230, compare_at_price = null, stock = 14, sku = 'ELOVA-9PM-100'
+set label = '100 ml', volume_ml = 100, price = 155, compare_at_price = null, stock = 14, sku = 'ELOVA-9PM-100'
 where product_id = 'c0000000-0000-4000-8000-000000000005';
 
 update public.product_variants

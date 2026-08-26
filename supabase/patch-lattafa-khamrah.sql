@@ -23,7 +23,7 @@ insert into public.products (
     'Una fragancia dulce, cálida y envolvente con un marcado carácter gourmand. Khamrah combina especias aromáticas con canela, dátiles y praliné, creando un aroma seductor y adictivo que destaca especialmente durante la noche y en climas frescos.',
     'perfume',
     'unisex',
-    130,
+    155,
     null,
     10,
     array['ámbar', 'gourmand', 'especiado', 'oriental']::text[],
@@ -75,7 +75,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000043', '100 ml', 100, 130, null, 10, 'ELOVA-KHAMRAH-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000043', '100 ml', 100, 155, null, 10, 'ELOVA-KHAMRAH-100', true, 1),
   ('c0000000-0000-4000-8000-000000000044', '3 ml', 3, 23, null, 22, 'ELOVA-KHAMRAH-3', false, 1),
   ('c0000000-0000-4000-8000-000000000044', '5 ml', 5, 32, null, 18, 'ELOVA-KHAMRAH-5', false, 2),
   ('c0000000-0000-4000-8000-000000000044', '10 ml', 10, 45, null, 11, 'ELOVA-KHAMRAH-10', false, 3)

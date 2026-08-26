@@ -26,7 +26,7 @@ export const afnan9pmNightOut = {
 };
 
 export const afnan9pmNightOutPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 230, stock: 14 },
+  { label: "100 ml", volumeMl: 100, price: 155, stock: 14 },
 ];
 
 export const afnan9pmNightOutDecantSizes: ProductSize[] = [

@@ -26,7 +26,7 @@ export const odysseyMandarinSky = {
 };
 
 export const odysseyMandarinSkyPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 155, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 160, stock: 10 },
 ];
 
 export const odysseyMandarinSkyDecantSizes: ProductSize[] = [

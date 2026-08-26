@@ -25,7 +25,7 @@ export const lattafaKhamrah = {
 };
 
 export const lattafaKhamrahPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 130, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 155, stock: 10 },
 ];
 
 export const lattafaKhamrahDecantSizes: ProductSize[] = [

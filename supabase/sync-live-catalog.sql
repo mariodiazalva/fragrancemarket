@@ -572,7 +572,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia masculina, intensa y sofisticada, diseñada para destacar durante la noche. 9 PM Night Out combina acordes especiados y aromáticos con un fondo cálido y amaderado, creando una esencia elegante, seductora y moderna, perfecta para citas, fiestas y ocasiones especiales.',
   gender = 'masculine',
-  price = 230,
+  price = 155,
   compare_at_price = null,
   stock = 14,
   fragrance_family = array['ámbar', 'aromático', 'especiado', 'amaderado']::text[],
@@ -603,7 +603,7 @@ where id = 'c0000000-0000-4000-8000-000000000014'
    or slug in ('citrus-atlas-decant', '9-pm-night-out-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 230, compare_at_price = null, stock = 14, sku = 'ELOVA-9PM-100'
+set label = '100 ml', volume_ml = 100, price = 155, compare_at_price = null, stock = 14, sku = 'ELOVA-9PM-100'
 where product_id = 'c0000000-0000-4000-8000-000000000005';
 
 update public.product_variants
@@ -833,7 +833,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia femenina, dulce y cremosa, con un carácter delicado y envolvente. Lattafa Yara combina frutas suaves, flores blancas y acordes de vainilla y almizcle, creando un aroma elegante, juvenil y muy fácil de llevar.',
   gender = 'feminine',
-  price = 165,
+  price = 140,
   compare_at_price = null,
   stock = 7,
   fragrance_family = array['floral', 'gourmand', 'ámbar', 'oriental']::text[],
@@ -864,7 +864,7 @@ where id = 'c0000000-0000-4000-8000-000000000016'
    or slug in ('rose-silence-decant', 'yara-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 165, compare_at_price = null, stock = 7, sku = 'ELOVA-YARA-100'
+set label = '100 ml', volume_ml = 100, price = 140, compare_at_price = null, stock = 7, sku = 'ELOVA-YARA-100'
 where product_id = 'c0000000-0000-4000-8000-000000000008';
 
 update public.product_variants
@@ -1837,7 +1837,7 @@ insert into public.products (
     'Una fragancia masculina moderna, fresca y vibrante que combina un carácter afrutado con notas aromáticas y un fondo amaderado. Born in Roma Coral Fantasy tiene un perfil juvenil y sofisticado, ideal para quienes buscan un aroma versátil, llamativo y fácil de llevar durante el día o la noche.',
     'perfume',
     'masculine',
-    502,
+    550,
     null,
     10,
     array['frutal', 'aromático', 'amaderado', 'floral']::text[],
@@ -1889,7 +1889,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000035', '100 ml', 100, 502, null, 10, 'ELOVA-BIRCF-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000035', '100 ml', 100, 550, null, 10, 'ELOVA-BIRCF-100', true, 1),
   ('c0000000-0000-4000-8000-000000000036', '3 ml', 3, 25, null, 22, 'ELOVA-BIRCF-3', false, 1),
   ('c0000000-0000-4000-8000-000000000036', '5 ml', 5, 35, null, 18, 'ELOVA-BIRCF-5', false, 2)
 on conflict (sku) do update set
@@ -2217,7 +2217,7 @@ insert into public.products (
     'Una fragancia masculina dulce, cítrica y moderna que combina la frescura de la mandarina con un corazón gourmand y un fondo cálido y amaderado. Odyssey Mandarin Sky ofrece un aroma llamativo, juvenil y seductor, ideal para el día a día, citas y salidas nocturnas.',
     'perfume',
     'masculine',
-    155,
+    160,
     null,
     10,
     array['cítrico', 'frutal', 'ámbar', 'gourmand', 'amaderado']::text[],
@@ -2269,7 +2269,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000041', '100 ml', 100, 155, null, 10, 'ELOVA-MANDARIN-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000041', '100 ml', 100, 160, null, 10, 'ELOVA-MANDARIN-100', true, 1),
   ('c0000000-0000-4000-8000-000000000042', '3 ml', 3, 15, null, 22, 'ELOVA-MANDARIN-3', false, 1),
   ('c0000000-0000-4000-8000-000000000042', '5 ml', 5, 18, null, 18, 'ELOVA-MANDARIN-5', false, 2),
   ('c0000000-0000-4000-8000-000000000042', '10 ml', 10, 24, null, 11, 'ELOVA-MANDARIN-10', false, 3)
@@ -2347,7 +2347,7 @@ insert into public.products (
     'Una fragancia dulce, cálida y envolvente con un marcado carácter gourmand. Khamrah combina especias aromáticas con canela, dátiles y praliné, creando un aroma seductor y adictivo que destaca especialmente durante la noche y en climas frescos.',
     'perfume',
     'unisex',
-    130,
+    155,
     null,
     10,
     array['ámbar', 'gourmand', 'especiado', 'oriental']::text[],
@@ -2399,7 +2399,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000043', '100 ml', 100, 130, null, 10, 'ELOVA-KHAMRAH-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000043', '100 ml', 100, 155, null, 10, 'ELOVA-KHAMRAH-100', true, 1),
   ('c0000000-0000-4000-8000-000000000044', '3 ml', 3, 23, null, 22, 'ELOVA-KHAMRAH-3', false, 1),
   ('c0000000-0000-4000-8000-000000000044', '5 ml', 5, 32, null, 18, 'ELOVA-KHAMRAH-5', false, 2),
   ('c0000000-0000-4000-8000-000000000044', '10 ml', 10, 45, null, 11, 'ELOVA-KHAMRAH-10', false, 3)

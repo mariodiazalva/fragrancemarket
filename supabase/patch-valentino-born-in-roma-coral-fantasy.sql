@@ -19,7 +19,7 @@ insert into public.products (
     'Una fragancia masculina moderna, fresca y vibrante que combina un carácter afrutado con notas aromáticas y un fondo amaderado. Born in Roma Coral Fantasy tiene un perfil juvenil y sofisticado, ideal para quienes buscan un aroma versátil, llamativo y fácil de llevar durante el día o la noche.',
     'perfume',
     'masculine',
-    502,
+    550,
     null,
     10,
     array['frutal', 'aromático', 'amaderado', 'floral']::text[],
@@ -71,7 +71,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000035', '100 ml', 100, 502, null, 10, 'ELOVA-BIRCF-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000035', '100 ml', 100, 550, null, 10, 'ELOVA-BIRCF-100', true, 1),
   ('c0000000-0000-4000-8000-000000000036', '3 ml', 3, 25, null, 22, 'ELOVA-BIRCF-3', false, 1),
   ('c0000000-0000-4000-8000-000000000036', '5 ml', 5, 35, null, 18, 'ELOVA-BIRCF-5', false, 2)
 on conflict (sku) do update set
