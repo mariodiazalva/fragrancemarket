@@ -14,7 +14,7 @@ export function SocialSection() {
           className="max-w-2xl"
         />
 
-        <div className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div className="reveal-stagger mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
           {socialPlaceholders.map((item) => (
             <div
               key={item.id}

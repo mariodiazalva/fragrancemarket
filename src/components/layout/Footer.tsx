@@ -17,7 +17,7 @@ const socialIcons = {
 
 export function Footer() {
   return (
-    <footer className="theme-ink mt-auto border-t border-elova-border bg-elova-black">
+    <footer className="site-footer theme-ink mt-auto border-t border-elova-border bg-elova-black">
       <Container className="py-14 sm:py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <FooterColumn title="Comprar" links={footerNavigation.shop} />

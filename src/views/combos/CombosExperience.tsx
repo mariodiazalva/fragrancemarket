@@ -29,7 +29,7 @@ export function CombosExperience({ sets }: CombosExperienceProps) {
             title="Más aromas. Una sola compra."
             description="Los sets están pensados para comparar decants y subir el pedido sin armarlo pieza por pieza."
           />
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
+          <div className="reveal-stagger mt-10 grid gap-8 md:grid-cols-3">
             {combosExplain.map((item) => (
               <article key={item.id} className="border-t border-elova-gold/30 pt-5">
                 <h3 className="text-xs uppercase tracking-[0.18em] text-text-primary">
@@ -50,7 +50,7 @@ export function CombosExperience({ sets }: CombosExperienceProps) {
             title="Los cuatro sets"
             description="Date Night, Daily, Signature y Arabian. Cada uno lista lo que incluye y lo que ahorras."
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="reveal-stagger mt-10 grid gap-4 md:grid-cols-2">
             {sets.map((set) => (
               <SetCard key={set.id} set={set} />
             ))}

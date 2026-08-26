@@ -5,7 +5,7 @@ export function TrustSection() {
   return (
     <section className="py-16 sm:py-20 lg:py-24">
       <Container>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal-stagger grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {trustItems.map((item) => (
             <article key={item.id} className="border-t border-elova-border pt-5">
               <h2 className="text-xs uppercase tracking-[0.18em] text-text-primary">

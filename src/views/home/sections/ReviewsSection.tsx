@@ -17,7 +17,7 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
           description="Comentarios de clientes que probaron decants y frascos antes de decidir su próximo perfume."
         />
 
-        <div className="mt-8 flex w-full min-w-0 gap-3 overflow-x-auto overscroll-x-contain snap-x snap-mandatory no-scrollbar pb-2 sm:gap-4 md:grid md:grid-cols-3 md:overflow-visible">
+        <div className="reveal-stagger mt-8 flex w-full min-w-0 gap-3 overflow-x-auto overscroll-x-contain snap-x snap-mandatory no-scrollbar pb-2 sm:gap-4 md:grid md:grid-cols-3 md:overflow-visible">
           {reviews.map((review) => (
             <article
               key={review.id}

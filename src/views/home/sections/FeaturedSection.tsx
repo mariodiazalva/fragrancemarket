@@ -23,7 +23,7 @@ export function FeaturedSection({ products }: FeaturedSectionProps) {
           description="Piezas que suelen pedirse primero: frascos, decants y firmas con más demanda."
         />
 
-        <div className="mt-10 flex w-full min-w-0 gap-3 overflow-x-auto overscroll-x-contain snap-x snap-mandatory no-scrollbar pb-2 sm:gap-4 md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-4">
+        <div className="reveal-stagger mt-10 flex w-full min-w-0 gap-3 overflow-x-auto overscroll-x-contain snap-x snap-mandatory no-scrollbar pb-2 sm:gap-4 md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-4">
           {products.map((product) => (
             <div
               key={product.id}

@@ -4,6 +4,7 @@ import { CartLineItem } from "@/components/cart/CartLineItem";
 import { CartRecommendations } from "@/components/cart/CartRecommendations";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 
@@ -14,20 +15,22 @@ export function CartView() {
   return (
     <main className="flex-1 pb-28 pt-8 sm:pb-16 sm:pt-12">
       <Container>
-        <p className="text-xs uppercase tracking-[0.35em] text-elova-gold">Compra</p>
-        <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
-          <h1 className="font-serif text-[2rem] font-bold tracking-[-0.02em] text-text-primary sm:text-4xl lg:text-5xl">
-            Carrito
-          </h1>
-          {items.length > 0 ? (
-            <button
-              type="button"
-              onClick={clear}
-              className="inline-flex min-h-11 items-center text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary transition-colors hover:text-elova-gold"
-            >
-              Vaciar carrito
-            </button>
-          ) : null}
+        <div className="elova-fade-up">
+          <p className="text-xs uppercase tracking-[0.35em] text-elova-gold">Compra</p>
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <h1 className="font-serif text-[2rem] font-bold tracking-[-0.02em] text-text-primary sm:text-4xl lg:text-5xl">
+              Carrito
+            </h1>
+            {items.length > 0 ? (
+              <button
+                type="button"
+                onClick={clear}
+                className="inline-flex min-h-11 items-center text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary transition-colors hover:text-elova-gold"
+              >
+                Vaciar carrito
+              </button>
+            ) : null}
+          </div>
         </div>
 
         {items.length === 0 ? (
@@ -63,9 +66,11 @@ export function CartView() {
           </div>
         )}
 
-        <div className="mt-12">
-          <CartRecommendations excludeProductIds={excludeIds} />
-        </div>
+        <Reveal>
+          <div className="mt-12">
+            <CartRecommendations excludeProductIds={excludeIds} />
+          </div>
+        </Reveal>
       </Container>
 
       {items.length > 0 ? (

@@ -19,7 +19,7 @@ export function DecantsGuide({ activeSize }: DecantsGuideProps) {
             description="Qué es, por qué pedirlo y cómo acertar con el tamaño."
           />
 
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
+          <div className="reveal-stagger mt-10 grid gap-8 md:grid-cols-3">
             {decantExplain.map((item) => (
               <article key={item.id} className="border-t border-elova-gold/30 pt-5">
                 <h3 className="text-xs uppercase tracking-[0.18em] text-text-primary">
@@ -41,7 +41,7 @@ export function DecantsGuide({ activeSize }: DecantsGuideProps) {
             description="Tres medidas. Elige la que encaje con lo que quieres probar."
           />
 
-          <div className="mt-10 grid gap-3 md:grid-cols-3">
+          <div className="reveal-stagger mt-10 grid gap-3 md:grid-cols-3">
             {decantSizeGuides.map((size) => {
               const href =
                 activeSize === size.volumeMl

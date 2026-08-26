@@ -14,7 +14,7 @@ export function OccasionsSection() {
           description="Elige según el día que tienes por delante."
         />
 
-        <div className="mt-10 flex w-full min-w-0 gap-3 overflow-x-auto overscroll-x-contain snap-x snap-mandatory no-scrollbar pb-2 md:grid md:grid-cols-5 md:overflow-visible">
+        <div className="reveal-stagger mt-10 flex w-full min-w-0 gap-3 overflow-x-auto overscroll-x-contain snap-x snap-mandatory no-scrollbar pb-2 md:grid md:grid-cols-5 md:overflow-visible">
           {occasionCards.map((card) => (
             <Link
               key={card.id}

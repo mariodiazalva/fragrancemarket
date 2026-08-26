@@ -19,7 +19,7 @@ export function ProductGrid({ products, headingLevel = "h2" }: ProductGridProps)
   }
 
   return (
-    <div className="grid min-w-0 grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
+    <div className="reveal-stagger grid min-w-0 grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
       {products.map((product) => (
         <ProductCard
           key={product.id}

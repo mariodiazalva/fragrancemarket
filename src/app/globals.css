@@ -31,8 +31,10 @@
   --accent-muted: var(--elova-gold-muted);
   --border: var(--elova-border);
   --elova-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --elova-ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
   --elova-duration: 280ms;
   --elova-duration-move: 400ms;
+  --elova-duration-reveal: 880ms;
   color-scheme: light;
 }
 
@@ -108,6 +110,7 @@
 
 html {
   overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -179,11 +182,20 @@ a,
 @keyframes elova-fade-up {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translate3d(0, 18px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes elova-hero-media {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
   }
 }
 
@@ -200,24 +212,90 @@ a,
 }
 
 .elova-fade-in {
-  animation: elova-fade-in var(--elova-duration) var(--elova-ease) both;
+  animation: elova-fade-in var(--elova-duration-reveal) var(--elova-ease-reveal) both;
 }
 
 .elova-fade-up {
-  animation: elova-fade-up var(--elova-duration-move) var(--elova-ease) both;
+  animation: elova-fade-up 1s var(--elova-ease-reveal) both;
 }
 
-.reveal {
+.elova-hero-media {
+  animation: elova-hero-media 1.6s var(--elova-ease-reveal) both;
+}
+
+#contenido main > section ~ *,
+[data-reveal],
+.reveal,
+.site-footer {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translate3d(0, 1.5rem, 0);
   transition:
-    opacity var(--elova-duration-move) var(--elova-ease),
-    transform var(--elova-duration-move) var(--elova-ease);
+    opacity var(--elova-duration-reveal) var(--elova-ease-reveal),
+    transform var(--elova-duration-reveal) var(--elova-ease-reveal);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
-.reveal.is-visible {
+#contenido main > section ~ *.is-visible,
+[data-reveal].is-visible,
+.reveal.is-visible,
+.site-footer.is-visible {
   opacity: 1;
   transform: none;
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+}
+
+.is-visible .reveal-stagger > * {
+  opacity: 1;
+  animation: elova-stagger-in 820ms var(--elova-ease-reveal) backwards;
+  animation-delay: calc(90ms + var(--stagger, 0) * 70ms);
+}
+
+@keyframes elova-stagger-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.9rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.reveal-stagger > *:nth-child(1) {
+  --stagger: 0;
+}
+.reveal-stagger > *:nth-child(2) {
+  --stagger: 1;
+}
+.reveal-stagger > *:nth-child(3) {
+  --stagger: 2;
+}
+.reveal-stagger > *:nth-child(4) {
+  --stagger: 3;
+}
+.reveal-stagger > *:nth-child(5) {
+  --stagger: 4;
+}
+.reveal-stagger > *:nth-child(6) {
+  --stagger: 5;
+}
+.reveal-stagger > *:nth-child(7) {
+  --stagger: 6;
+}
+.reveal-stagger > *:nth-child(8) {
+  --stagger: 7;
+}
+.reveal-stagger > *:nth-child(9) {
+  --stagger: 8;
+}
+.reveal-stagger > *:nth-child(10) {
+  --stagger: 9;
+}
+.reveal-stagger > *:nth-child(n + 11) {
+  --stagger: 10;
 }
 
 .cart-badge-pop {
@@ -238,15 +316,24 @@ a,
     scroll-behavior: auto;
   }
 
+  #contenido main > section ~ *,
+  [data-reveal],
   .reveal,
-  .reveal.is-visible {
+  .site-footer,
+  .reveal-stagger > *,
+  .reveal.is-visible,
+  [data-reveal].is-visible,
+  .site-footer.is-visible,
+  .is-visible .reveal-stagger > * {
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
   }
 
   .elova-fade-in,
   .elova-fade-up,
+  .elova-hero-media,
   .cart-badge-pop,
   .cart-line-enter,
   .mobile-nav[data-open="true"] li {

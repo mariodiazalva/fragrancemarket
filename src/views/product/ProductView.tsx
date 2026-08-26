@@ -63,7 +63,7 @@ export function ProductView({
           </ol>
         </nav>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+        <div className="elova-fade-up mt-8 grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
           <ProductGallery
             images={product.images}
             alt={`${product.name} de ${product.brand}`}

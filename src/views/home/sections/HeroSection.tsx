@@ -12,7 +12,7 @@ export function HeroSection() {
         fill
         preload
         sizes="100vw"
-        className="object-cover object-center"
+        className="elova-hero-media object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-elova-black via-elova-black/60 to-elova-black/25 lg:bg-gradient-to-r lg:from-elova-black lg:via-elova-black/75 lg:to-transparent" />
 

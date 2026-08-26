@@ -167,7 +167,7 @@ export function CheckoutView() {
 
   return (
     <main className="flex-1 pb-16 pt-8 sm:pt-12">
-      <Container>
+      <Container className="elova-fade-up">
         <p className="text-xs uppercase tracking-[0.35em] text-elova-gold">Compra</p>
         <h1 className="mt-4 font-serif text-[2rem] tracking-[0.04em] text-text-primary sm:text-4xl">
           Checkout

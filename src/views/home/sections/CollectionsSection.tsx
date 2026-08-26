@@ -14,7 +14,7 @@ export function CollectionsSection() {
           description="Entra por género, origen o estilo."
         />
 
-        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3">
+        <div className="reveal-stagger mt-10 grid grid-cols-2 gap-3 md:grid-cols-3">
           {collectionCards.map((card) => (
             <Link
               key={card.id}

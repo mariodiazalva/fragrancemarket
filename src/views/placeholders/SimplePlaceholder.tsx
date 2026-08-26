@@ -14,7 +14,7 @@ export function SimplePlaceholder({
 }: SimplePlaceholderProps) {
   return (
     <main className="flex flex-1 flex-col justify-center py-24">
-      <Container size="narrow" className="text-center">
+      <Container size="narrow" className="elova-fade-up text-center">
         <p className="text-xs uppercase tracking-[0.35em] text-elova-gold">
           {eyebrow}
         </p>

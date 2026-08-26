@@ -9,4 +9,5 @@ export { ProductCard } from "./ProductCard";
 export { ProductPrice } from "./ProductPrice";
 export { Rating } from "./Rating";
 export { Reveal } from "./Reveal";
+export { ScrollReveal } from "./ScrollReveal";
 export { SectionHeading } from "./SectionHeading";

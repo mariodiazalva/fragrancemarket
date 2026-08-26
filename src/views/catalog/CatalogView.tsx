@@ -6,6 +6,7 @@ import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CatalogToolbar } from "@/components/catalog/CatalogToolbar";
 import { CloseIcon } from "@/components/layout/icons";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import type { CatalogPageConfig } from "@/lib/catalog";
 import { countActiveFilters } from "@/lib/catalog";
 import type { CatalogFacets, CatalogQuery } from "@/types";
@@ -56,6 +57,19 @@ export function CatalogView({
   }, [filtersOpen]);
 
   const Wrapper = as;
+  const catalogBody = (
+    <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
+      <aside className="hidden lg:block">
+        <CatalogFilters
+          pathname={pathname}
+          query={query}
+          facets={facets}
+          config={config}
+        />
+      </aside>
+      <div className="min-w-0">{children}</div>
+    </div>
+  );
 
   return (
     <Wrapper className={as === "main" ? "pb-20 pt-10 sm:pt-14" : "pb-20 pt-6"}>
@@ -90,18 +104,7 @@ export function CatalogView({
           </p>
         ) : null}
 
-        <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
-          <aside className="hidden lg:block">
-            <CatalogFilters
-              pathname={pathname}
-              query={query}
-              facets={facets}
-              config={config}
-            />
-          </aside>
-
-          <div className="min-w-0">{children}</div>
-        </div>
+        {hideHeader ? catalogBody : <Reveal>{catalogBody}</Reveal>}
       </Container>
 
       <div

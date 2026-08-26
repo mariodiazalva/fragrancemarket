@@ -13,7 +13,7 @@ export function DecantsGuideSection() {
           description="Tres medidas para conocer una fragancia en la piel, con calma."
         />
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="reveal-stagger mt-12 grid gap-8 md:grid-cols-3">
           {decantSizes.map((size) => (
             <article key={size.id} className="border-t border-elova-gold/30 pt-6">
               <p className="font-serif text-4xl tracking-[0.08em] text-text-primary sm:text-5xl">

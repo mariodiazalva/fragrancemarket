@@ -23,7 +23,7 @@ export function DiscoverSection() {
         />
 
         <div
-          className={`mt-10 grid gap-4 ${cards.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}
+          className={`reveal-stagger mt-10 grid gap-4 ${cards.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}
         >
           {cards.map((card) => (
             <Link

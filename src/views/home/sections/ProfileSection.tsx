@@ -14,7 +14,7 @@ export function ProfileSection() {
           description="Cuatro direcciones para orientar la búsqueda."
         />
 
-        <div className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div className="reveal-stagger mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
           {profileCards.map((card) => (
             <Link
               key={card.id}

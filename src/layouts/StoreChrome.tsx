@@ -7,6 +7,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { isAdminRoute } from "@/lib/admin";
 
 type StoreChromeProps = {
@@ -42,6 +43,7 @@ export function StoreChrome({ children }: StoreChromeProps) {
         {children}
       </div>
       <Footer />
+      <ScrollReveal />
       <CartDrawer />
     </div>
   );

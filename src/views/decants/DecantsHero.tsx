@@ -12,7 +12,7 @@ export function DecantsHero() {
         fill
         preload
         sizes="100vw"
-        className="object-cover"
+        className="elova-hero-media object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-elova-black via-elova-black/65 to-elova-black/30" />
 
