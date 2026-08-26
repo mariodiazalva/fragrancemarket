@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { OrderConfirmation } from "@/components/order/OrderConfirmation";
 import { Button, ButtonLink } from "@/components/ui/Button";
+import { accountOrdersHref } from "@/lib/order-confirmation";
 import type { OrderPaymentSummary } from "@/types/order";
 
 type PayOrderViewProps = {
@@ -65,6 +66,9 @@ export function PayOrderView({ order, testMode }: PayOrderViewProps) {
             )}
             <ButtonLink href="/perfumes" variant="outline">
               Seguir viendo
+            </ButtonLink>
+            <ButtonLink href={accountOrdersHref(order.customer?.email)} variant="outline">
+              Volver a pedidos
             </ButtonLink>
           </div>
         </div>

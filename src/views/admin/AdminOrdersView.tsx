@@ -1,9 +1,11 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { SubmitButton } from "@/components/account/SubmitButton";
 import { Container } from "@/components/ui/Container";
+import { Input } from "@/components/ui/Input";
 import { formatBillingAddress, formatShippingAddress } from "@/lib/shipping";
 import { formatPrice } from "@/lib/utils";
 import { setAdminOrderStatusAction } from "@/services/admin-order.actions";
+import { requestMagicLinkAction } from "@/services/auth.actions";
 import {
   nextOrderStatusActions,
   orderStatusLabel,
@@ -33,7 +35,7 @@ function formatOrderDate(value: string): string {
 
 function accessMessage(access: AdminOrdersViewProps["access"]): string {
   if (access === "signed-out") {
-    return "Entra en Cuenta con el correo de la tienda para ver y actualizar pedidos.";
+    return "Entra con el correo de la tienda para ver y actualizar pedidos.";
   }
 
   if (access === "setup") {
@@ -83,11 +85,25 @@ export function AdminOrdersView({
             <p className="text-sm leading-relaxed text-text-secondary">
               {accessMessage(access)}
             </p>
-            <div className="mt-6">
-              <ButtonLink href="/cuenta" variant="outline">
-                Ir a cuenta
-              </ButtonLink>
-            </div>
+            {access === "signed-out" ? (
+              <form action={requestMagicLinkAction} className="mt-6 max-w-md space-y-5">
+                <input type="hidden" name="next" value="/admin/pedidos" />
+                <Input
+                  label="Correo de la tienda"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                />
+                <SubmitButton pendingLabel="Enviando…">Enviar enlace de acceso</SubmitButton>
+              </form>
+            ) : (
+              <div className="mt-6">
+                <ButtonLink href="/cuenta" variant="outline">
+                  Ir a cuenta
+                </ButtonLink>
+              </div>
+            )}
           </div>
         ) : orders.length === 0 ? (
           <p className="mt-10 text-sm text-text-secondary">Aún no hay pedidos.</p>

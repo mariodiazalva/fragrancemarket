@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
+import { combosComingSoon } from "@/data/combos";
 import type { DemoReview, FaqItem, FragranceSet, Product } from "@/types";
 import { CollectionsSection } from "@/views/home/sections/CollectionsSection";
 import { DecantsGuideSection } from "@/views/home/sections/DecantsGuideSection";
@@ -46,9 +47,11 @@ export function HomeView({
       <Reveal>
         <CollectionsSection />
       </Reveal>
-      <Reveal>
-        <SetsSection sets={sets} />
-      </Reveal>
+      {combosComingSoon ? null : (
+        <Reveal>
+          <SetsSection sets={sets} />
+        </Reveal>
+      )}
       <Reveal>
         <SelectionSection />
       </Reveal>

@@ -1,6 +1,7 @@
 import { cache } from "react";
 
 import { productSlugAliases } from "@/data/catalog-overrides";
+import { combosComingSoon, withoutHiddenSetProducts } from "@/data/combos";
 import { listFeaturedProducts, listPublishedProducts } from "@/data-access/products";
 import { productMatchesQuery } from "@/services/search.service";
 import type {
@@ -133,7 +134,7 @@ function buildFacets(products: Product[]): CatalogFacets {
 }
 
 export async function getProducts(filters?: ProductFilters): Promise<Product[]> {
-  const products = await listPublishedProducts();
+  const products = withoutHiddenSetProducts(await listPublishedProducts());
   return applyFilters(products, filters);
 }
 
@@ -146,11 +147,15 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
 });
 
 export async function getFeaturedProducts(limit = 8): Promise<Product[]> {
-  return listFeaturedProducts(limit);
+  const extra = combosComingSoon ? 8 : 0;
+  return withoutHiddenSetProducts(await listFeaturedProducts(limit + extra)).slice(
+    0,
+    limit,
+  );
 }
 
 export async function getBestsellers(limit = 8): Promise<Product[]> {
-  const products = await listPublishedProducts();
+  const products = withoutHiddenSetProducts(await listPublishedProducts());
   return products.filter((product) => product.bestseller).slice(0, limit);
 }
 
@@ -165,7 +170,7 @@ function excludeCurrent(products: Product[], productId: string): Product[] {
 }
 
 export async function getRelatedProducts(product: Product): Promise<RelatedProducts> {
-  const catalog = await listPublishedProducts();
+  const catalog = withoutHiddenSetProducts(await listPublishedProducts());
   const others = excludeCurrent(catalog, product.id);
 
   const youMayLike = others
@@ -203,7 +208,7 @@ export async function getRelatedProducts(product: Product): Promise<RelatedProdu
 }
 
 export const getProductSlugs = cache(async (): Promise<string[]> => {
-  const products = await listPublishedProducts();
+  const products = withoutHiddenSetProducts(await listPublishedProducts());
   return products.map((product) => product.slug);
 });
 
@@ -227,7 +232,7 @@ export async function getCatalog(
   query: CatalogQuery = {},
   options?: { facetFilters?: ProductFilters },
 ): Promise<CatalogResult> {
-  const catalog = await listPublishedProducts();
+  const catalog = withoutHiddenSetProducts(await listPublishedProducts());
   const { query: searchQuery, sort, ...filters } = query;
   const filtered = applyFilters(catalog, filters);
   const searched = searchQuery

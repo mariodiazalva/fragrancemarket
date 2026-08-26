@@ -14,6 +14,7 @@ import { MobileMenu } from "@/components/layout/MobileMenu";
 import { SiteLogo } from "@/components/layout/SiteLogo";
 import { SearchAutocomplete } from "@/components/search/SearchAutocomplete";
 import { Container } from "@/components/ui/Container";
+import { combosComingSoon } from "@/data/combos";
 import { useCart } from "@/hooks/useCart";
 import {
   headerActions,
@@ -242,7 +243,7 @@ function HeaderInner({ pathname }: HeaderInnerProps) {
                 "/mujer",
                 "/unisex",
                 "/arabes",
-                "/combos",
+                ...(combosComingSoon ? [] : ["/combos"]),
               ];
               const base = catalogPaths.includes(pathname)
                 ? pathname

@@ -68,6 +68,14 @@ import {
   leMaleElixir,
   leMaleElixirSlugs,
 } from "@/data/le-male-elixir";
+import {
+  odysseyMandarinSky,
+  odysseyMandarinSkySlugs,
+} from "@/data/odyssey-mandarin-sky";
+import {
+  lattafaKhamrah,
+  lattafaKhamrahSlugs,
+} from "@/data/lattafa-khamrah";
 import type { Product } from "@/types";
 
 const sharedNotes = {
@@ -489,6 +497,50 @@ export const catalogExtraProducts: Product[] = [
     { three: 23, five: 34, ten: 56 },
     "2026-08-25",
     "designer",
+  ),
+  decantFrom(
+    {
+      name: odysseyMandarinSky.name,
+      brand: odysseyMandarinSky.brand,
+      description: odysseyMandarinSky.description,
+      gender: odysseyMandarinSky.gender,
+      notes: odysseyMandarinSky.notes,
+      fragranceFamily: odysseyMandarinSky.fragranceFamily,
+      occasions: odysseyMandarinSky.occasions,
+      intensity: odysseyMandarinSky.intensity,
+      intensityScore: odysseyMandarinSky.intensityScore,
+      projection: odysseyMandarinSky.projection,
+      longevity: odysseyMandarinSky.longevity,
+      rating: odysseyMandarinSky.rating,
+      images: odysseyMandarinSky.images,
+      bestseller: false,
+    },
+    odysseyMandarinSkySlugs.perfume,
+    { three: 15, five: 18, ten: 24 },
+    "2026-08-26",
+    "arabian",
+  ),
+  decantFrom(
+    {
+      name: lattafaKhamrah.name,
+      brand: lattafaKhamrah.brand,
+      description: lattafaKhamrah.description,
+      gender: lattafaKhamrah.gender,
+      notes: lattafaKhamrah.notes,
+      fragranceFamily: lattafaKhamrah.fragranceFamily,
+      occasions: lattafaKhamrah.occasions,
+      intensity: lattafaKhamrah.intensity,
+      intensityScore: lattafaKhamrah.intensityScore,
+      projection: lattafaKhamrah.projection,
+      longevity: lattafaKhamrah.longevity,
+      rating: lattafaKhamrah.rating,
+      images: lattafaKhamrah.images,
+      bestseller: false,
+    },
+    lattafaKhamrahSlugs.perfume,
+    { three: 23, five: 32, ten: 45 },
+    "2026-08-26",
+    "arabian",
   ),
   decantFrom(
     {

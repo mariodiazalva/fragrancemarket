@@ -1,6 +1,9 @@
+import { redirect } from "next/navigation";
+
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { OrderConfirmation } from "@/components/order/OrderConfirmation";
+import { accountOrdersHref, isOrderAwaitingPayment } from "@/lib/order-confirmation";
 import { createPageMetadata } from "@/lib/seo";
 import { getOrderPaymentSummary } from "@/services/order.service";
 
@@ -38,13 +41,17 @@ export default async function OrderConfirmedPage({ searchParams }: ConfirmedPage
     }
   }
 
+  if (order && isOrderAwaitingPayment(order.status) && !notified && !paid) {
+    redirect(`/pedido/${order.id}/pagar`);
+  }
+
   if (!order) {
     return (
       <main className="flex-1 pb-16 pt-8 sm:pt-12">
         <Container size="narrow">
           <p className="text-xs uppercase tracking-[0.35em] text-elova-gold">Compra</p>
           <h1 className="mt-4 font-serif text-[2rem] tracking-[0.04em] text-text-primary sm:text-4xl">
-            {paid ? "Pedido pagado" : notified ? "Pago por validar" : "Pedido registrado"}
+            {paid || notified ? "¡Gracias por confirmar!" : "Pedido registrado"}
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-text-secondary">
             {orderId
@@ -64,19 +71,32 @@ export default async function OrderConfirmedPage({ searchParams }: ConfirmedPage
     );
   }
 
+  const justConfirmed = paid || notified;
+  const isSummary = !justConfirmed && !isOrderAwaitingPayment(order.status);
+  const accountHref = accountOrdersHref(order.customer?.email);
+
   return (
     <OrderConfirmation
       order={order}
-      phase={paid || order.status === "paid" ? "paid" : notified ? "notified" : "thanks"}
+      phase={
+        isSummary
+          ? "summary"
+          : paid || order.status === "paid"
+            ? "paid"
+            : notified
+              ? "notified"
+              : "thanks"
+      }
+      hidePaymentDetails={isSummary}
       actions={
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          {!paid && order.status === "pending" ? (
-            <ButtonLink href={`/pedido/${order.id}/pagar`} variant={notified ? "outline" : "primary"}>
-              {notified ? "Ver datos de pago" : "Ir al pago"}
+          {isOrderAwaitingPayment(order.status) ? (
+            <ButtonLink href={`/pedido/${order.id}/pagar`} variant="outline">
+              Ver datos de pago
             </ButtonLink>
           ) : null}
-          <ButtonLink href={`/cuenta?id=${order.id}`} variant={paid || order.status === "paid" ? "primary" : "outline"}>
-            Consultar pedido
+          <ButtonLink href={accountHref} variant="outline">
+            {isSummary ? "Volver a pedidos" : "Consultar pedido"}
           </ButtonLink>
           <ButtonLink href="/perfumes" variant="outline">
             Seguir viendo

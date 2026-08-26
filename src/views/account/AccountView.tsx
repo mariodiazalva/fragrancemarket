@@ -3,20 +3,20 @@ import Link from "next/link";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Input } from "@/components/ui/Input";
-import { OrderSummary } from "@/components/order/OrderSummary";
+import { orderDetailHref } from "@/lib/order-confirmation";
 import { formatPrice } from "@/lib/utils";
-import { SubmitButton } from "@/components/account/SubmitButton";
-import { requestMagicLinkAction, signOutAction } from "@/services/auth.actions";
-import { orderStatusLabel, type OrderListItem, type OrderPaymentSummary } from "@/types/order";
+import { signOutAction } from "@/services/auth.actions";
+import { orderStatusLabel, type OrderListItem } from "@/types/order";
 
 type AccountViewProps = {
-  email: string | null;
+  sessionEmail: string | null;
+  lookupEmail: string;
+  ordersEmail: string | null;
   orders: OrderListItem[];
+  showOrders: boolean;
   orderId: string;
-  order: OrderPaymentSummary | null;
   lookupError: string | null;
   ordersError: string | null;
-  magicSent: boolean;
   authError: string | null;
   isAdmin: boolean;
 };
@@ -32,56 +32,42 @@ function formatOrderDate(value: string): string {
 }
 
 function authErrorMessage(code: string): string {
-  if (code === "invalid") {
-    return "Supabase no acepta este correo (direcciones de prueba como admin@gmail.com). Usa el email con el que entras a supabase.com.";
-  }
-
-  if (code === "smtp") {
-    return "Con el SMTP de prueba, el enlace solo llega al correo de tu cuenta de Supabase. Usa ese email o configura un SMTP propio.";
-  }
-
   if (code === "enlace") {
-    return "El enlace no es válido o ya se usó. Pide uno nuevo.";
+    return "El enlace no es válido o ya se usó.";
   }
 
-  if (code === "wait") {
-    return "Espera un minuto antes de pedir otro enlace. El primero sigue válido; revisa también no deseados.";
-  }
-
-  if (code === "quota") {
-    return "El SMTP de prueba de Supabase solo deja 2 correos por hora. No pidas otro ahora: espera una hora y vuelve a intentarlo. Revisa también spam por si uno sí salió.";
-  }
-
-  return "No se pudo enviar el enlace. Inténtalo de nuevo.";
+  return "No se pudo entrar con ese enlace.";
 }
 
 export function AccountView({
-  email,
+  sessionEmail,
+  lookupEmail,
+  ordersEmail,
   orders,
+  showOrders,
   orderId,
-  order,
   lookupError,
   ordersError,
-  magicSent,
   authError,
   isAdmin,
 }: AccountViewProps) {
+  const emailInputValue = lookupEmail || sessionEmail || "";
+
   return (
     <main className="flex-1 pb-16 pt-8 sm:pt-12">
       <Container size="narrow">
         <p className="text-xs uppercase tracking-[0.35em] text-elova-gold">Cuenta</p>
         <h1 className="mt-4 font-serif text-[2rem] tracking-[0.04em] text-text-primary sm:text-4xl">
-          {email ? "Tus pedidos" : "Consulta tu pedido"}
+          Consulta tu pedido
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-          {email
-            ? "Pedidos asociados a este correo. También puedes consultar uno con su referencia."
-            : "Te enviamos un enlace al correo para ver tus pedidos, sin contraseña. También puedes consultar uno con la referencia del checkout."}
+          Escribe el correo con el que compraste para ver tus pedidos pendientes o
+          hechos. Si tienes la referencia o el número de pedido, consulta solo ese.
         </p>
 
-        {email ? (
+        {sessionEmail ? (
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border border-elova-border bg-surface px-4 py-3">
-            <p className="text-sm text-text-primary">{email}</p>
+            <p className="text-sm text-text-primary">{sessionEmail}</p>
             <div className="flex flex-wrap gap-3">
               {isAdmin ? (
                 <ButtonLink href="/admin/pedidos" variant="outline" size="sm">
@@ -95,24 +81,6 @@ export function AccountView({
               </form>
             </div>
           </div>
-        ) : (
-          <form action={requestMagicLinkAction} className="mt-10 space-y-5">
-            <Input
-              label="Correo"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-            />
-            <SubmitButton pendingLabel="Enviando…">Enviar enlace</SubmitButton>
-          </form>
-        )}
-
-        {magicSent && !email ? (
-          <p className="mt-6 text-sm text-text-secondary" role="status">
-            Si el correo es válido, te enviamos un enlace para entrar. Revisa también
-            la carpeta de no deseados.
-          </p>
         ) : null}
 
         {authError ? (
@@ -121,7 +89,20 @@ export function AccountView({
           </p>
         ) : null}
 
-        {email ? (
+        <form action="/cuenta" method="get" className="mt-10 space-y-5">
+          <Input
+            label="Correo"
+            name="email"
+            type="email"
+            autoComplete="email"
+            defaultValue={emailInputValue}
+            required
+            hint="El mismo correo que usaste en el checkout."
+          />
+          <Button type="submit">Ver pedidos</Button>
+        </form>
+
+        {showOrders ? (
           <section className="mt-12">
             <h2 className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
               Pedidos
@@ -139,7 +120,7 @@ export function AccountView({
                 {orders.map((item) => (
                   <li key={item.id}>
                     <Link
-                      href={`/cuenta?id=${item.id}`}
+                      href={orderDetailHref(item.id, item.status)}
                       className="flex flex-wrap items-baseline justify-between gap-3 border border-elova-border bg-surface px-4 py-3 text-sm transition-colors hover:border-elova-gold/40"
                     >
                       <span className="text-text-primary">
@@ -161,7 +142,7 @@ export function AccountView({
 
         <form action="/cuenta" method="get" className="mt-12 space-y-5">
           <Input
-            label="Referencia"
+            label="Referencia o número de pedido"
             name="id"
             defaultValue={orderId}
             autoComplete="off"
@@ -170,7 +151,7 @@ export function AccountView({
             hint="Es el código que te mostramos al registrar el pedido."
           />
           <Button type="submit" variant="outline">
-            Consultar referencia
+            Consultar pedido
           </Button>
         </form>
 
@@ -178,20 +159,6 @@ export function AccountView({
           <p className="mt-8 text-sm text-red-700" role="alert">
             {lookupError}
           </p>
-        ) : null}
-
-        {order ? (
-          <div className="mt-10 space-y-6">
-            <OrderSummary order={order} />
-            <div className="flex flex-col gap-3 sm:flex-row">
-              {order.status === "pending" ? (
-                <ButtonLink href={`/pedido/${order.id}/pagar`}>Ir al pago</ButtonLink>
-              ) : null}
-              <ButtonLink href="/perfumes" variant="outline">
-                Seguir viendo
-              </ButtonLink>
-            </div>
-          </div>
         ) : null}
       </Container>
     </main>

@@ -1,3 +1,31 @@
+/** Set to false to restore the live combos catalog and set products. */
+export const combosComingSoon = true;
+
+export function withoutHiddenSetProducts<T extends { type: string }>(
+  products: T[],
+): T[] {
+  if (!combosComingSoon) {
+    return products;
+  }
+
+  return products.filter((product) => product.type !== "set");
+}
+
+export function withoutHiddenComboLinks<T extends { id: string }>(items: T[]): T[] {
+  if (!combosComingSoon) {
+    return items;
+  }
+
+  return items.filter((item) => item.id !== "combos");
+}
+
+export const combosComingSoonCopy = {
+  eyebrow: "Próximamente",
+  title: "Combos",
+  description:
+    "Estamos preparando los sets de decants. Vuelve pronto para comparar aromas con un mejor precio que comprarlos sueltos.",
+} as const;
+
 export const combosHero = {
   eyebrow: "Sets",
   title: "Tres aromas. Una decisión más clara.",

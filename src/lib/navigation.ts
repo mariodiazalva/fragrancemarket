@@ -1,3 +1,5 @@
+import { withoutHiddenComboLinks } from "@/data/combos";
+
 export type NavMatch = "exact" | "prefix";
 
 export type NavItem = {
@@ -31,7 +33,7 @@ export type AnnouncementBarConfig = {
   separator: string;
 };
 
-export const mainNavigation: NavItem[] = [
+export const mainNavigation: NavItem[] = withoutHiddenComboLinks([
   { id: "inicio", label: "Inicio", href: "/", match: "exact" },
   { id: "decants", label: "Decants", href: "/decants" },
   { id: "perfumes", label: "Perfumes", href: "/perfumes" },
@@ -40,9 +42,9 @@ export const mainNavigation: NavItem[] = [
   { id: "arabes", label: "Árabes", href: "/arabes" },
   { id: "combos", label: "Combos", href: "/combos" },
   { id: "nosotros", label: "Nosotros", href: "/nosotros" },
-];
+]);
 
-export const mobileNavigation: NavItem[] = [
+export const mobileNavigation: NavItem[] = withoutHiddenComboLinks([
   { id: "inicio", label: "Inicio", href: "/", match: "exact" },
   { id: "decants", label: "Decants", href: "/decants" },
   { id: "perfumes", label: "Perfumes", href: "/perfumes" },
@@ -50,7 +52,7 @@ export const mobileNavigation: NavItem[] = [
   { id: "mujer", label: "Mujer", href: "/mujer" },
   { id: "arabes", label: "Árabes", href: "/arabes" },
   { id: "combos", label: "Combos", href: "/combos" },
-];
+]);
 
 export const mobileShortcuts: NavItem[] = [
   { id: "envios", label: "Envíos", href: "/envios" },
@@ -64,7 +66,6 @@ export const headerActions: HeaderAction[] = [
     label: "Cuenta",
     type: "link",
     href: "/cuenta",
-    hideOnMobile: true,
     showInMobileMenu: true,
   },
   {
@@ -86,14 +87,14 @@ export const announcementBar: AnnouncementBarConfig = {
 };
 
 export const footerNavigation = {
-  shop: [
+  shop: withoutHiddenComboLinks([
     { id: "decants", label: "Decants", href: "/decants" },
     { id: "perfumes", label: "Perfumes", href: "/perfumes" },
     { id: "combos", label: "Combos", href: "/combos" },
     { id: "hombre", label: "Hombre", href: "/hombre" },
     { id: "mujer", label: "Mujer", href: "/mujer" },
     { id: "arabes", label: "Árabes", href: "/arabes" },
-  ],
+  ]),
   help: [
     { id: "encontrar", label: "Encontrar mi perfume", href: "/encontrar" },
     { id: "envios", label: "Envíos", href: "/envios" },

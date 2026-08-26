@@ -3,20 +3,29 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { withoutHiddenComboLinks } from "@/data/combos";
 import { discoverCards } from "@/data/home";
 
 export function DiscoverSection() {
+  const cards = withoutHiddenComboLinks(discoverCards);
+
   return (
     <section className="py-16 sm:py-20 lg:py-24">
       <Container>
         <SectionHeading
           eyebrow="Empieza aquí"
           title="Descubre Fragrance Market"
-          description="Tres caminos para encontrar una fragancia, sin prisa y sin comprar a ciegas."
+          description={
+            cards.length === 3
+              ? "Tres caminos para encontrar una fragancia, sin prisa y sin comprar a ciegas."
+              : "Dos caminos para encontrar una fragancia, sin prisa y sin comprar a ciegas."
+          }
         />
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {discoverCards.map((card) => (
+        <div
+          className={`mt-10 grid gap-4 ${cards.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}
+        >
+          {cards.map((card) => (
             <Link
               key={card.id}
               href={card.href}

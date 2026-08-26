@@ -3,7 +3,6 @@ import "server-only";
 import { parseBillingAddress, parseShippingAddress } from "@/lib/shipping";
 import { getSignedInEmail } from "@/data-access/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { createSupabaseSessionClient } from "@/lib/supabase/session";
 import type {
   OrderCustomer,
   OrderListItem,
@@ -310,30 +309,7 @@ function mapOrderListItem(value: unknown): OrderListItem | null {
   };
 }
 
-export async function listMyOrders(): Promise<OrderListItem[]> {
-  const email = await getSignedInEmail();
-
-  if (!email) {
-    return [];
-  }
-
-  const supabase = await createSupabaseSessionClient();
-  const { data, error } = await supabase.rpc("list_my_orders");
-
-  if (error) {
-    if (/Could not find the function/i.test(error.message)) {
-      throw new Error(
-        "El acceso con correo aún no está activo. Ejecuta supabase/migrations/20260818200000_list_my_orders.sql.",
-      );
-    }
-
-    if (/not_authenticated/i.test(error.message)) {
-      return [];
-    }
-
-    throw new Error("No se pudieron leer tus pedidos.");
-  }
-
+function mapOrderList(data: unknown): OrderListItem[] {
   if (!Array.isArray(data)) {
     return [];
   }
@@ -342,4 +318,43 @@ export async function listMyOrders(): Promise<OrderListItem[]> {
     const mapped = mapOrderListItem(item);
     return mapped ? [mapped] : [];
   });
+}
+
+export async function listOrdersByEmail(email: string): Promise<OrderListItem[]> {
+  const trimmed = email.trim().toLowerCase();
+
+  if (!isEmail(trimmed)) {
+    throw new Error("El correo no es válido.");
+  }
+
+  const supabase = createSupabaseServerClient();
+  const { data, error } = await supabase.rpc("list_orders_by_email", {
+    p_email: trimmed,
+  });
+
+  if (error) {
+    if (/Could not find the function/i.test(error.message)) {
+      throw new Error(
+        "La consulta por correo aún no está activa. Ejecuta supabase/migrations/20260826120000_list_orders_by_email.sql.",
+      );
+    }
+
+    if (/invalid_email/i.test(error.message)) {
+      throw new Error("El correo no es válido.");
+    }
+
+    throw new Error("No se pudieron leer tus pedidos.");
+  }
+
+  return mapOrderList(data);
+}
+
+export async function listMyOrders(): Promise<OrderListItem[]> {
+  const email = await getSignedInEmail();
+
+  if (!email) {
+    return [];
+  }
+
+  return listOrdersByEmail(email);
 }

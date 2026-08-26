@@ -8,6 +8,7 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/constants";
+import { combosComingSoon } from "@/data/combos";
 import { catalogPages, type CatalogRouteId } from "@/lib/catalog";
 import { getProductHref } from "@/lib/product";
 import type { Product } from "@/types/product";
@@ -22,7 +23,7 @@ export const INDEXABLE_PATHS = [
   "/arabes",
   "/disenador",
   "/nicho",
-  "/combos",
+  ...(combosComingSoon ? [] : ["/combos"]),
   "/ocasiones/diario",
   "/ocasiones/cita",
   "/ocasiones/fiesta",

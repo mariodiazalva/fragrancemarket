@@ -16,6 +16,7 @@ type AdminOrdersPageProps = {
   searchParams: Promise<{
     error?: string | string[];
     ok?: string | string[];
+    sent?: string | string[];
   }>;
 };
 
@@ -46,6 +47,30 @@ function errorMessage(code: string): string | null {
 
   if (code === "update") {
     return "No se pudo actualizar el pedido.";
+  }
+
+  if (code === "invalid") {
+    return "Ese correo no es válido.";
+  }
+
+  if (code === "smtp") {
+    return "Con el SMTP de prueba, el enlace solo llega al correo de tu cuenta de Supabase.";
+  }
+
+  if (code === "wait") {
+    return "Espera un minuto antes de pedir otro enlace.";
+  }
+
+  if (code === "quota") {
+    return "El SMTP de prueba de Supabase solo deja 2 correos por hora.";
+  }
+
+  if (code === "enlace") {
+    return "El enlace no es válido o ya se usó.";
+  }
+
+  if (code === "send") {
+    return "No se pudo enviar el enlace. Inténtalo de nuevo.";
   }
 
   return null;
@@ -82,7 +107,13 @@ export default async function AdminOrdersPage({ searchParams }: AdminOrdersPageP
       email={email}
       orders={orders}
       access={access}
-      notice={firstParam(params.ok) === "1" ? "Estado actualizado. El cliente lo ve en Cuenta." : null}
+      notice={
+        firstParam(params.ok) === "1"
+          ? "Estado actualizado. El cliente lo ve en Cuenta."
+          : firstParam(params.sent) === "1"
+            ? "Si el correo es de la tienda, te enviamos un enlace para entrar. Revisa también no deseados."
+            : null
+      }
       error={errorMessage(firstParam(params.error))}
     />
   );

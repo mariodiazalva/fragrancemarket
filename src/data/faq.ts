@@ -37,7 +37,7 @@ export const mockFaqs: FaqItem[] = [
     id: "elegir",
     question: "¿Cómo puedo elegir mi perfume?",
     answer:
-      "Puedes empezar por un decant, explorar por perfil u ocasión, o usar el recomendador. Si aún no estás seguro, un set te permite comparar varias piezas.",
+      "Puedes empezar por un decant, explorar por perfil u ocasión, o usar el recomendador para acotar la búsqueda.",
   },
   {
     id: "pagos",

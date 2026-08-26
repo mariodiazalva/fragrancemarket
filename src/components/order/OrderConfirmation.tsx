@@ -19,11 +19,12 @@ import { getProductHref } from "@/lib/product";
 import { formatPrice } from "@/lib/utils";
 import type { OrderPaymentSummary } from "@/types/order";
 
-export type OrderConfirmationPhase = "pay" | "thanks" | "notified" | "paid";
+export type OrderConfirmationPhase = "pay" | "thanks" | "notified" | "paid" | "summary";
 
 type OrderConfirmationProps = {
   order: OrderPaymentSummary;
   phase: OrderConfirmationPhase;
+  hidePaymentDetails?: boolean;
   actions?: ReactNode;
   footer?: ReactNode;
 };
@@ -31,6 +32,7 @@ type OrderConfirmationProps = {
 export function OrderConfirmation({
   order,
   phase,
+  hidePaymentDetails = false,
   actions,
   footer,
 }: OrderConfirmationProps) {
@@ -38,13 +40,35 @@ export function OrderConfirmation({
   const orderRef = shortOrderNumber(order.id);
   const itemCount = orderItemCount(order.items);
   const subtotal = orderSubtotal(order);
-  const showPayment = phase !== "paid" && order.status !== "paid";
+  const isThankYou =
+    phase === "notified" ||
+    phase === "paid" ||
+    phase === "summary" ||
+    order.status === "paid";
+  const showPayment =
+    !hidePaymentDetails && (phase === "pay" || phase === "thanks");
   const addressLines = order.shipping
     ? shippingAddressLines(order.shipping, order.customer)
     : [];
   const billingLines = order.billing
     ? billingAddressLines(order.billing, order.customer)
     : [];
+
+  const statusCard = (
+    <div className="mt-6 rounded-xl border border-elova-border bg-elova-cream p-5 sm:p-6">
+      <h2 className="font-serif text-xl tracking-[-0.02em] text-text-primary">
+        {cardTitle(phase, order.status)}
+      </h2>
+      <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+        {cardCopy(phase, order.status)}
+      </p>
+      {showPayment ? (
+        <div className="mt-6">
+          <PaymentInstructions amount={order.total} reference={order.id} />
+        </div>
+      ) : null}
+    </div>
+  );
 
   return (
     <main className="flex-1 bg-elova-cream-deep">
@@ -68,10 +92,17 @@ export function OrderConfirmation({
             <div className="min-w-0">
               <p className="text-sm text-text-secondary">Confirmación Nº {orderRef}</p>
               <h1 className="mt-1 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-text-primary sm:text-4xl">
-                {firstName ? `¡Gracias, ${firstName}!` : "¡Gracias!"}
+                {headingForPhase(phase, order.status, firstName)}
               </h1>
             </div>
           </div>
+
+          {isThankYou ? (
+            <>
+              {statusCard}
+              {actions ? <div className="mt-6">{actions}</div> : null}
+            </>
+          ) : null}
 
           {order.shipping ? (
             <div className="relative mt-8 overflow-hidden rounded-xl border border-elova-border bg-surface-elevated">
@@ -95,19 +126,7 @@ export function OrderConfirmation({
             </div>
           ) : null}
 
-          <div className="mt-6 rounded-xl border border-elova-border bg-elova-cream p-5 sm:p-6">
-            <h2 className="font-serif text-xl tracking-[-0.02em] text-text-primary">
-              {cardTitle(phase, order.status)}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-              {cardCopy(phase, order.status)}
-            </p>
-            {showPayment ? (
-              <div className="mt-6">
-                <PaymentInstructions amount={order.total} reference={order.id} />
-              </div>
-            ) : null}
-          </div>
+          {isThankYou ? null : statusCard}
 
           <div className="mt-10">
             <h2 className="font-serif text-xl tracking-[-0.02em] text-text-primary">
@@ -125,10 +144,12 @@ export function OrderConfirmation({
                 ) : null}
               </DetailBlock>
 
-              <DetailBlock title="Métodos de pago">
-                <p>Yape / Plin / {storePaymentDetails.bankName}</p>
-                <p>{formatPrice(order.total)}</p>
-              </DetailBlock>
+              {hidePaymentDetails ? null : (
+                <DetailBlock title="Métodos de pago">
+                  <p>Yape / Plin / {storePaymentDetails.bankName}</p>
+                  <p>{formatPrice(order.total)}</p>
+                </DetailBlock>
+              )}
 
               {order.shipping ? (
                 <DetailBlock title="Dirección de envío">
@@ -153,7 +174,9 @@ export function OrderConfirmation({
             </div>
           </div>
 
-          {actions || footer ? (
+          {isThankYou ? (
+            footer ? <div className="mt-10">{footer}</div> : null
+          ) : actions || footer ? (
             <div className="mt-10 space-y-6">
               {actions}
               {footer}
@@ -245,25 +268,56 @@ export function OrderConfirmation({
   );
 }
 
-function cardTitle(phase: OrderConfirmationPhase, status: string): string {
-  if (status === "paid" || phase === "paid") {
-    return "Tu pedido está pagado";
+function headingForPhase(
+  phase: OrderConfirmationPhase,
+  status: string,
+  firstName: string,
+): string {
+  if (phase === "summary") {
+    return status === "cancelled" ? "Pedido cancelado" : "Pedido confirmado";
   }
 
-  if (phase === "notified") {
-    return "Pago por validar";
+  if (phase === "notified" || phase === "paid") {
+    return "¡Gracias por confirmar!";
+  }
+
+  return firstName ? `¡Gracias, ${firstName}!` : "¡Gracias!";
+}
+
+function cardTitle(phase: OrderConfirmationPhase, status: string): string {
+  if (phase === "summary") {
+    return status === "cancelled" ? "Pedido cancelado" : "Pedido confirmado";
+  }
+
+  if (status === "paid" || phase === "paid" || phase === "notified") {
+    return "Agradecemos tu confianza";
   }
 
   return "Tu pedido está confirmado";
 }
 
 function cardCopy(phase: OrderConfirmationPhase, status: string): string {
+  if (phase === "summary") {
+    switch (status) {
+      case "processing":
+        return "El pedido está en proceso de envío.";
+      case "shipped":
+        return "El pedido ya fue enviado.";
+      case "delivered":
+        return "El pedido fue entregado.";
+      case "cancelled":
+        return "Este pedido está cancelado.";
+      default:
+        return "El pago está confirmado. Aquí tienes el resumen de tu pedido.";
+    }
+  }
+
   if (status === "paid" || phase === "paid") {
     return "El pedido quedó marcado como pagado. Te avisamos cuando pase a envío.";
   }
 
   if (phase === "notified") {
-    return "Gracias. Recibimos tu aviso. Validamos Yape, Plin o la transferencia y te confirmamos antes de despachar.";
+    return "Recibimos tu aviso de pago. Validamos Yape, Plin o la transferencia y te confirmamos antes de despachar.";
   }
 
   return "El pedido quedó registrado. Paga el monto exacto y envía el comprobante para que lo validemos.";

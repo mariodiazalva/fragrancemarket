@@ -55,17 +55,26 @@ function authSendErrorCode(
   return "send";
 }
 
+function safeAuthNext(value: string): "/admin/pedidos" | "/cuenta" {
+  return value === "/admin/pedidos" ? "/admin/pedidos" : "/cuenta";
+}
+
 export async function requestMagicLinkAction(formData: FormData) {
   const email = String(formData.get("email") ?? "");
-  const redirectTo = `${new URL(SITE_URL).origin}/auth/callback`;
+  const next = safeAuthNext(String(formData.get("next") ?? ""));
+  const origin = new URL(SITE_URL).origin;
+  const redirectTo =
+    next === "/admin/pedidos"
+      ? `${origin}/auth/callback?next=/admin/pedidos`
+      : `${origin}/auth/callback`;
 
   try {
     await requestMagicLink(email, redirectTo);
   } catch (error) {
-    redirect(`/cuenta?error=${authSendErrorCode(error)}`);
+    redirect(`${next}?error=${authSendErrorCode(error)}`);
   }
 
-  redirect("/cuenta?sent=1");
+  redirect(`${next}?sent=1`);
 }
 
 export async function signOutAction() {

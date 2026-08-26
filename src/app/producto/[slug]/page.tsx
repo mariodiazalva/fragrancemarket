@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/seo/JsonLd";
+import { combosComingSoon } from "@/data/combos";
 import { typeLabels } from "@/lib/catalog";
 import { getProductHref } from "@/lib/product";
 import {
@@ -35,7 +36,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  if (!product) {
+  if (!product || (combosComingSoon && product.type === "set")) {
     return { title: "Producto", robots: { index: false, follow: false } };
   }
 
@@ -46,7 +47,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  if (!product) {
+  if (!product || (combosComingSoon && product.type === "set")) {
     notFound();
   }
 

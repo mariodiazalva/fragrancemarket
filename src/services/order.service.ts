@@ -2,6 +2,7 @@ import {
   confirmOrderPayment,
   getOrderForPayment,
   listMyOrders,
+  listOrdersByEmail,
   placeOrder,
 } from "@/data-access/orders";
 import { getSignedInEmail } from "@/data-access/auth";
@@ -45,4 +46,8 @@ export async function getAccountEmail(): Promise<string | null> {
 
 export async function getMyOrders(): Promise<OrderListItem[]> {
   return listMyOrders();
+}
+
+export async function getOrdersByEmail(email: string): Promise<OrderListItem[]> {
+  return listOrdersByEmail(email);
 }

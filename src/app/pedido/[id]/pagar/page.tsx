@@ -1,6 +1,7 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { createPageMetadata } from "@/lib/seo";
+import { isOrderAwaitingPayment } from "@/lib/order-confirmation";
 import { isPaymentsTestMode } from "@/lib/supabase/env";
 import { getOrderPaymentSummary } from "@/services/order.service";
 import { PayOrderView } from "@/views/order/PayOrderView";
@@ -24,6 +25,10 @@ export default async function PayOrderPage({ params }: PayOrderPageProps) {
 
   if (!order) {
     notFound();
+  }
+
+  if (!isOrderAwaitingPayment(order.status)) {
+    redirect(`/pedido/confirmado?id=${encodeURIComponent(order.id)}`);
   }
 
   return <PayOrderView order={order} testMode={isPaymentsTestMode()} />;

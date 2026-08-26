@@ -16,7 +16,7 @@ export const mockReviews: DemoReview[] = [
     author: "Diego R.",
     rating: 4,
     title: "Bien para decidir entre dos ouds",
-    body: "El set Arabian me sirvió para comparar. Me quedé con uno y dejé el otro.",
+    body: "Pedí dos decants de oud. Me quedé con uno y dejé el otro.",
     productName: "Born in Roma Uomo Intense",
     isDemo: true,
   },

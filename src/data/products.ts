@@ -84,6 +84,16 @@ import {
   leMaleElixirPerfumeSizes,
   leMaleElixirSlugs,
 } from "@/data/le-male-elixir";
+import {
+  odysseyMandarinSky,
+  odysseyMandarinSkyPerfumeSizes,
+  odysseyMandarinSkySlugs,
+} from "@/data/odyssey-mandarin-sky";
+import {
+  lattafaKhamrah,
+  lattafaKhamrahPerfumeSizes,
+  lattafaKhamrahSlugs,
+} from "@/data/lattafa-khamrah";
 import type { Product } from "@/types";
 
 /**
@@ -508,6 +518,56 @@ const featuredPerfumes: Product[] = [
     bestseller: false,
     stock: 10,
     createdAt: "2026-08-25",
+  },
+  {
+    id: "prod-odyssey-mandarin-sky",
+    name: odysseyMandarinSky.name,
+    brand: odysseyMandarinSky.brand,
+    slug: odysseyMandarinSkySlugs.perfume,
+    description: odysseyMandarinSky.description,
+    gender: odysseyMandarinSky.gender,
+    category: odysseyMandarinSky.category,
+    type: "perfume",
+    price: 155,
+    images: odysseyMandarinSky.images,
+    sizes: odysseyMandarinSkyPerfumeSizes,
+    notes: odysseyMandarinSky.notes,
+    fragranceFamily: odysseyMandarinSky.fragranceFamily,
+    occasions: odysseyMandarinSky.occasions,
+    intensity: odysseyMandarinSky.intensity,
+    intensityScore: odysseyMandarinSky.intensityScore,
+    projection: odysseyMandarinSky.projection,
+    longevity: odysseyMandarinSky.longevity,
+    rating: odysseyMandarinSky.rating,
+    featured: true,
+    bestseller: false,
+    stock: 10,
+    createdAt: "2026-08-26",
+  },
+  {
+    id: "prod-khamrah",
+    name: lattafaKhamrah.name,
+    brand: lattafaKhamrah.brand,
+    slug: lattafaKhamrahSlugs.perfume,
+    description: lattafaKhamrah.description,
+    gender: lattafaKhamrah.gender,
+    category: lattafaKhamrah.category,
+    type: "perfume",
+    price: 130,
+    images: lattafaKhamrah.images,
+    sizes: lattafaKhamrahPerfumeSizes,
+    notes: lattafaKhamrah.notes,
+    fragranceFamily: lattafaKhamrah.fragranceFamily,
+    occasions: lattafaKhamrah.occasions,
+    intensity: lattafaKhamrah.intensity,
+    intensityScore: lattafaKhamrah.intensityScore,
+    projection: lattafaKhamrah.projection,
+    longevity: lattafaKhamrah.longevity,
+    rating: lattafaKhamrah.rating,
+    featured: true,
+    bestseller: false,
+    stock: 10,
+    createdAt: "2026-08-26",
   },
 ];
 

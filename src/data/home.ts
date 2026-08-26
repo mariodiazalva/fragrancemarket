@@ -23,7 +23,7 @@ export const discoverCards: HomeLinkCard[] = [
     description: "Más aromas. Mejor elección.",
     href: "/combos",
     image: "/images/home/discover-combos-collection.png",
-    cta: "Ver combos",
+    cta: "Próximamente",
   },
 ];
 

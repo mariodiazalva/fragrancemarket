@@ -85,6 +85,28 @@ export function shippingMapEmbedUrl(shipping: ShippingAddress): string {
   return `https://maps.google.com/maps?q=${encodeURIComponent(shippingMapQuery(shipping))}&hl=es&z=16&output=embed`;
 }
 
+export function isOrderAwaitingPayment(status: string): boolean {
+  return status === "pending";
+}
+
+export function orderDetailHref(orderId: string, status: string): string {
+  if (isOrderAwaitingPayment(status)) {
+    return `/pedido/${orderId}/pagar`;
+  }
+
+  return `/pedido/confirmado?id=${encodeURIComponent(orderId)}`;
+}
+
+export function accountOrdersHref(email?: string | null): string {
+  const trimmed = email?.trim();
+
+  if (!trimmed) {
+    return "/cuenta";
+  }
+
+  return `/cuenta?email=${encodeURIComponent(trimmed)}`;
+}
+
 export function orderItemCount(items: OrderPaymentItem[]): number {
   return items.reduce((total, item) => total + item.quantity, 0);
 }

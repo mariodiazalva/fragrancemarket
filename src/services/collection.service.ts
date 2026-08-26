@@ -1,3 +1,4 @@
+import { withoutHiddenSetProducts } from "@/data/combos";
 import {
   getCollectionBySlug,
   listCollectionSlugs,
@@ -11,5 +12,14 @@ export async function getCollectionSlugs(): Promise<string[]> {
 export async function getFragranceCollectionBySlug(
   slug: string,
 ): Promise<FragranceCollection | null> {
-  return getCollectionBySlug(slug);
+  const collection = await getCollectionBySlug(slug);
+
+  if (!collection) {
+    return null;
+  }
+
+  return {
+    ...collection,
+    products: withoutHiddenSetProducts(collection.products),
+  };
 }

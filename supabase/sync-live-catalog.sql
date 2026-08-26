@@ -2195,4 +2195,269 @@ insert into public.collection_products (collection_id, product_id, position) val
   ('aa000000-0000-4000-8000-000000000003', 'c0000000-0000-4000-8000-000000000040', 23)
 on conflict do nothing;
 
+-- Adds Armaf Odyssey Mandarin Sky (perfume + decant).
+insert into public.fragrance_notes (id, name, slug) values
+  ('d0000000-0000-4000-8000-000000000097', 'Naranja', 'naranja'),
+  ('d0000000-0000-4000-8000-000000000098', 'Caramelo', 'caramelo'),
+  ('d0000000-0000-4000-8000-000000000099', 'Cumarina', 'cumarina'),
+  ('d0000000-0000-4000-8000-000000000100', 'Ambroxan', 'ambroxan')
+on conflict (slug) do nothing;
+
+insert into public.products (
+  id, name, slug, brand_id, category_id, description, type, gender,
+  price, compare_at_price, stock, fragrance_family, occasions, rating,
+  intensity, featured, bestseller, sort_order, created_at
+) values
+  (
+    'c0000000-0000-4000-8000-000000000041',
+    'Odyssey Mandarin Sky',
+    'odyssey-mandarin-sky',
+    'a0000000-0000-4000-8000-000000000012',
+    'b0000000-0000-4000-8000-000000000002',
+    'Una fragancia masculina dulce, cítrica y moderna que combina la frescura de la mandarina con un corazón gourmand y un fondo cálido y amaderado. Odyssey Mandarin Sky ofrece un aroma llamativo, juvenil y seductor, ideal para el día a día, citas y salidas nocturnas.',
+    'perfume',
+    'masculine',
+    155,
+    null,
+    10,
+    array['cítrico', 'frutal', 'ámbar', 'gourmand', 'amaderado']::text[],
+    array['diario', 'cita', 'fiesta', 'noche']::text[],
+    4.6,
+    4,
+    true,
+    false,
+    41,
+    '2026-08-26'
+  ),
+  (
+    'c0000000-0000-4000-8000-000000000042',
+    'Odyssey Mandarin Sky',
+    'odyssey-mandarin-sky-decant',
+    'a0000000-0000-4000-8000-000000000012',
+    'b0000000-0000-4000-8000-000000000002',
+    'Una fragancia masculina dulce, cítrica y moderna que combina la frescura de la mandarina con un corazón gourmand y un fondo cálido y amaderado. Odyssey Mandarin Sky ofrece un aroma llamativo, juvenil y seductor, ideal para el día a día, citas y salidas nocturnas.',
+    'decant',
+    'masculine',
+    18,
+    null,
+    18,
+    array['cítrico', 'frutal', 'ámbar', 'gourmand', 'amaderado']::text[],
+    array['diario', 'cita', 'fiesta', 'noche']::text[],
+    4.6,
+    4,
+    false,
+    false,
+    42,
+    '2026-08-26'
+  )
+on conflict (id) do update set
+  name = excluded.name,
+  slug = excluded.slug,
+  brand_id = excluded.brand_id,
+  category_id = excluded.category_id,
+  description = excluded.description,
+  type = excluded.type,
+  gender = excluded.gender,
+  price = excluded.price,
+  stock = excluded.stock,
+  fragrance_family = excluded.fragrance_family,
+  occasions = excluded.occasions,
+  intensity = excluded.intensity,
+  featured = excluded.featured,
+  bestseller = excluded.bestseller;
+
+insert into public.product_variants (
+  product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
+) values
+  ('c0000000-0000-4000-8000-000000000041', '100 ml', 100, 155, null, 10, 'ELOVA-MANDARIN-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000042', '3 ml', 3, 15, null, 22, 'ELOVA-MANDARIN-3', false, 1),
+  ('c0000000-0000-4000-8000-000000000042', '5 ml', 5, 18, null, 18, 'ELOVA-MANDARIN-5', false, 2),
+  ('c0000000-0000-4000-8000-000000000042', '10 ml', 10, 24, null, 11, 'ELOVA-MANDARIN-10', false, 3)
+on conflict (sku) do update set
+  price = excluded.price,
+  stock = excluded.stock,
+  product_id = excluded.product_id,
+  label = excluded.label,
+  volume_ml = excluded.volume_ml,
+  is_full_bottle = excluded.is_full_bottle;
+
+insert into public.product_images (product_id, url, alt, position) values
+  ('c0000000-0000-4000-8000-000000000041', '/images/products/product-odyssey-mandarin-sky.png', 'Odyssey Mandarin Sky', 0),
+  ('c0000000-0000-4000-8000-000000000042', '/images/products/product-odyssey-mandarin-sky.png', 'Odyssey Mandarin Sky decant', 0)
+on conflict (product_id, position) do update set
+  url = excluded.url,
+  alt = excluded.alt;
+
+delete from public.product_notes
+where product_id in (
+  'c0000000-0000-4000-8000-000000000041',
+  'c0000000-0000-4000-8000-000000000042'
+);
+
+insert into public.product_notes (product_id, note_id, stage, position) values
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000048', 'top', 0),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000097', 'top', 1),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000011', 'top', 2),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000098', 'heart', 0),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000041', 'heart', 1),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000099', 'heart', 2),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000028', 'base', 0),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000023', 'base', 1),
+  ('c0000000-0000-4000-8000-000000000041', 'd0000000-0000-4000-8000-000000000100', 'base', 2),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000048', 'top', 0),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000097', 'top', 1),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000011', 'top', 2),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000098', 'heart', 0),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000041', 'heart', 1),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000099', 'heart', 2),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000028', 'base', 0),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000023', 'base', 1),
+  ('c0000000-0000-4000-8000-000000000042', 'd0000000-0000-4000-8000-000000000100', 'base', 2)
+on conflict do nothing;
+
+insert into public.collection_products (collection_id, product_id, position) values
+  ('aa000000-0000-4000-8000-000000000001', 'c0000000-0000-4000-8000-000000000041', 8),
+  ('aa000000-0000-4000-8000-000000000001', 'c0000000-0000-4000-8000-000000000042', 9),
+  ('aa000000-0000-4000-8000-000000000002', 'c0000000-0000-4000-8000-000000000041', 28),
+  ('aa000000-0000-4000-8000-000000000002', 'c0000000-0000-4000-8000-000000000042', 29),
+  ('aa000000-0000-4000-8000-000000000003', 'c0000000-0000-4000-8000-000000000041', 24),
+  ('aa000000-0000-4000-8000-000000000003', 'c0000000-0000-4000-8000-000000000042', 25)
+on conflict do nothing;
+
+-- Adds Lattafa Khamrah (perfume + decant).
+insert into public.fragrance_notes (id, name, slug) values
+  ('d0000000-0000-4000-8000-000000000101', 'Dátiles', 'datiles'),
+  ('d0000000-0000-4000-8000-000000000102', 'Nardos', 'nardos'),
+  ('d0000000-0000-4000-8000-000000000103', 'Mahonial', 'mahonial'),
+  ('d0000000-0000-4000-8000-000000000104', 'Mirra', 'mirra'),
+  ('d0000000-0000-4000-8000-000000000105', 'Akigalawood', 'akigalawood')
+on conflict (slug) do nothing;
+
+insert into public.products (
+  id, name, slug, brand_id, category_id, description, type, gender,
+  price, compare_at_price, stock, fragrance_family, occasions, rating,
+  intensity, featured, bestseller, sort_order, created_at
+) values
+  (
+    'c0000000-0000-4000-8000-000000000043',
+    'Khamrah',
+    'khamrah',
+    'a0000000-0000-4000-8000-000000000011',
+    'b0000000-0000-4000-8000-000000000002',
+    'Una fragancia dulce, cálida y envolvente con un marcado carácter gourmand. Khamrah combina especias aromáticas con canela, dátiles y praliné, creando un aroma seductor y adictivo que destaca especialmente durante la noche y en climas frescos.',
+    'perfume',
+    'unisex',
+    130,
+    null,
+    10,
+    array['ámbar', 'gourmand', 'especiado', 'oriental']::text[],
+    array['cita', 'diario', 'fiesta', 'formal', 'noche']::text[],
+    4.8,
+    5,
+    true,
+    false,
+    43,
+    '2026-08-26'
+  ),
+  (
+    'c0000000-0000-4000-8000-000000000044',
+    'Khamrah',
+    'khamrah-decant',
+    'a0000000-0000-4000-8000-000000000011',
+    'b0000000-0000-4000-8000-000000000002',
+    'Una fragancia dulce, cálida y envolvente con un marcado carácter gourmand. Khamrah combina especias aromáticas con canela, dátiles y praliné, creando un aroma seductor y adictivo que destaca especialmente durante la noche y en climas frescos.',
+    'decant',
+    'unisex',
+    32,
+    null,
+    18,
+    array['ámbar', 'gourmand', 'especiado', 'oriental']::text[],
+    array['cita', 'diario', 'fiesta', 'formal', 'noche']::text[],
+    4.8,
+    5,
+    false,
+    false,
+    44,
+    '2026-08-26'
+  )
+on conflict (id) do update set
+  name = excluded.name,
+  slug = excluded.slug,
+  brand_id = excluded.brand_id,
+  category_id = excluded.category_id,
+  description = excluded.description,
+  type = excluded.type,
+  gender = excluded.gender,
+  price = excluded.price,
+  stock = excluded.stock,
+  fragrance_family = excluded.fragrance_family,
+  occasions = excluded.occasions,
+  intensity = excluded.intensity,
+  featured = excluded.featured,
+  bestseller = excluded.bestseller;
+
+insert into public.product_variants (
+  product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
+) values
+  ('c0000000-0000-4000-8000-000000000043', '100 ml', 100, 130, null, 10, 'ELOVA-KHAMRAH-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000044', '3 ml', 3, 23, null, 22, 'ELOVA-KHAMRAH-3', false, 1),
+  ('c0000000-0000-4000-8000-000000000044', '5 ml', 5, 32, null, 18, 'ELOVA-KHAMRAH-5', false, 2),
+  ('c0000000-0000-4000-8000-000000000044', '10 ml', 10, 45, null, 11, 'ELOVA-KHAMRAH-10', false, 3)
+on conflict (sku) do update set
+  price = excluded.price,
+  stock = excluded.stock,
+  product_id = excluded.product_id,
+  label = excluded.label,
+  volume_ml = excluded.volume_ml,
+  is_full_bottle = excluded.is_full_bottle;
+
+insert into public.product_images (product_id, url, alt, position) values
+  ('c0000000-0000-4000-8000-000000000043', '/images/products/product-khamrah.png', 'Khamrah', 0),
+  ('c0000000-0000-4000-8000-000000000044', '/images/products/product-khamrah.png', 'Khamrah decant', 0)
+on conflict (product_id, position) do update set
+  url = excluded.url,
+  alt = excluded.alt;
+
+delete from public.product_notes
+where product_id in (
+  'c0000000-0000-4000-8000-000000000043',
+  'c0000000-0000-4000-8000-000000000044'
+);
+
+insert into public.product_notes (product_id, note_id, stage, position) values
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000039', 'top', 0),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000077', 'top', 1),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000002', 'top', 2),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000101', 'heart', 0),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000044', 'heart', 1),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000102', 'heart', 2),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000103', 'heart', 3),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000009', 'base', 0),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000041', 'base', 1),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000104', 'base', 2),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000006', 'base', 3),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000095', 'base', 4),
+  ('c0000000-0000-4000-8000-000000000043', 'd0000000-0000-4000-8000-000000000105', 'base', 5),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000039', 'top', 0),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000077', 'top', 1),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000002', 'top', 2),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000101', 'heart', 0),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000044', 'heart', 1),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000102', 'heart', 2),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000103', 'heart', 3),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000009', 'base', 0),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000041', 'base', 1),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000104', 'base', 2),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000006', 'base', 3),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000095', 'base', 4),
+  ('c0000000-0000-4000-8000-000000000044', 'd0000000-0000-4000-8000-000000000105', 'base', 5)
+on conflict do nothing;
+
+insert into public.collection_products (collection_id, product_id, position) values
+  ('aa000000-0000-4000-8000-000000000002', 'c0000000-0000-4000-8000-000000000043', 30),
+  ('aa000000-0000-4000-8000-000000000002', 'c0000000-0000-4000-8000-000000000044', 31),
+  ('aa000000-0000-4000-8000-000000000003', 'c0000000-0000-4000-8000-000000000043', 26),
+  ('aa000000-0000-4000-8000-000000000003', 'c0000000-0000-4000-8000-000000000044', 27)
+on conflict do nothing;
+
 

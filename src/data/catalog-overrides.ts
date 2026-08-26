@@ -106,6 +106,18 @@ import {
   leMaleElixirPerfumeSizes,
   leMaleElixirSlugs,
 } from "@/data/le-male-elixir";
+import {
+  odysseyMandarinSky,
+  odysseyMandarinSkyDecantSizes,
+  odysseyMandarinSkyPerfumeSizes,
+  odysseyMandarinSkySlugs,
+} from "@/data/odyssey-mandarin-sky";
+import {
+  lattafaKhamrah,
+  lattafaKhamrahDecantSizes,
+  lattafaKhamrahPerfumeSizes,
+  lattafaKhamrahSlugs,
+} from "@/data/lattafa-khamrah";
 import type { Product, ProductSize } from "@/types";
 import type { SetItem } from "@/types/content";
 
@@ -519,6 +531,50 @@ const replacements: CatalogReplacement[] = [
     perfumeStock: 10,
     decantStock: 18,
     injectDecantId: "c0000000-0000-4000-8000-000000000040",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "odyssey-mandarin-sky",
+      "prod-odyssey-mandarin-sky",
+      "c0000000-0000-4000-8000-000000000041",
+    ]),
+    legacyDecantKeys: new Set([
+      "odyssey-mandarin-sky-decant",
+      "decant-odyssey-mandarin-sky",
+      "c0000000-0000-4000-8000-000000000042",
+    ]),
+    perfumeSlug: odysseyMandarinSkySlugs.perfume,
+    decantSlug: odysseyMandarinSkySlugs.decant,
+    content: odysseyMandarinSky,
+    perfumeSizes: odysseyMandarinSkyPerfumeSizes,
+    decantSizes: odysseyMandarinSkyDecantSizes,
+    perfumePrice: 155,
+    decantPrice: 18,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000042",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "khamrah",
+      "prod-khamrah",
+      "c0000000-0000-4000-8000-000000000043",
+    ]),
+    legacyDecantKeys: new Set([
+      "khamrah-decant",
+      "decant-khamrah",
+      "c0000000-0000-4000-8000-000000000044",
+    ]),
+    perfumeSlug: lattafaKhamrahSlugs.perfume,
+    decantSlug: lattafaKhamrahSlugs.decant,
+    content: lattafaKhamrah,
+    perfumeSizes: lattafaKhamrahPerfumeSizes,
+    decantSizes: lattafaKhamrahDecantSizes,
+    perfumePrice: 130,
+    decantPrice: 32,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000044",
   },
 ];
 

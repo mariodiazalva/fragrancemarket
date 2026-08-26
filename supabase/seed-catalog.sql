@@ -79,7 +79,12 @@ insert into public.fragrance_notes (id, name, slug) values
   ('d0000000-0000-4000-8000-000000000093', 'Acordes rojos', 'acordes-rojos'),
   ('d0000000-0000-4000-8000-000000000094', 'Coco', 'coco'),
   ('d0000000-0000-4000-8000-000000000095', 'Benjuí', 'benjui'),
-  ('d0000000-0000-4000-8000-000000000096', 'Opopónaco', 'opoponaco')
+  ('d0000000-0000-4000-8000-000000000096', 'Opopónaco', 'opoponaco'),
+  ('d0000000-0000-4000-8000-000000000101', 'Dátiles', 'datiles'),
+  ('d0000000-0000-4000-8000-000000000102', 'Nardos', 'nardos'),
+  ('d0000000-0000-4000-8000-000000000103', 'Mahonial', 'mahonial'),
+  ('d0000000-0000-4000-8000-000000000104', 'Mirra', 'mirra'),
+  ('d0000000-0000-4000-8000-000000000105', 'Akigalawood', 'akigalawood')
 on conflict (slug) do nothing;
 
 insert into public.products (
