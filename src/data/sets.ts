@@ -1,0 +1,148 @@
+import type { FragranceSet } from "@/types/content";
+
+/**
+ * Local ELOVA SETS. Used when Supabase is not configured.
+ * `productId` on items maps to catalog products.
+ */
+export const mockSets: FragranceSet[] = [
+  {
+    id: "set-date-night",
+    name: "Date Night",
+    slug: "date-night",
+    description: "Tres decants para una noche que pide algo más cercano.",
+    price: 189,
+    compareAtPrice: 240,
+    image: "/images/sets/set-date-night.png",
+    items: [
+      {
+        productId: "decant-khamrah-qahwa",
+        slug: "khamrah-qahwa-decant",
+        name: "Khamrah Qahwa",
+        brand: "Lattafa",
+        sizeLabel: "5 ml",
+        individualPrice: 32,
+      },
+      {
+        productId: "decant-stronger-with-you-intensely",
+        slug: "stronger-with-you-intensely-decant",
+        name: "Stronger With You Intensely",
+        brand: "Emporio Armani",
+        sizeLabel: "5 ml",
+        individualPrice: 38,
+      },
+      {
+        productId: "decant-yara",
+        slug: "yara-decant",
+        name: "Yara",
+        brand: "Lattafa",
+        sizeLabel: "5 ml",
+        individualPrice: 30,
+      },
+    ],
+  },
+  {
+    id: "set-daily",
+    name: "Daily",
+    slug: "daily",
+    description: "Una rotación clara para el día: fresco, limpio y fácil de repetir.",
+    price: 159,
+    compareAtPrice: 199,
+    image: "/images/sets/set-daily.png",
+    items: [
+      {
+        productId: "decant-9-pm-night-out",
+        slug: "9-pm-night-out-decant",
+        name: "9 PM Night Out",
+        brand: "Afnan",
+        sizeLabel: "5 ml",
+        individualPrice: 25,
+      },
+      {
+        productId: "decant-acqua-di-gio-profondo",
+        slug: "acqua-di-gio-profondo-decant",
+        name: "Acqua di Giò Profondo",
+        brand: "Giorgio Armani",
+        sizeLabel: "5 ml",
+        individualPrice: 52,
+      },
+      {
+        productId: "decant-odyssey-aqua",
+        slug: "odyssey-aqua-decant",
+        name: "Odyssey Aqua",
+        brand: "Armaf",
+        sizeLabel: "5 ml",
+        individualPrice: 33,
+      },
+    ],
+  },
+  {
+    id: "set-signature",
+    name: "Signature",
+    slug: "signature",
+    description: "Piezas con carácter, para quien ya sabe cómo quiere oler.",
+    price: 219,
+    compareAtPrice: 280,
+    image: "/images/sets/set-signature.png",
+    items: [
+      {
+        productId: "decant-stronger-with-you-intensely",
+        slug: "stronger-with-you-intensely-decant",
+        name: "Stronger With You Intensely",
+        brand: "Emporio Armani",
+        sizeLabel: "5 ml",
+        individualPrice: 38,
+      },
+      {
+        productId: "decant-odyssey-aqua",
+        slug: "odyssey-aqua-decant",
+        name: "Odyssey Aqua",
+        brand: "Armaf",
+        sizeLabel: "5 ml",
+        individualPrice: 33,
+      },
+      {
+        productId: "decant-khamrah-qahwa",
+        slug: "khamrah-qahwa-decant",
+        name: "Khamrah Qahwa",
+        brand: "Lattafa",
+        sizeLabel: "5 ml",
+        individualPrice: 32,
+      },
+    ],
+  },
+  {
+    id: "set-arabian",
+    name: "Arabian",
+    slug: "arabian",
+    description: "Ouds y resinas en formato decant, para explorar sin prisa.",
+    price: 239,
+    compareAtPrice: 310,
+    image: "/images/sets/set-arabian.png",
+    items: [
+      {
+        productId: "decant-born-in-roma-uomo-intense",
+        slug: "born-in-roma-uomo-intense-decant",
+        name: "Born in Roma Uomo Intense",
+        brand: "Valentino",
+        sizeLabel: "5 ml",
+        individualPrice: 45,
+      },
+      {
+        productId: "decant-erba-pura",
+        slug: "erba-pura-decant",
+        name: "Erba Pura",
+        brand: "Xerjoff",
+        sizeLabel: "5 ml",
+        individualPrice: 76,
+      },
+      {
+        productId: "decant-odyssey-aqua",
+        slug: "odyssey-aqua-decant",
+        name: "Odyssey Aqua",
+        brand: "Armaf",
+        sizeLabel: "5 ml",
+        individualPrice: 33,
+      },
+    ],
+  },
+];

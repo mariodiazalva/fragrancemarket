@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette — Fragrance Market: high-contrast black / white */
+  --elova-cream: #ffffff;
+  --elova-cream-deep: #f4f4f4;
+  --elova-black: #000000;
+  --elova-graphite: #0a0a0a;
+  --elova-gray: #737373;
+  --elova-white: #ffffff;
+  --elova-gold: #000000;
+  --elova-gold-muted: #404040;
+  --elova-gold-highlight: #111111;
+  --elova-border: #e5e5e5;
+  --elova-border-subtle: #f0f0f0;
+  --accent-foreground: #ffffff;
+
+  /* Semantic text (light theme) */
+  --text-primary: #000000;
+  --text-secondary: #737373;
+
+  /* Surface aliases */
+  --surface: #ffffff;
+  --surface-elevated: #fafafa;
+
+  /* Legacy semantic aliases */
+  --background: var(--elova-cream);
+  --foreground: var(--text-primary);
+  --muted: var(--text-secondary);
+  --accent: var(--elova-gold);
+  --accent-muted: var(--elova-gold-muted);
+  --border: var(--elova-border);
+  --elova-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --elova-duration: 280ms;
+  --elova-duration-move: 400ms;
+  color-scheme: light;
+}
+
+/* Dark secondary theme — footer, announcement, heroes, contrast bands */
+.theme-ink {
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --elova-gold: #ffffff;
+  --elova-gold-muted: #d4d4d4;
+  --elova-gold-highlight: #f5f5f5;
+  --elova-border: #262626;
+  --elova-border-subtle: #1a1a1a;
+  --accent-foreground: #000000;
+  --surface: #0a0a0a;
+  --surface-elevated: #141414;
+  --background: var(--elova-black);
+  --foreground: #ffffff;
+  --muted: #a3a3a3;
+  --border: var(--elova-border);
+  color: var(--text-primary);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-elova-cream: var(--elova-cream);
+  --color-elova-cream-deep: var(--elova-cream-deep);
+  --color-elova-black: var(--elova-black);
+  --color-elova-graphite: var(--elova-graphite);
+  --color-elova-gray: var(--elova-gray);
+  --color-elova-white: var(--elova-white);
+  --color-elova-gold: var(--elova-gold);
+  --color-elova-gold-muted: var(--elova-gold-muted);
+  --color-elova-gold-highlight: var(--elova-gold-highlight);
+  --color-elova-border: var(--elova-border);
+  --color-elova-border-subtle: var(--elova-border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-montserrat);
+  --spacing-container: 72rem;
+  --spacing-container-narrow: 48rem;
+  --spacing-container-wide: 80rem;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  overflow-wrap: break-word;
+}
+
+:is(h1, h2, h3).font-serif {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+::selection {
+  background: var(--elova-black);
+  color: var(--elova-white);
+}
+
+.theme-ink ::selection {
+  background: var(--elova-white);
+  color: var(--elova-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--elova-gold);
+  outline-offset: 2px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes elova-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes elova-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes elova-cart-pop {
+  0% {
+    transform: scale(0.72);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.elova-fade-in {
+  animation: elova-fade-in var(--elova-duration) var(--elova-ease) both;
+}
+
+.elova-fade-up {
+  animation: elova-fade-up var(--elova-duration-move) var(--elova-ease) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--elova-duration-move) var(--elova-ease),
+    transform var(--elova-duration-move) var(--elova-ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.cart-badge-pop {
+  animation: elova-cart-pop 0.32s var(--elova-ease) both;
+}
+
+.cart-line-enter {
+  animation: elova-fade-up var(--elova-duration) var(--elova-ease) both;
+}
+
+.mobile-nav[data-open="true"] li {
+  animation: elova-fade-up 0.32s var(--elova-ease) both;
+  animation-delay: calc(var(--i, 0) * 28ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .elova-fade-in,
+  .elova-fade-up,
+  .cart-badge-pop,
+  .cart-line-enter,
+  .mobile-nav[data-open="true"] li {
+    animation: none;
+  }
+}

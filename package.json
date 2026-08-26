@@ -1,0 +1,42 @@
+{
+  "name": "elova-perfumes",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "verify:products": "node scripts/verify-featured-products.mjs",
+    "verify:catalog": "node scripts/verify-catalog.mjs",
+    "verify:pdp": "node scripts/verify-pdp.mjs",
+    "verify:sets": "node scripts/verify-sets.mjs",
+    "verify:reviews": "node scripts/verify-reviews.mjs",
+    "verify:faqs": "node scripts/verify-faqs.mjs",
+    "verify:orders": "node scripts/verify-orders.mjs",
+    "verify:shipping": "node scripts/verify-shipping.mjs",
+    "verify:payments": "node scripts/verify-payments.mjs",
+    "verify:landings": "node scripts/verify-landings.mjs",
+    "verify:collections": "node scripts/verify-collections.mjs",
+    "verify:auth": "node scripts/verify-auth.mjs",
+    "verify:admin": "node scripts/verify-admin-orders.mjs"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
