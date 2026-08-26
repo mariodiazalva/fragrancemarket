@@ -56,6 +56,26 @@
   color-scheme: dark;
 }
 
+/* Light overlay panels nested inside .theme-ink (mobile menu, drawers) */
+.theme-paper {
+  --text-primary: #000000;
+  --text-secondary: #737373;
+  --elova-gold: #000000;
+  --elova-gold-muted: #404040;
+  --elova-gold-highlight: #111111;
+  --elova-border: #e5e5e5;
+  --elova-border-subtle: #f0f0f0;
+  --accent-foreground: #ffffff;
+  --surface: #ffffff;
+  --surface-elevated: #fafafa;
+  --background: var(--elova-cream);
+  --foreground: #000000;
+  --muted: #737373;
+  --border: var(--elova-border);
+  color: var(--text-primary);
+  color-scheme: light;
+}
+
 @theme inline {
   --color-elova-cream: var(--elova-cream);
   --color-elova-cream-deep: var(--elova-cream-deep);

@@ -42,6 +42,21 @@ export const mainNavigation: NavItem[] = [
   { id: "nosotros", label: "Nosotros", href: "/nosotros" },
 ];
 
+export const mobileNavigation: NavItem[] = [
+  { id: "inicio", label: "Inicio", href: "/", match: "exact" },
+  { id: "decants", label: "Decants", href: "/decants" },
+  { id: "perfumes", label: "Perfumes", href: "/perfumes" },
+  { id: "hombre", label: "Hombre", href: "/hombre" },
+  { id: "mujer", label: "Mujer", href: "/mujer" },
+  { id: "arabes", label: "Árabes", href: "/arabes" },
+  { id: "combos", label: "Combos", href: "/combos" },
+];
+
+export const mobileShortcuts: NavItem[] = [
+  { id: "envios", label: "Envíos", href: "/envios" },
+  { id: "preguntas", label: "Preguntas frecuentes", href: "/#preguntas" },
+];
+
 export const headerActions: HeaderAction[] = [
   { id: "search", label: "Buscar", type: "search" },
   {

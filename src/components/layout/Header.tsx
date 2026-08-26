@@ -19,6 +19,7 @@ import {
   headerActions,
   isNavItemActive,
   mainNavigation,
+  mobileNavigation,
   type HeaderAction,
 } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
@@ -273,7 +274,7 @@ function HeaderInner({ pathname }: HeaderInnerProps) {
 
       <MobileMenu
         open={menuOpen}
-        items={mainNavigation}
+        items={mobileNavigation}
         onClose={() => setMenuOpen(false)}
         isItemActive={(item) => isNavItemActive(pathname, item)}
       />
