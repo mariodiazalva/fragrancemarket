@@ -82,7 +82,7 @@ export const announcementBar: AnnouncementBarConfig = {
   separator: "·",
   items: [
     { id: "shipping", label: "ENVÍOS A TODO EL PERÚ" },
-    { id: "decants", label: "DECANTS DESDE S/ 29", href: "/decants" },
+    { id: "decants", label: "DECANTS DESDE S/ 15", href: "/decants" },
   ],
 };
 
