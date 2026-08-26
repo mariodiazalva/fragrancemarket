@@ -41,9 +41,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es-PE"
-      className={`${montserrat.variable} ${inter.variable} h-full overflow-x-clip antialiased`}
+      className={`${montserrat.variable} ${inter.variable} min-h-full antialiased`}
     >
-      <body className="flex min-h-full min-w-0 flex-col overflow-x-clip font-sans">
+      <body className="flex min-h-dvh min-w-0 flex-col overflow-x-clip font-sans">
         <noscript>
           <style>{`#contenido main > section ~ *,[data-reveal],.reveal,.site-footer,.reveal-stagger > *{opacity:1!important;transform:none!important;filter:none!important}`}</style>
         </noscript>

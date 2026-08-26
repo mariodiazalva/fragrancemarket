@@ -119,6 +119,7 @@ body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
+  overflow-y: visible;
   overflow-wrap: break-word;
 }
 

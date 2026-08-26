@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+import { observeReveal } from "@/lib/reveal";
+
 function collectTargets() {
   const nodes = new Set<HTMLElement>();
   const root = document.getElementById("contenido");
@@ -40,41 +42,16 @@ export function ScrollReveal() {
       return;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      targets.forEach((node) => node.classList.add("is-visible"));
-      return;
-    }
+    let batch = 0;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let batch = 0;
-
-        for (const entry of entries) {
-          if (!entry.isIntersecting) {
-            continue;
-          }
-
-          const node = entry.target as HTMLElement;
-
-          if (batch > 0) {
-            node.style.setProperty("--reveal-delay", `${batch * 80}ms`);
-          }
-
-          node.classList.add("is-visible");
-          observer.unobserve(node);
-          batch += 1;
-        }
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" },
-    );
-
-    targets.forEach((node) => {
-      if (!node.classList.contains("is-visible")) {
-        observer.observe(node);
+    return observeReveal(targets, (node) => {
+      if (batch > 0) {
+        node.style.setProperty("--reveal-delay", `${Math.min(batch, 4) * 70}ms`);
       }
-    });
 
-    return () => observer.disconnect();
+      node.classList.add("is-visible");
+      batch += 1;
+    });
   }, [pathname]);
 
   return null;
