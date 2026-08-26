@@ -23,7 +23,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia fresca, elegante y profundamente marina que captura la sensación del océano y la naturaleza. Acqua di Giò Profondo combina cítricos y notas marinas con un corazón aromático y un fondo amaderado, creando un aroma limpio, masculino y sofisticado, ideal para el día a día y los días cálidos.',
   gender = 'masculine',
-  price = 370,
+  price = 550,
   compare_at_price = null,
   stock = 10,
   fragrance_family = array['aromático', 'cítrico', 'fresco', 'amaderado']::text[],
@@ -54,7 +54,7 @@ where id = 'c0000000-0000-4000-8000-000000000013'
    or slug in ('iris-quiet-decant', 'acqua-di-gio-profondo-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 370, compare_at_price = null, stock = 10, sku = 'ELOVA-GIO-100'
+set label = '100 ml', volume_ml = 100, price = 550, compare_at_price = null, stock = 10, sku = 'ELOVA-GIO-100'
 where product_id = 'c0000000-0000-4000-8000-000000000004';
 
 update public.product_variants

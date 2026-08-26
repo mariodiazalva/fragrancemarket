@@ -40,7 +40,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia cálida, dulce y envolvente que combina especias aromáticas con acordes gourmand de canela, praliné y café. Khamrah Qahwa ofrece un aroma intenso y adictivo, perfecto para quienes buscan una fragancia llamativa, sofisticada y especialmente atractiva durante la noche y en climas frescos.',
   gender = 'unisex',
-  price = 32,
+  price = 18,
   compare_at_price = null,
   stock = 18,
   fragrance_family = array['ámbar', 'especiado', 'gourmand', 'oriental']::text[],
@@ -56,15 +56,15 @@ set label = '100 ml', volume_ml = 100, price = 165, compare_at_price = null, sto
 where product_id = 'c0000000-0000-4000-8000-000000000006';
 
 update public.product_variants
-set price = 22, sku = 'ELOVA-QAHWA-3'
+set price = 15, sku = 'ELOVA-QAHWA-3'
 where product_id = 'c0000000-0000-4000-8000-000000000015' and volume_ml = 3;
 
 update public.product_variants
-set price = 32, sku = 'ELOVA-QAHWA-5'
+set price = 18, sku = 'ELOVA-QAHWA-5'
 where product_id = 'c0000000-0000-4000-8000-000000000015' and volume_ml = 5;
 
 update public.product_variants
-set price = 50, sku = 'ELOVA-QAHWA-10'
+set price = 22, sku = 'ELOVA-QAHWA-10'
 where product_id = 'c0000000-0000-4000-8000-000000000015' and volume_ml = 10;
 
 update public.product_images
@@ -107,5 +107,5 @@ insert into public.product_notes (product_id, note_id, stage, position) values
 on conflict do nothing;
 
 update public.set_products
-set individual_price = 32
+set individual_price = 18
 where product_id = 'c0000000-0000-4000-8000-000000000015';

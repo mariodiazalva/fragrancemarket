@@ -29,9 +29,9 @@ export const khamrahQahwaPerfumeSizes: ProductSize[] = [
 ];
 
 export const khamrahQahwaDecantSizes: ProductSize[] = [
-  { label: "3 ml", volumeMl: 3, price: 22, stock: 22 },
-  { label: "5 ml", volumeMl: 5, price: 32, stock: 18 },
-  { label: "10 ml", volumeMl: 10, price: 50, stock: 11 },
+  { label: "3 ml", volumeMl: 3, price: 15, stock: 22 },
+  { label: "5 ml", volumeMl: 5, price: 18, stock: 18 },
+  { label: "10 ml", volumeMl: 10, price: 22, stock: 11 },
 ];
 
 export const khamrahQahwaSlugs = {

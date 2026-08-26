@@ -29,9 +29,9 @@ export const odysseyAquaPerfumeSizes: ProductSize[] = [
 ];
 
 export const odysseyAquaDecantSizes: ProductSize[] = [
-  { label: "3 ml", volumeMl: 3, price: 24, stock: 22 },
-  { label: "5 ml", volumeMl: 5, price: 33, stock: 18 },
-  { label: "10 ml", volumeMl: 10, price: 45, stock: 11 },
+  { label: "3 ml", volumeMl: 3, price: 15, stock: 22 },
+  { label: "5 ml", volumeMl: 5, price: 18, stock: 18 },
+  { label: "10 ml", volumeMl: 10, price: 25, stock: 11 },
 ];
 
 export const odysseyAquaSlugs = {

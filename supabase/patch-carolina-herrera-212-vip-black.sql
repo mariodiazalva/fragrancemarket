@@ -26,7 +26,7 @@ insert into public.products (
     'Una fragancia masculina, intensa y seductora, con un carácter elegante y nocturno. 212 VIP Black combina la frescura de la absenta con notas aromáticas y un fondo cálido de almizcle y vainilla, creando un aroma moderno, sofisticado y perfecto para destacar.',
     'perfume',
     'masculine',
-    400,
+    430,
     null,
     10,
     array['aromático', 'ámbar', 'frutal', 'oriental']::text[],
@@ -78,7 +78,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000023', '100 ml', 100, 400, null, 10, 'ELOVA-VIPB-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000023', '100 ml', 100, 430, null, 10, 'ELOVA-VIPB-100', true, 1),
   ('c0000000-0000-4000-8000-000000000024', '3 ml', 3, 35, null, 22, 'ELOVA-VIPB-3', false, 1),
   ('c0000000-0000-4000-8000-000000000024', '5 ml', 5, 50, null, 18, 'ELOVA-VIPB-5', false, 2),
   ('c0000000-0000-4000-8000-000000000024', '10 ml', 10, 70, null, 11, 'ELOVA-VIPB-10', false, 3)

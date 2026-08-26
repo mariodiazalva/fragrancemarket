@@ -26,13 +26,13 @@ export const valentinoBornInRoma = {
 };
 
 export const valentinoBornInRomaPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 480, stock: 6 },
+  { label: "100 ml", volumeMl: 100, price: 650, stock: 6 },
 ];
 
 export const valentinoBornInRomaDecantSizes: ProductSize[] = [
-  { label: "3 ml", volumeMl: 3, price: 30, stock: 22 },
+  { label: "3 ml", volumeMl: 3, price: 26, stock: 22 },
   { label: "5 ml", volumeMl: 5, price: 45, stock: 18 },
-  { label: "10 ml", volumeMl: 10, price: 73, stock: 11 },
+  { label: "10 ml", volumeMl: 10, price: 75, stock: 11 },
 ];
 
 export const valentinoBornInRomaSlugs = {

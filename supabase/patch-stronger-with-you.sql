@@ -22,7 +22,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia intensa, cálida y adictiva que combina acordes dulces y especiados con una base profunda y envolvente. Stronger With You Intensely destaca por su carácter seductor y masculino, siendo especialmente atractivo para noches, citas y ocasiones especiales.',
   gender = 'masculine',
-  price = 360,
+  price = 515,
   compare_at_price = null,
   stock = 8,
   fragrance_family = array['ámbar', 'aromático', 'especiado', 'oriental']::text[],
@@ -41,7 +41,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia intensa, cálida y adictiva que combina acordes dulces y especiados con una base profunda y envolvente. Stronger With You Intensely destaca por su carácter seductor y masculino, siendo especialmente atractivo para noches, citas y ocasiones especiales.',
   gender = 'masculine',
-  price = 38,
+  price = 35,
   compare_at_price = null,
   stock = 18,
   fragrance_family = array['ámbar', 'aromático', 'especiado', 'oriental']::text[],
@@ -53,19 +53,19 @@ where id = 'c0000000-0000-4000-8000-000000000009'
    or slug in ('nocturne-absolu-decant', 'stronger-with-you-intensely-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 360, compare_at_price = null, stock = 8, sku = 'ELOVA-SWY-100'
+set label = '100 ml', volume_ml = 100, price = 515, compare_at_price = null, stock = 8, sku = 'ELOVA-SWY-100'
 where product_id = 'c0000000-0000-4000-8000-000000000001';
 
 update public.product_variants
-set price = 30, sku = 'ELOVA-SWY-3'
+set price = 25, sku = 'ELOVA-SWY-3'
 where product_id = 'c0000000-0000-4000-8000-000000000009' and volume_ml = 3;
 
 update public.product_variants
-set price = 38, sku = 'ELOVA-SWY-5'
+set price = 35, sku = 'ELOVA-SWY-5'
 where product_id = 'c0000000-0000-4000-8000-000000000009' and volume_ml = 5;
 
 update public.product_variants
-set price = 55, sku = 'ELOVA-SWY-10'
+set price = 60, sku = 'ELOVA-SWY-10'
 where product_id = 'c0000000-0000-4000-8000-000000000009' and volume_ml = 10;
 
 update public.product_images
@@ -106,5 +106,5 @@ insert into public.product_notes (product_id, note_id, stage, position) values
 on conflict do nothing;
 
 update public.set_products
-set individual_price = 38
+set individual_price = 35
 where product_id = 'c0000000-0000-4000-8000-000000000009';

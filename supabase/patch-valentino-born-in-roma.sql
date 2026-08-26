@@ -17,7 +17,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia intensa, elegante y seductora que combina la calidez de la vainilla con acordes aromáticos y amaderados. Born in Roma Uomo Intense proyecta una personalidad sofisticada y moderna, ideal para destacar especialmente durante la noche y en ocasiones especiales.',
   gender = 'masculine',
-  price = 480,
+  price = 650,
   compare_at_price = null,
   stock = 6,
   fragrance_family = array['ámbar', 'aromático', 'amaderado', 'oriental']::text[],
@@ -48,11 +48,11 @@ where id = 'c0000000-0000-4000-8000-000000000012'
    or slug in ('oud-sable-decant', 'born-in-roma-uomo-intense-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 480, compare_at_price = null, stock = 6, sku = 'ELOVA-BIR-100'
+set label = '100 ml', volume_ml = 100, price = 650, compare_at_price = null, stock = 6, sku = 'ELOVA-BIR-100'
 where product_id = 'c0000000-0000-4000-8000-000000000003';
 
 update public.product_variants
-set price = 30, sku = 'ELOVA-BIR-3'
+set price = 26, sku = 'ELOVA-BIR-3'
 where product_id = 'c0000000-0000-4000-8000-000000000012' and volume_ml = 3;
 
 update public.product_variants
@@ -60,7 +60,7 @@ set price = 45, sku = 'ELOVA-BIR-5'
 where product_id = 'c0000000-0000-4000-8000-000000000012' and volume_ml = 5;
 
 update public.product_variants
-set price = 73, sku = 'ELOVA-BIR-10'
+set price = 75, sku = 'ELOVA-BIR-10'
 where product_id = 'c0000000-0000-4000-8000-000000000012' and volume_ml = 10;
 
 update public.product_images

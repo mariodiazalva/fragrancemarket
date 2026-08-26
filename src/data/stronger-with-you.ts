@@ -26,13 +26,13 @@ export const strongerWithYouIntensely = {
 };
 
 export const strongerWithYouPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 360, stock: 8 },
+  { label: "100 ml", volumeMl: 100, price: 515, stock: 8 },
 ];
 
 export const strongerWithYouDecantSizes: ProductSize[] = [
-  { label: "3 ml", volumeMl: 3, price: 30, stock: 22 },
-  { label: "5 ml", volumeMl: 5, price: 38, stock: 18 },
-  { label: "10 ml", volumeMl: 10, price: 55, stock: 11 },
+  { label: "3 ml", volumeMl: 3, price: 25, stock: 22 },
+  { label: "5 ml", volumeMl: 5, price: 35, stock: 18 },
+  { label: "10 ml", volumeMl: 10, price: 60, stock: 11 },
 ];
 
 export const strongerWithYouSlugs = {

@@ -40,7 +40,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia fresca, cítrica y aromática con un carácter limpio y masculino. Odyssey Aqua combina notas refrescantes con un fondo amaderado que la convierte en una opción versátil, ideal para el día a día, días calurosos y ocasiones donde buscas transmitir frescura y elegancia.',
   gender = 'masculine',
-  price = 33,
+  price = 18,
   compare_at_price = null,
   stock = 18,
   fragrance_family = array['cítrico', 'aromático', 'fresco', 'amaderado']::text[],
@@ -56,15 +56,15 @@ set label = '100 ml', volume_ml = 100, price = 170, compare_at_price = null, sto
 where product_id = 'c0000000-0000-4000-8000-000000000002';
 
 update public.product_variants
-set price = 24, sku = 'ELOVA-AQUA-3'
+set price = 15, sku = 'ELOVA-AQUA-3'
 where product_id = 'c0000000-0000-4000-8000-000000000011' and volume_ml = 3;
 
 update public.product_variants
-set price = 33, sku = 'ELOVA-AQUA-5'
+set price = 18, sku = 'ELOVA-AQUA-5'
 where product_id = 'c0000000-0000-4000-8000-000000000011' and volume_ml = 5;
 
 update public.product_variants
-set price = 45, sku = 'ELOVA-AQUA-10'
+set price = 25, sku = 'ELOVA-AQUA-10'
 where product_id = 'c0000000-0000-4000-8000-000000000011' and volume_ml = 10;
 
 update public.product_images
@@ -105,5 +105,5 @@ insert into public.product_notes (product_id, note_id, stage, position) values
 on conflict do nothing;
 
 update public.set_products
-set individual_price = 33
+set individual_price = 18
 where product_id = 'c0000000-0000-4000-8000-000000000011';

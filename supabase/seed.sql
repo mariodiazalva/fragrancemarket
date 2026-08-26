@@ -129,7 +129,7 @@ insert into public.products (
     'Una fragancia intensa, cálida y adictiva que combina acordes dulces y especiados con una base profunda y envolvente. Stronger With You Intensely destaca por su carácter seductor y masculino, siendo especialmente atractivo para noches, citas y ocasiones especiales.',
     'perfume',
     'masculine',
-    360,
+    515,
     null,
     8,
     array['ámbar', 'aromático', 'especiado', 'oriental']::text[],
@@ -169,7 +169,7 @@ insert into public.products (
     'Una fragancia intensa, elegante y seductora que combina la calidez de la vainilla con acordes aromáticos y amaderados. Born in Roma Uomo Intense proyecta una personalidad sofisticada y moderna, ideal para destacar especialmente durante la noche y en ocasiones especiales.',
     'perfume',
     'masculine',
-    480,
+    650,
     null,
     6,
     array['ámbar', 'aromático', 'amaderado', 'oriental']::text[],
@@ -189,7 +189,7 @@ insert into public.products (
     'Una fragancia fresca, elegante y profundamente marina que captura la sensación del océano y la naturaleza. Acqua di Giò Profondo combina cítricos y notas marinas con un corazón aromático y un fondo amaderado, creando un aroma limpio, masculino y sofisticado, ideal para el día a día y los días cálidos.',
     'perfume',
     'masculine',
-    370,
+    550,
     null,
     10,
     array['aromático', 'cítrico', 'fresco', 'amaderado']::text[],
@@ -249,7 +249,7 @@ insert into public.products (
     'Un clásico masculino, sensual y elegante que combina la frescura de la menta con la suavidad de la lavanda y la calidez de la vainilla. Le Male ofrece un aroma distintivo, limpio y seductor, ideal tanto para el día a día como para ocasiones especiales.',
     'perfume',
     'masculine',
-    480,
+    470,
     null,
     11,
     array['aromático', 'ámbar', 'especiado', 'floral']::text[],
@@ -289,7 +289,7 @@ insert into public.products (
     'Una fragancia intensa, cálida y adictiva que combina acordes dulces y especiados con una base profunda y envolvente. Stronger With You Intensely destaca por su carácter seductor y masculino, siendo especialmente atractivo para noches, citas y ocasiones especiales.',
     'decant',
     'masculine',
-    38,
+    35,
     null,
     18,
     array['ámbar', 'aromático', 'especiado', 'oriental']::text[],
@@ -305,17 +305,17 @@ on conflict (slug) do nothing;
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000001', '100 ml', 100, 360, null, 8, 'ELOVA-SWY-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000001', '100 ml', 100, 515, null, 8, 'ELOVA-SWY-100', true, 1),
   ('c0000000-0000-4000-8000-000000000002', '100 ml', 100, 170, null, 12, 'ELOVA-AQUA-100', true, 1),
-  ('c0000000-0000-4000-8000-000000000003', '100 ml', 100, 480, null, 6, 'ELOVA-BIR-100', true, 1),
-  ('c0000000-0000-4000-8000-000000000004', '100 ml', 100, 370, null, 10, 'ELOVA-GIO-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000003', '100 ml', 100, 650, null, 6, 'ELOVA-BIR-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000004', '100 ml', 100, 550, null, 10, 'ELOVA-GIO-100', true, 1),
   ('c0000000-0000-4000-8000-000000000005', '100 ml', 100, 230, null, 14, 'ELOVA-9PM-100', true, 1),
   ('c0000000-0000-4000-8000-000000000006', '100 ml', 100, 165, null, 9, 'ELOVA-QAHWA-100', true, 1),
-  ('c0000000-0000-4000-8000-000000000007', '100 ml', 100, 480, null, 11, 'ELOVA-MALE-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000007', '120 ml', 120, 470, null, 11, 'ELOVA-MALE-120', true, 1),
   ('c0000000-0000-4000-8000-000000000008', '100 ml', 100, 165, null, 7, 'ELOVA-YARA-100', true, 1),
-  ('c0000000-0000-4000-8000-000000000009', '3 ml', 3, 30, null, 22, 'ELOVA-SWY-3', false, 1),
-  ('c0000000-0000-4000-8000-000000000009', '5 ml', 5, 38, null, 18, 'ELOVA-SWY-5', false, 2),
-  ('c0000000-0000-4000-8000-000000000009', '10 ml', 10, 55, null, 11, 'ELOVA-SWY-10', false, 3)
+  ('c0000000-0000-4000-8000-000000000009', '3 ml', 3, 25, null, 22, 'ELOVA-SWY-3', false, 1),
+  ('c0000000-0000-4000-8000-000000000009', '5 ml', 5, 35, null, 18, 'ELOVA-SWY-5', false, 2),
+  ('c0000000-0000-4000-8000-000000000009', '10 ml', 10, 60, null, 11, 'ELOVA-SWY-10', false, 3)
 on conflict (sku) do nothing;
 
 insert into public.product_images (product_id, url, alt, position) values

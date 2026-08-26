@@ -26,7 +26,7 @@ export const acquaDiGioProfondo = {
 };
 
 export const acquaDiGioProfondoPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 370, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 550, stock: 10 },
 ];
 
 export const acquaDiGioProfondoDecantSizes: ProductSize[] = [

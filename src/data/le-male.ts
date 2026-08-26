@@ -25,13 +25,13 @@ export const leMale = {
 };
 
 export const leMalePerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 480, stock: 11 },
+  { label: "120 ml", volumeMl: 120, price: 470, stock: 11 },
 ];
 
 export const leMaleDecantSizes: ProductSize[] = [
-  { label: "3 ml", volumeMl: 3, price: 36, stock: 22 },
-  { label: "5 ml", volumeMl: 5, price: 52.5, stock: 18 },
-  { label: "10 ml", volumeMl: 10, price: 72, stock: 11 },
+  { label: "3 ml", volumeMl: 3, price: 20, stock: 22 },
+  { label: "5 ml", volumeMl: 5, price: 30, stock: 18 },
+  { label: "10 ml", volumeMl: 10, price: 48, stock: 11 },
 ];
 
 export const leMaleSlugs = {

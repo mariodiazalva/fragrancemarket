@@ -28,7 +28,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia intensa, cálida y adictiva que combina acordes dulces y especiados con una base profunda y envolvente. Stronger With You Intensely destaca por su carácter seductor y masculino, siendo especialmente atractivo para noches, citas y ocasiones especiales.',
   gender = 'masculine',
-  price = 360,
+  price = 515,
   compare_at_price = null,
   stock = 8,
   fragrance_family = array['ámbar', 'aromático', 'especiado', 'oriental']::text[],
@@ -47,7 +47,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia intensa, cálida y adictiva que combina acordes dulces y especiados con una base profunda y envolvente. Stronger With You Intensely destaca por su carácter seductor y masculino, siendo especialmente atractivo para noches, citas y ocasiones especiales.',
   gender = 'masculine',
-  price = 38,
+  price = 35,
   compare_at_price = null,
   stock = 18,
   fragrance_family = array['ámbar', 'aromático', 'especiado', 'oriental']::text[],
@@ -59,19 +59,19 @@ where id = 'c0000000-0000-4000-8000-000000000009'
    or slug in ('nocturne-absolu-decant', 'stronger-with-you-intensely-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 360, compare_at_price = null, stock = 8, sku = 'ELOVA-SWY-100'
+set label = '100 ml', volume_ml = 100, price = 515, compare_at_price = null, stock = 8, sku = 'ELOVA-SWY-100'
 where product_id = 'c0000000-0000-4000-8000-000000000001';
 
 update public.product_variants
-set price = 30, sku = 'ELOVA-SWY-3'
+set price = 25, sku = 'ELOVA-SWY-3'
 where product_id = 'c0000000-0000-4000-8000-000000000009' and volume_ml = 3;
 
 update public.product_variants
-set price = 38, sku = 'ELOVA-SWY-5'
+set price = 35, sku = 'ELOVA-SWY-5'
 where product_id = 'c0000000-0000-4000-8000-000000000009' and volume_ml = 5;
 
 update public.product_variants
-set price = 55, sku = 'ELOVA-SWY-10'
+set price = 60, sku = 'ELOVA-SWY-10'
 where product_id = 'c0000000-0000-4000-8000-000000000009' and volume_ml = 10;
 
 update public.product_images
@@ -112,7 +112,7 @@ insert into public.product_notes (product_id, note_id, stage, position) values
 on conflict do nothing;
 
 update public.set_products
-set individual_price = 38
+set individual_price = 35
 where product_id = 'c0000000-0000-4000-8000-000000000009';
 
 
@@ -159,7 +159,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia fresca, cítrica y aromática con un carácter limpio y masculino. Odyssey Aqua combina notas refrescantes con un fondo amaderado que la convierte en una opción versátil, ideal para el día a día, días calurosos y ocasiones donde buscas transmitir frescura y elegancia.',
   gender = 'masculine',
-  price = 33,
+  price = 18,
   compare_at_price = null,
   stock = 18,
   fragrance_family = array['cítrico', 'aromático', 'fresco', 'amaderado']::text[],
@@ -175,15 +175,15 @@ set label = '100 ml', volume_ml = 100, price = 170, compare_at_price = null, sto
 where product_id = 'c0000000-0000-4000-8000-000000000002';
 
 update public.product_variants
-set price = 24, sku = 'ELOVA-AQUA-3'
+set price = 15, sku = 'ELOVA-AQUA-3'
 where product_id = 'c0000000-0000-4000-8000-000000000011' and volume_ml = 3;
 
 update public.product_variants
-set price = 33, sku = 'ELOVA-AQUA-5'
+set price = 18, sku = 'ELOVA-AQUA-5'
 where product_id = 'c0000000-0000-4000-8000-000000000011' and volume_ml = 5;
 
 update public.product_variants
-set price = 45, sku = 'ELOVA-AQUA-10'
+set price = 25, sku = 'ELOVA-AQUA-10'
 where product_id = 'c0000000-0000-4000-8000-000000000011' and volume_ml = 10;
 
 update public.product_images
@@ -224,7 +224,7 @@ insert into public.product_notes (product_id, note_id, stage, position) values
 on conflict do nothing;
 
 update public.set_products
-set individual_price = 33
+set individual_price = 18
 where product_id = 'c0000000-0000-4000-8000-000000000011';
 
 
@@ -248,7 +248,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia intensa, elegante y seductora que combina la calidez de la vainilla con acordes aromáticos y amaderados. Born in Roma Uomo Intense proyecta una personalidad sofisticada y moderna, ideal para destacar especialmente durante la noche y en ocasiones especiales.',
   gender = 'masculine',
-  price = 480,
+  price = 650,
   compare_at_price = null,
   stock = 6,
   fragrance_family = array['ámbar', 'aromático', 'amaderado', 'oriental']::text[],
@@ -279,11 +279,11 @@ where id = 'c0000000-0000-4000-8000-000000000012'
    or slug in ('oud-sable-decant', 'born-in-roma-uomo-intense-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 480, compare_at_price = null, stock = 6, sku = 'ELOVA-BIR-100'
+set label = '100 ml', volume_ml = 100, price = 650, compare_at_price = null, stock = 6, sku = 'ELOVA-BIR-100'
 where product_id = 'c0000000-0000-4000-8000-000000000003';
 
 update public.product_variants
-set price = 30, sku = 'ELOVA-BIR-3'
+set price = 26, sku = 'ELOVA-BIR-3'
 where product_id = 'c0000000-0000-4000-8000-000000000012' and volume_ml = 3;
 
 update public.product_variants
@@ -291,7 +291,7 @@ set price = 45, sku = 'ELOVA-BIR-5'
 where product_id = 'c0000000-0000-4000-8000-000000000012' and volume_ml = 5;
 
 update public.product_variants
-set price = 73, sku = 'ELOVA-BIR-10'
+set price = 75, sku = 'ELOVA-BIR-10'
 where product_id = 'c0000000-0000-4000-8000-000000000012' and volume_ml = 10;
 
 update public.product_images
@@ -366,7 +366,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia cálida, dulce y envolvente que combina especias aromáticas con acordes gourmand de canela, praliné y café. Khamrah Qahwa ofrece un aroma intenso y adictivo, perfecto para quienes buscan una fragancia llamativa, sofisticada y especialmente atractiva durante la noche y en climas frescos.',
   gender = 'unisex',
-  price = 32,
+  price = 18,
   compare_at_price = null,
   stock = 18,
   fragrance_family = array['ámbar', 'especiado', 'gourmand', 'oriental']::text[],
@@ -382,15 +382,15 @@ set label = '100 ml', volume_ml = 100, price = 165, compare_at_price = null, sto
 where product_id = 'c0000000-0000-4000-8000-000000000006';
 
 update public.product_variants
-set price = 22, sku = 'ELOVA-QAHWA-3'
+set price = 15, sku = 'ELOVA-QAHWA-3'
 where product_id = 'c0000000-0000-4000-8000-000000000015' and volume_ml = 3;
 
 update public.product_variants
-set price = 32, sku = 'ELOVA-QAHWA-5'
+set price = 18, sku = 'ELOVA-QAHWA-5'
 where product_id = 'c0000000-0000-4000-8000-000000000015' and volume_ml = 5;
 
 update public.product_variants
-set price = 50, sku = 'ELOVA-QAHWA-10'
+set price = 22, sku = 'ELOVA-QAHWA-10'
 where product_id = 'c0000000-0000-4000-8000-000000000015' and volume_ml = 10;
 
 update public.product_images
@@ -433,7 +433,7 @@ insert into public.product_notes (product_id, note_id, stage, position) values
 on conflict do nothing;
 
 update public.set_products
-set individual_price = 32
+set individual_price = 18
 where product_id = 'c0000000-0000-4000-8000-000000000015';
 
 
@@ -463,7 +463,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Una fragancia fresca, elegante y profundamente marina que captura la sensación del océano y la naturaleza. Acqua di Giò Profondo combina cítricos y notas marinas con un corazón aromático y un fondo amaderado, creando un aroma limpio, masculino y sofisticado, ideal para el día a día y los días cálidos.',
   gender = 'masculine',
-  price = 370,
+  price = 550,
   compare_at_price = null,
   stock = 10,
   fragrance_family = array['aromático', 'cítrico', 'fresco', 'amaderado']::text[],
@@ -494,7 +494,7 @@ where id = 'c0000000-0000-4000-8000-000000000013'
    or slug in ('iris-quiet-decant', 'acqua-di-gio-profondo-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 370, compare_at_price = null, stock = 10, sku = 'ELOVA-GIO-100'
+set label = '100 ml', volume_ml = 100, price = 550, compare_at_price = null, stock = 10, sku = 'ELOVA-GIO-100'
 where product_id = 'c0000000-0000-4000-8000-000000000004';
 
 update public.product_variants
@@ -695,7 +695,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Un clásico masculino, sensual y elegante que combina la frescura de la menta con la suavidad de la lavanda y la calidez de la vainilla. Le Male ofrece un aroma distintivo, limpio y seductor, ideal tanto para el día a día como para ocasiones especiales.',
   gender = 'masculine',
-  price = 480,
+  price = 470,
   compare_at_price = null,
   stock = 11,
   fragrance_family = array['aromático', 'ámbar', 'especiado', 'floral']::text[],
@@ -719,7 +719,7 @@ insert into public.products (
   'Un clásico masculino, sensual y elegante que combina la frescura de la menta con la suavidad de la lavanda y la calidez de la vainilla. Le Male ofrece un aroma distintivo, limpio y seductor, ideal tanto para el día a día como para ocasiones especiales.',
   'decant',
   'masculine',
-  52.5,
+  30,
   null,
   18,
   array['aromático', 'ámbar', 'especiado', 'floral']::text[],
@@ -746,15 +746,15 @@ on conflict (id) do update set
   intensity = excluded.intensity;
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 480, compare_at_price = null, stock = 11, sku = 'ELOVA-MALE-100'
+set label = '120 ml', volume_ml = 120, price = 470, compare_at_price = null, stock = 11, sku = 'ELOVA-MALE-120'
 where product_id = 'c0000000-0000-4000-8000-000000000007';
 
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000022', '3 ml', 3, 36, null, 22, 'ELOVA-MALE-3', false, 1),
-  ('c0000000-0000-4000-8000-000000000022', '5 ml', 5, 52.5, null, 18, 'ELOVA-MALE-5', false, 2),
-  ('c0000000-0000-4000-8000-000000000022', '10 ml', 10, 72, null, 11, 'ELOVA-MALE-10', false, 3)
+  ('c0000000-0000-4000-8000-000000000022', '3 ml', 3, 20, null, 22, 'ELOVA-MALE-3', false, 1),
+  ('c0000000-0000-4000-8000-000000000022', '5 ml', 5, 30, null, 18, 'ELOVA-MALE-5', false, 2),
+  ('c0000000-0000-4000-8000-000000000022', '10 ml', 10, 48, null, 11, 'ELOVA-MALE-10', false, 3)
 on conflict (sku) do update set
   price = excluded.price,
   stock = excluded.stock,
@@ -1060,7 +1060,7 @@ insert into public.products (
     'Una fragancia masculina, intensa y seductora, con un carácter elegante y nocturno. 212 VIP Black combina la frescura de la absenta con notas aromáticas y un fondo cálido de almizcle y vainilla, creando un aroma moderno, sofisticado y perfecto para destacar.',
     'perfume',
     'masculine',
-    400,
+    430,
     null,
     10,
     array['aromático', 'ámbar', 'frutal', 'oriental']::text[],
@@ -1112,7 +1112,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000023', '100 ml', 100, 400, null, 10, 'ELOVA-VIPB-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000023', '100 ml', 100, 430, null, 10, 'ELOVA-VIPB-100', true, 1),
   ('c0000000-0000-4000-8000-000000000024', '3 ml', 3, 35, null, 22, 'ELOVA-VIPB-3', false, 1),
   ('c0000000-0000-4000-8000-000000000024', '5 ml', 5, 50, null, 18, 'ELOVA-VIPB-5', false, 2),
   ('c0000000-0000-4000-8000-000000000024', '10 ml', 10, 70, null, 11, 'ELOVA-VIPB-10', false, 3)

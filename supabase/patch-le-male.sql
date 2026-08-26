@@ -18,7 +18,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000003',
   description = 'Un clásico masculino, sensual y elegante que combina la frescura de la menta con la suavidad de la lavanda y la calidez de la vainilla. Le Male ofrece un aroma distintivo, limpio y seductor, ideal tanto para el día a día como para ocasiones especiales.',
   gender = 'masculine',
-  price = 480,
+  price = 470,
   compare_at_price = null,
   stock = 11,
   fragrance_family = array['aromático', 'ámbar', 'especiado', 'floral']::text[],
@@ -42,7 +42,7 @@ insert into public.products (
   'Un clásico masculino, sensual y elegante que combina la frescura de la menta con la suavidad de la lavanda y la calidez de la vainilla. Le Male ofrece un aroma distintivo, limpio y seductor, ideal tanto para el día a día como para ocasiones especiales.',
   'decant',
   'masculine',
-  52.5,
+  30,
   null,
   18,
   array['aromático', 'ámbar', 'especiado', 'floral']::text[],
@@ -69,15 +69,15 @@ on conflict (id) do update set
   intensity = excluded.intensity;
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 480, compare_at_price = null, stock = 11, sku = 'ELOVA-MALE-100'
+set label = '120 ml', volume_ml = 120, price = 470, compare_at_price = null, stock = 11, sku = 'ELOVA-MALE-120'
 where product_id = 'c0000000-0000-4000-8000-000000000007';
 
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000022', '3 ml', 3, 36, null, 22, 'ELOVA-MALE-3', false, 1),
-  ('c0000000-0000-4000-8000-000000000022', '5 ml', 5, 52.5, null, 18, 'ELOVA-MALE-5', false, 2),
-  ('c0000000-0000-4000-8000-000000000022', '10 ml', 10, 72, null, 11, 'ELOVA-MALE-10', false, 3)
+  ('c0000000-0000-4000-8000-000000000022', '3 ml', 3, 20, null, 22, 'ELOVA-MALE-3', false, 1),
+  ('c0000000-0000-4000-8000-000000000022', '5 ml', 5, 30, null, 18, 'ELOVA-MALE-5', false, 2),
+  ('c0000000-0000-4000-8000-000000000022', '10 ml', 10, 48, null, 11, 'ELOVA-MALE-10', false, 3)
 on conflict (sku) do update set
   price = excluded.price,
   stock = excluded.stock,

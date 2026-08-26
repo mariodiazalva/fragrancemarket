@@ -92,7 +92,7 @@ console.log(
 );
 
 const expected = [
-  ["stronger-with-you-intensely", "Stronger With You Intensely", 360],
+  ["stronger-with-you-intensely", "Stronger With You Intensely", 515],
   ["odyssey-aqua", "Odyssey Aqua", 170],
   ["born-in-roma-uomo-intense", "Born in Roma Uomo Intense", 480],
   ["acqua-di-gio-profondo", "Acqua di Giò Profondo", 370],
@@ -101,7 +101,7 @@ const expected = [
   ["le-male", "Le Male", 480],
   ["yara", "Yara", 165],
   ["erba-pura", "Erba Pura", 960],
-  ["stronger-with-you-intensely-decant", "Stronger With You Intensely", 38],
+  ["stronger-with-you-intensely-decant", "Stronger With You Intensely", 35],
   ["odyssey-aqua-decant", "Odyssey Aqua", 33],
   ["born-in-roma-uomo-intense-decant", "Born in Roma Uomo Intense", 45],
   ["acqua-di-gio-profondo-decant", "Acqua di Giò Profondo", 52],

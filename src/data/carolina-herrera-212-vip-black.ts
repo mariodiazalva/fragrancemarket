@@ -26,7 +26,7 @@ export const carolinaHerrera212VipBlack = {
 };
 
 export const carolinaHerrera212VipBlackPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 400, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 430, stock: 10 },
 ];
 
 export const carolinaHerrera212VipBlackDecantSizes: ProductSize[] = [
