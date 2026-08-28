@@ -54,7 +54,7 @@ export function ProductPrice({
             styles.compare,
           )}
         >
-          {formatPrice(compareAtPrice, locale, currency)}
+          {formatCatalogPrice(compareAtPrice, locale, currency)}
         </span>
       ) : null}
     </div>
