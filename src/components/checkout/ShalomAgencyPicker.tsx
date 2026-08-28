@@ -36,8 +36,8 @@ export function ShalomAgencyPicker({
         Agencia Shalom
       </legend>
       <p className="text-sm leading-relaxed text-text-secondary">
-        El envío es por agencia Shalom a todo el Perú. Elige departamento, ciudad
-        y distrito para ver las agencias disponibles.
+        Elige departamento, ciudad y distrito para ver las agencias Shalom
+        disponibles. El flete es fijo a todo el Perú.
       </p>
 
       {!hasLocation ? (

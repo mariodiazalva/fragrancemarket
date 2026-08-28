@@ -28,14 +28,42 @@ export const peruDepartments = [
 
 export type PeruDepartment = (typeof peruDepartments)[number];
 
+export const shippingCarriers = ["Shalom", "Pickup", "Local"] as const;
+
+export type ShippingCarrier = (typeof shippingCarriers)[number];
+
 export type ShippingAddress = {
   line: string;
   district?: string;
   city: string;
   department: PeruDepartment;
-  carrier?: "Shalom";
+  carrier?: ShippingCarrier;
   agencyId?: string;
 };
+
+export const STORE_PICKUP = {
+  line: "Rosas de América MZ D LT 3 Grupo 1",
+  district: "Trujillo",
+  city: "Trujillo",
+  department: "La Libertad",
+  carrier: "Pickup",
+  lat: -8.090927,
+  lng: -79.0509975,
+} as const satisfies ShippingAddress & { lat: number; lng: number };
+
+export function storePickupMapEmbedUrl(): string {
+  return `https://maps.google.com/maps?q=${STORE_PICKUP.lat},${STORE_PICKUP.lng}&hl=es&z=16&output=embed`;
+}
+
+export function storePickupMapsUrl(): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${STORE_PICKUP.line}, ${STORE_PICKUP.city}, ${STORE_PICKUP.department}, Perú`,
+  )}`;
+}
+
+export function isShippingCarrier(value: string): value is ShippingCarrier {
+  return (shippingCarriers as readonly string[]).includes(value);
+}
 
 export type BillingAddress = {
   line: string;
@@ -67,7 +95,8 @@ export function parseShippingAddress(value: unknown): ShippingAddress | null {
   const city = typeof row.city === "string" ? row.city.trim() : "";
   const department = typeof row.department === "string" ? row.department.trim() : "";
   const agencyId = typeof row.agencyId === "string" ? row.agencyId.trim() : "";
-  const carrier = row.carrier === "Shalom" ? "Shalom" : undefined;
+  const rawCarrier = typeof row.carrier === "string" ? row.carrier.trim() : "";
+  const carrier = isShippingCarrier(rawCarrier) ? rawCarrier : undefined;
 
   if (!line || !city || !isPeruDepartment(department)) {
     return null;

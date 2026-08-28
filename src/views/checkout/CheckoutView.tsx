@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+import { LocalDeliveryFields } from "@/components/checkout/LocalDeliveryFields";
+import { PickupLocation } from "@/components/checkout/PickupLocation";
 import { ShalomAgencyPicker } from "@/components/checkout/ShalomAgencyPicker";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -17,7 +19,21 @@ import {
   shippingLineForAgency,
   type ShalomAgency,
 } from "@/lib/shalom";
-import { peruDepartments, type PeruDepartment } from "@/lib/shipping";
+import {
+  STORE_PICKUP,
+  peruDepartments,
+  type PeruDepartment,
+  type ShippingAddress,
+} from "@/lib/shipping";
+import {
+  SHALOM_SHIPPING_AMOUNT,
+  type ShippingMethod,
+} from "@/lib/shipping-quote";
+import {
+  TRUJILLO_CITY,
+  TRUJILLO_DEPARTMENT,
+  quoteTrujilloDelivery,
+} from "@/lib/trujillo-delivery";
 import { formatPrice } from "@/lib/utils";
 
 const selectClassName =
@@ -31,10 +47,13 @@ export function CheckoutView() {
   const [dni, setDni] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [method, setMethod] = useState<ShippingMethod | "">("");
   const [department, setDepartment] = useState<PeruDepartment | "">("");
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
   const [agencyId, setAgencyId] = useState("");
+  const [localDistrict, setLocalDistrict] = useState("");
+  const [deliveryLine, setDeliveryLine] = useState("");
   const [billingLine, setBillingLine] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +61,29 @@ export function CheckoutView() {
 
   const cities = department ? listShalomCities(department) : [];
   const districts = department ? listShalomDistricts(department, city) : [];
+  const localQuote = useMemo(
+    () => quoteTrujilloDelivery(localDistrict, deliveryLine || billingLine),
+    [billingLine, deliveryLine, localDistrict],
+  );
+
+  const shippingAmount = useMemo(() => {
+    if (method === "pickup") {
+      return 0;
+    }
+
+    if (method === "shalom") {
+      return SHALOM_SHIPPING_AMOUNT;
+    }
+
+    if (method === "local") {
+      return localQuote?.amount ?? null;
+    }
+
+    return null;
+  }, [localQuote, method]);
+
+  const payableTotal =
+    shippingAmount === null ? totals.subtotal : totals.subtotal + shippingAmount;
 
   useEffect(() => {
     if (!agencyId) {
@@ -106,14 +148,62 @@ export function CheckoutView() {
     setAgencyId(agency.id);
   }
 
+  function chooseMethod(next: ShippingMethod) {
+    setMethod(next);
+    setError(null);
+
+    if (next === "local" && !deliveryLine.trim() && billingLine.trim()) {
+      setDeliveryLine(billingLine);
+    }
+  }
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
 
-    const agency = findShalomAgency(agencyId);
+    let shipping: ShippingAddress;
 
-    if (!agency) {
-      setError("Elige una agencia Shalom para el envío.");
+    if (method === "pickup") {
+      shipping = {
+        line: STORE_PICKUP.line,
+        district: STORE_PICKUP.district,
+        city: STORE_PICKUP.city,
+        department: STORE_PICKUP.department,
+        carrier: "Pickup",
+      };
+    } else if (method === "local") {
+      const line = (deliveryLine.trim() || billingLine.trim());
+
+      if (!localQuote || line.length < 5) {
+        setError("Completa el distrito y la dirección de entrega en Trujillo.");
+        return;
+      }
+
+      shipping = {
+        line,
+        district: localDistrict,
+        city: TRUJILLO_CITY,
+        department: TRUJILLO_DEPARTMENT,
+        carrier: "Local",
+      };
+    } else if (method === "shalom") {
+      const agency = findShalomAgency(agencyId);
+
+      if (!agency) {
+        setError("Elige una agencia Shalom para el envío.");
+        return;
+      }
+
+      shipping = {
+        line: shippingLineForAgency(agency),
+        district: district || agency.district,
+        city: city || agency.city,
+        department: department || agency.region,
+        carrier: "Shalom",
+        agencyId: agency.id,
+      };
+    } else {
+      setError("Elige un método de envío.");
       return;
     }
 
@@ -129,19 +219,12 @@ export function CheckoutView() {
           phone,
           dni,
           notes,
-          shipping: {
-            line: shippingLineForAgency(agency),
-            district: district || agency.district,
-            city: city || agency.city,
-            department: department || agency.region,
-            carrier: "Shalom",
-            agencyId: agency.id,
-          },
+          shipping,
           billing: {
             line: billingLine,
-            district: district || agency.district,
-            city: city || agency.city,
-            department: department || agency.region,
+            district: shipping.district,
+            city: shipping.city,
+            department: shipping.department,
             dni,
           },
           items: items.map((item) => ({
@@ -173,9 +256,9 @@ export function CheckoutView() {
           Checkout
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-text-secondary">
-          Deja tus datos de facturación y elige una agencia Shalom. En el
-          siguiente paso te mostramos Yape, Plin y transferencia BCP. El envío a
-          todo el Perú queda en {formatPrice(0)} hasta definir el flete.
+          Deja tus datos de facturación y elige cómo recibir el pedido: recojo en
+          local, delivery en Trujillo o agencia Shalom a todo el Perú. En el
+          siguiente paso te mostramos Yape, Plin y transferencia BCP.
         </p>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
@@ -185,8 +268,7 @@ export function CheckoutView() {
                 Facturación
               </legend>
               <p className="text-sm leading-relaxed text-text-secondary">
-                Estos datos salen en la factura. El envío va por agencia Shalom,
-                aparte.
+                Estos datos salen en la factura. El envío lo eliges aparte.
               </p>
             <Input
               label="Nombres (obligatorio)"
@@ -245,107 +327,163 @@ export function CheckoutView() {
               value={billingLine}
               onChange={(event) => setBillingLine(event.target.value)}
             />
-            <div className="flex w-full flex-col gap-2">
-              <label
-                htmlFor="department"
-                className="text-xs font-medium uppercase tracking-[0.14em] text-text-secondary"
-              >
-                Departamento
-              </label>
-              <select
-                id="department"
-                name="department"
-                required
-                value={department}
-                onChange={(event) => {
-                  setDepartment(event.target.value as PeruDepartment | "");
-                  setCity("");
-                  setDistrict("");
-                }}
-                className={selectClassName}
-              >
-                <option value="">Elige un departamento</option>
-                {peruDepartments.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex w-full flex-col gap-2">
-              <label
-                htmlFor="city"
-                className="text-xs font-medium uppercase tracking-[0.14em] text-text-secondary"
-              >
-                Ciudad
-              </label>
-              <select
-                id="city"
-                name="city"
-                required
-                value={city}
-                onChange={(event) => {
-                  setCity(event.target.value);
-                  setDistrict("");
-                }}
-                className={selectClassName}
-              >
-                <option value="">
-                  {!department
-                    ? "Elige un departamento primero"
-                    : cities.length === 0
-                      ? "No hay ciudades listadas"
-                      : "Elige una ciudad"}
-                </option>
-                {cities.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex w-full flex-col gap-2">
-              <label
-                htmlFor="district"
-                className="text-xs font-medium uppercase tracking-[0.14em] text-text-secondary"
-              >
-                Distrito
-              </label>
-              <select
-                id="district"
-                name="district"
-                required
-                value={district}
-                onChange={(event) => setDistrict(event.target.value)}
-                className={selectClassName}
-              >
-                <option value="">
-                  {!city
-                    ? "Elige una ciudad primero"
-                    : districts.length === 0
-                      ? "No hay distritos listados"
-                      : "Elige un distrito"}
-                </option>
-                {districts.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </div>
             </fieldset>
 
             <fieldset className="space-y-5">
               <legend className="font-serif text-xl tracking-[-0.02em] text-text-primary">
                 Envío
               </legend>
-            <ShalomAgencyPicker
-              department={department}
-              district={district}
-              city={city}
-              selectedId={agencyId}
-              onSelect={selectAgency}
-            />
+              <p className="text-sm leading-relaxed text-text-secondary">
+                Recojo gratis en Trujillo, delivery local según zona, o Shalom a
+                todo el Perú por {formatPrice(SHALOM_SHIPPING_AMOUNT)}.
+              </p>
+
+              <div className="space-y-3">
+                <PickupLocation
+                  selected={method === "pickup"}
+                  onSelect={() => chooseMethod("pickup")}
+                />
+                <LocalDeliveryFields
+                  selected={method === "local"}
+                  onSelect={() => chooseMethod("local")}
+                  district={localDistrict}
+                  deliveryLine={deliveryLine}
+                  quote={localQuote}
+                  onDistrictChange={setLocalDistrict}
+                  onDeliveryLineChange={setDeliveryLine}
+                />
+                <div
+                  className={[
+                    "border",
+                    method === "shalom"
+                      ? "border-elova-gold bg-surface-elevated"
+                      : "border-elova-border bg-surface",
+                  ].join(" ")}
+                >
+                  <label className="flex cursor-pointer gap-3 px-3 py-3 text-sm leading-relaxed">
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value="shalom"
+                      required
+                      checked={method === "shalom"}
+                      onChange={() => chooseMethod("shalom")}
+                      className="mt-1 shrink-0 accent-elova-gold"
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex flex-wrap items-baseline justify-between gap-2">
+                        <span className="text-text-primary">Agencia Shalom</span>
+                        <span className="text-[0.7rem] uppercase tracking-[0.12em] text-elova-gold">
+                          {formatPrice(SHALOM_SHIPPING_AMOUNT)}
+                        </span>
+                      </span>
+                      <span className="mt-1 block text-text-secondary">
+                        Envío a todo el Perú. Eliges la agencia donde recoger el pedido.
+                      </span>
+                    </span>
+                  </label>
+
+                  {method === "shalom" ? (
+                    <div className="space-y-4 border-t border-elova-border px-3 py-4">
+                      <div className="flex w-full flex-col gap-2">
+                        <label
+                          htmlFor="department"
+                          className="text-xs font-medium uppercase tracking-[0.14em] text-text-secondary"
+                        >
+                          Departamento
+                        </label>
+                        <select
+                          id="department"
+                          name="department"
+                          required
+                          value={department}
+                          onChange={(event) => {
+                            setDepartment(event.target.value as PeruDepartment | "");
+                            setCity("");
+                            setDistrict("");
+                          }}
+                          className={selectClassName}
+                        >
+                          <option value="">Elige un departamento</option>
+                          {peruDepartments.map((item) => (
+                            <option key={item} value={item}>
+                              {item}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="flex w-full flex-col gap-2">
+                        <label
+                          htmlFor="city"
+                          className="text-xs font-medium uppercase tracking-[0.14em] text-text-secondary"
+                        >
+                          Ciudad
+                        </label>
+                        <select
+                          id="city"
+                          name="city"
+                          required
+                          value={city}
+                          onChange={(event) => {
+                            setCity(event.target.value);
+                            setDistrict("");
+                          }}
+                          className={selectClassName}
+                        >
+                          <option value="">
+                            {!department
+                              ? "Elige un departamento primero"
+                              : cities.length === 0
+                                ? "No hay ciudades listadas"
+                                : "Elige una ciudad"}
+                          </option>
+                          {cities.map((item) => (
+                            <option key={item} value={item}>
+                              {item}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="flex w-full flex-col gap-2">
+                        <label
+                          htmlFor="district"
+                          className="text-xs font-medium uppercase tracking-[0.14em] text-text-secondary"
+                        >
+                          Distrito
+                        </label>
+                        <select
+                          id="district"
+                          name="district"
+                          required
+                          value={district}
+                          onChange={(event) => setDistrict(event.target.value)}
+                          className={selectClassName}
+                        >
+                          <option value="">
+                            {!city
+                              ? "Elige una ciudad primero"
+                              : districts.length === 0
+                                ? "No hay distritos listados"
+                                : "Elige un distrito"}
+                          </option>
+                          {districts.map((item) => (
+                            <option key={item} value={item}>
+                              {item}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <ShalomAgencyPicker
+                        department={department}
+                        district={district}
+                        city={city}
+                        selectedId={agencyId}
+                        onSelect={selectAgency}
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              </div>
             <div className="flex w-full flex-col gap-2">
               <label
                 htmlFor="notes"
@@ -399,15 +537,20 @@ export function CheckoutView() {
               </div>
               <div className="flex justify-between gap-3">
                 <span className="uppercase tracking-[0.14em] text-text-secondary">Envío</span>
-                <span className="text-text-secondary">{formatPrice(0)}</span>
+                <span className="text-text-secondary">
+                  {shippingAmount === null
+                    ? "—"
+                    : shippingAmount === 0
+                      ? "Gratis"
+                      : formatPrice(shippingAmount)}
+                </span>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="uppercase tracking-[0.14em] text-text-secondary">Total</span>
-                <span className="text-text-primary">{formatPrice(totals.total)}</span>
+                <span className="text-text-primary">{formatPrice(payableTotal)}</span>
               </div>
               <p className="text-[0.7rem] leading-relaxed tracking-normal text-text-secondary">
-                Envío por agencia Shalom. El flete queda en {formatPrice(0)} hasta
-                confirmarlo.{" "}
+                El envío entra en el total según el método que elijas.{" "}
                 <Link href="/envios" className="text-elova-gold hover:underline">
                   Envíos
                 </Link>

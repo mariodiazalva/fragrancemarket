@@ -1,5 +1,6 @@
 import { formatPrice } from "@/lib/utils";
 import { formatBillingAddress, formatShippingAddress } from "@/lib/shipping";
+import { shippingMethodLabel } from "@/lib/order-confirmation";
 import { orderStatusLabel, type OrderPaymentSummary } from "@/types/order";
 
 type OrderSummaryProps = {
@@ -32,7 +33,9 @@ export function OrderSummary({ order }: OrderSummaryProps) {
         ))}
         <li className="flex justify-between text-sm">
           <span className="uppercase tracking-[0.14em] text-text-secondary">Envío</span>
-          <span className="text-text-secondary">{formatPrice(order.shippingAmount)}</span>
+          <span className="text-text-secondary">
+            {order.shippingAmount === 0 ? "Gratis" : formatPrice(order.shippingAmount)}
+          </span>
         </li>
         <li className="flex justify-between border-t border-elova-border pt-4 text-sm">
           <span className="uppercase tracking-[0.14em] text-text-secondary">Total</span>
@@ -42,7 +45,7 @@ export function OrderSummary({ order }: OrderSummaryProps) {
 
       {order.shipping ? (
         <p className="mt-5 text-sm leading-relaxed text-text-secondary">
-          Envío por Shalom a {formatShippingAddress(order.shipping)}
+          {shippingMethodLabel(order.shipping)} · {formatShippingAddress(order.shipping)}
         </p>
       ) : null}
 

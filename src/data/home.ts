@@ -66,7 +66,7 @@ export const trustItems = [
   {
     id: "envios",
     title: "Envíos a todo el Perú",
-    text: "Hacemos envíos a nivel nacional. El plazo y el costo se confirman según tu destino.",
+    text: "Recojo en Trujillo, delivery local o envío nacional por Shalom. El costo se confirma en el checkout según el método.",
   },
   {
     id: "compra",

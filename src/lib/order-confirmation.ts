@@ -1,4 +1,4 @@
-import type { BillingAddress, ShippingAddress } from "@/lib/shipping";
+import { storePickupMapEmbedUrl, type BillingAddress, type ShippingAddress } from "@/lib/shipping";
 import { findShalomAgency } from "@/lib/shalom";
 import type { OrderCustomer, OrderPaymentItem, OrderPaymentSummary } from "@/types/order";
 import type { Product } from "@/types/product";
@@ -25,6 +25,14 @@ export function formatPhoneDisplay(value: string | null | undefined): string {
 export function shippingMethodLabel(shipping: ShippingAddress | null): string {
   if (!shipping) {
     return "Envío";
+  }
+
+  if (shipping.carrier === "Pickup") {
+    return "Recojo en local";
+  }
+
+  if (shipping.carrier === "Local") {
+    return "Delivery en Trujillo";
   }
 
   if (shipping.carrier === "Shalom" || /shalom/i.test(shipping.line)) {
@@ -82,6 +90,10 @@ export function shippingMapQuery(shipping: ShippingAddress): string {
 }
 
 export function shippingMapEmbedUrl(shipping: ShippingAddress): string {
+  if (shipping.carrier === "Pickup") {
+    return storePickupMapEmbedUrl();
+  }
+
   return `https://maps.google.com/maps?q=${encodeURIComponent(shippingMapQuery(shipping))}&hl=es&z=16&output=embed`;
 }
 

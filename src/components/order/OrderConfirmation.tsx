@@ -107,7 +107,11 @@ export function OrderConfirmation({
           {order.shipping ? (
             <div className="relative mt-8 overflow-hidden rounded-xl border border-elova-border bg-surface-elevated">
               <iframe
-                title={`Mapa de envío a ${order.shipping.city}`}
+                title={
+                  order.shipping.carrier === "Pickup"
+                    ? "Mapa del local en Trujillo"
+                    : `Mapa de envío a ${order.shipping.city}`
+                }
                 src={shippingMapEmbedUrl(order.shipping)}
                 className="h-56 w-full border-0 grayscale-[0.35] contrast-[1.05] sm:h-64"
                 loading="lazy"
@@ -247,7 +251,9 @@ export function OrderConfirmation({
             </div>
             <div className="flex justify-between gap-4">
               <span className="text-text-secondary">Envío</span>
-              <span className="text-text-primary">{formatPrice(order.shippingAmount)}</span>
+              <span className="text-text-primary">
+                {order.shippingAmount === 0 ? "Gratis" : formatPrice(order.shippingAmount)}
+              </span>
             </div>
             <div className="flex items-baseline justify-between gap-4 border-t border-elova-border pt-4">
               <span className="text-base text-text-primary">Total</span>

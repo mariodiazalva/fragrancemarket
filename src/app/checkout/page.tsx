@@ -3,7 +3,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Checkout",
-  description: "Registra tus datos de facturación, elige una agencia Shalom y continúa a Yape, Plin o transferencia BCP.",
+  description: "Registra tus datos, elige recojo en local, delivery en Trujillo o agencia Shalom, y continúa a Yape, Plin o transferencia BCP.",
   path: "/checkout",
   noIndex: true,
 });

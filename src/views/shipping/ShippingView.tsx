@@ -1,19 +1,25 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { STORE_PICKUP } from "@/lib/shipping";
+import { SHALOM_SHIPPING_AMOUNT } from "@/lib/shipping-quote";
 import { formatPrice } from "@/lib/utils";
 
 const shippingNotes = [
   {
-    title: "Shalom",
-    text: "Los envíos son por agencia Shalom a todo el Perú. En el checkout escribes distrito y ciudad, ves las agencias disponibles y eliges dónde recoger el pedido.",
+    title: "Recojo en local",
+    text: `Puedes recoger en ${STORE_PICKUP.line} — ${STORE_PICKUP.city}. El recojo es gratis. En el checkout aparece el mapa al elegir esta opción.`,
   },
   {
-    title: "Costo",
-    text: `Por ahora el envío aparece como ${formatPrice(0)}. El importe se actualizará cuando el flete esté definido; no adelantamos una tarifa que aún no existe.`,
+    title: "Delivery en Trujillo",
+    text: `Si el pedido va a domicilio en Trujillo, el delivery es ${formatPrice(5)} en zona céntrica, ${formatPrice(8)} en distritos intermedios (La Esperanza, El Porvenir, Moche) y ${formatPrice(10)} en zonas alejadas (Huanchaco, Salaverry, Laredo y alrededores).`,
+  },
+  {
+    title: "Shalom",
+    text: `Los envíos a todo el Perú salen por agencia Shalom. En el checkout eliges departamento, ciudad y la agencia donde recoger. El flete es ${formatPrice(SHALOM_SHIPPING_AMOUNT)}.`,
   },
   {
     title: "Plazo",
-    text: "El tiempo de llegada depende de la agencia de destino. Si tu zona no aparece en el listado, confirma la agencia más cercana al (01) 500 7878.",
+    text: "El recojo y el delivery en Trujillo se coordinan al confirmar el pago. El tiempo de Shalom depende de la agencia de destino.",
   },
 ] as const;
 
@@ -26,8 +32,9 @@ export function ShippingView() {
           Envíos
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-          Enviamos a nivel nacional por Shalom. Eliges la agencia en el
-          checkout; hoy el flete no se cobra en el total.
+          Recojo gratis en Trujillo, delivery local según zona, o Shalom a todo el
+          Perú por {formatPrice(SHALOM_SHIPPING_AMOUNT)}. Eliges el método en el
+          checkout y el costo entra en el total.
         </p>
 
         <ul className="mt-10 space-y-8">

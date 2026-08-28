@@ -25,13 +25,13 @@ export const mockFaqs: FaqItem[] = [
     id: "envio-plazo",
     question: "¿Cuánto demora el envío?",
     answer:
-      "El plazo depende del destino y del método elegido. Te lo confirmamos al momento de la compra, antes de pagar.",
+      "El plazo depende del método: recojo y delivery en Trujillo se coordinan al confirmar el pago; Shalom depende de la agencia de destino.",
   },
   {
     id: "envio-peru",
     question: "¿Hacen envíos a todo el Perú?",
     answer:
-      "Sí, hacemos envíos a nivel nacional por agencia Shalom. En el checkout filtras por distrito y ciudad y eliges la agencia donde recoger el pedido.",
+      "Sí. En Trujillo puedes recoger en el local o pedir delivery según zona. Al resto del Perú enviamos por agencia Shalom: en el checkout eliges dónde recoger.",
   },
   {
     id: "elegir",

@@ -1,6 +1,9 @@
 import "server-only";
 
-import { parseBillingAddress, parseShippingAddress } from "@/lib/shipping";
+import { findShalomAgency } from "@/lib/shalom";
+import { STORE_PICKUP, parseBillingAddress, parseShippingAddress } from "@/lib/shipping";
+import { quoteShippingAmount } from "@/lib/shipping-quote";
+import { isTrujilloCity, quoteTrujilloDelivery } from "@/lib/trujillo-delivery";
 import { getSignedInEmail } from "@/data-access/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type {
@@ -25,7 +28,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
   const phoneDigits = (input.phone ?? "").replace(/\D/g, "");
   const dni = (input.dni ?? "").replace(/\D/g, "");
   const extraNotes = input.notes?.trim() ?? "";
-  const shipping = parseShippingAddress(input.shipping);
+  let shipping = parseShippingAddress(input.shipping);
   const billing = parseBillingAddress({ ...input.billing, dni });
 
   if (!isEmail(email)) {
@@ -44,9 +47,35 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
     throw new Error("Escribe tu número de teléfono.");
   }
 
-  if (!shipping || shipping.carrier !== "Shalom") {
-    throw new Error("Elige una agencia Shalom para el envío.");
+  if (!shipping?.carrier) {
+    throw new Error("Elige un método de envío.");
   }
+
+  if (shipping.carrier === "Shalom") {
+    if (!shipping.agencyId || !findShalomAgency(shipping.agencyId)) {
+      throw new Error("Elige una agencia Shalom para el envío.");
+    }
+  } else if (shipping.carrier === "Pickup") {
+    shipping = {
+      line: STORE_PICKUP.line,
+      district: STORE_PICKUP.district,
+      city: STORE_PICKUP.city,
+      department: STORE_PICKUP.department,
+      carrier: "Pickup",
+    };
+  } else if (shipping.carrier === "Local") {
+    if (shipping.department !== "La Libertad" || !isTrujilloCity(shipping.city)) {
+      throw new Error("El delivery local solo está disponible en Trujillo.");
+    }
+
+    if (!quoteTrujilloDelivery(shipping.district ?? "", shipping.line)) {
+      throw new Error("Elige un distrito de Trujillo para el delivery.");
+    }
+  } else {
+    throw new Error("Elige un método de envío.");
+  }
+
+  quoteShippingAmount(shipping);
 
   if (!billing) {
     throw new Error("Completa la dirección de facturación.");

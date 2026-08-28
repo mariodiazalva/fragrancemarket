@@ -4,7 +4,7 @@ import { ShippingView } from "@/views/shipping/ShippingView";
 export const metadata = createPageMetadata({
   title: "Envíos",
   description:
-    "Envíos a todo el Perú por agencia Shalom. Eliges la agencia en el checkout; hoy el flete no se cobra en el total.",
+    "Recojo gratis en Trujillo, delivery local según zona y envíos a todo el Perú por agencia Shalom. Eliges el método en el checkout.",
   path: "/envios",
 });
 

@@ -2,7 +2,7 @@ export const productReassurance = [
   {
     id: "envios",
     title: "Envíos",
-    text: "Hacemos envíos a nivel nacional. El plazo y el costo se confirman según tu destino al momento de comprar.",
+    text: "Recojo gratis en Trujillo, delivery local según zona, o envío nacional por Shalom. El costo se confirma en el checkout.",
   },
   {
     id: "pagos",
