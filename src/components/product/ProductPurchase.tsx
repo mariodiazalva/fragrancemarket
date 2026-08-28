@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { ProductPrice } from "@/components/ui/ProductPrice";
 import { useCart } from "@/hooks/useCart";
 import { getDefaultSize } from "@/lib/product";
-import { formatPrice } from "@/lib/utils";
+import { formatCatalogPrice } from "@/lib/utils";
 import { productToCartDraft } from "@/services/cart.service";
 import type { Product, ProductSize } from "@/types";
 
@@ -30,10 +30,12 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
   );
 
   const isSoldOut = selectedSize.stock <= 0;
+  const isPricePending = selectedSize.price <= 0;
+  const cannotPurchase = isSoldOut || isPricePending;
   const variantTitle = product.type === "set" ? "Presentación" : "Tamaño";
 
   async function handleAdd(redirectToCart = false) {
-    if (isSoldOut || status === "adding" || status === "buying") {
+    if (cannotPurchase || status === "adding" || status === "buying") {
       return;
     }
 
@@ -76,11 +78,13 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
       </fieldset>
 
       <p className="text-xs uppercase tracking-[0.16em] text-text-secondary">
-        {isSoldOut
-          ? "Agotado en esta presentación"
-          : selectedSize.stock <= 5
-            ? `Quedan ${selectedSize.stock} unidades`
-            : "Disponible"}
+        {isPricePending
+          ? "Precio por confirmar"
+          : isSoldOut
+            ? "Agotado en esta presentación"
+            : selectedSize.stock <= 5
+              ? `Quedan ${selectedSize.stock} unidades`
+              : "Disponible"}
       </p>
 
       <div className="flex flex-col gap-3 sm:flex-row">
@@ -88,7 +92,7 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
           variant="outline"
           size="lg"
           fullWidth
-          disabled={isSoldOut || status === "adding" || status === "buying"}
+          disabled={cannotPurchase || status === "adding" || status === "buying"}
           onClick={() => handleAdd(false)}
         >
           {status === "added" ? "Agregado" : "Agregar al carrito"}
@@ -96,7 +100,7 @@ export function ProductPurchase({ product }: ProductPurchaseProps) {
         <Button
           size="lg"
           fullWidth
-          disabled={isSoldOut || status === "adding" || status === "buying"}
+          disabled={cannotPurchase || status === "adding" || status === "buying"}
           onClick={() => handleAdd(true)}
         >
           Comprar ahora
@@ -128,7 +132,7 @@ function SizeOption({
     >
       <span>{size.label}</span>
       <span className="mt-0.5 text-[0.65rem] tracking-[0.08em] opacity-80">
-        {formatPrice(size.price)}
+        {formatCatalogPrice(size.price)}
       </span>
     </button>
   );

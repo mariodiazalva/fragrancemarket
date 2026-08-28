@@ -19,6 +19,18 @@ export function formatPrice(
   }).format(value);
 }
 
+export function formatCatalogPrice(
+  value: number,
+  locale = SITE_LOCALE,
+  currency = SITE_CURRENCY,
+): string {
+  if (!Number.isFinite(value) || value <= 0) {
+    return "S/ —";
+  }
+
+  return formatPrice(value, locale, currency);
+}
+
 export function normalizeSearch(value: string): string {
   return value
     .normalize("NFD")

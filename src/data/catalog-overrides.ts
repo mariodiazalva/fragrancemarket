@@ -190,6 +190,36 @@ import {
   lattafaYaraTousPerfumeSizes,
   lattafaYaraTousSlugs,
 } from "@/data/lattafa-yara-tous";
+import {
+  azzaroTheMostWanted,
+  azzaroTheMostWantedDecantSizes,
+  azzaroTheMostWantedPerfumeSizes,
+  azzaroTheMostWantedSlugs,
+} from "@/data/azzaro-the-most-wanted";
+import {
+  versaceErosFlame,
+  versaceErosFlameDecantSizes,
+  versaceErosFlamePerfumeSizes,
+  versaceErosFlameSlugs,
+} from "@/data/versace-eros-flame";
+import {
+  versaceErosEauDeParfum,
+  versaceErosEauDeParfumDecantSizes,
+  versaceErosEauDeParfumPerfumeSizes,
+  versaceErosEauDeParfumSlugs,
+} from "@/data/versace-eros-eau-de-parfum";
+import {
+  armafClubDeNuitIntenseMan,
+  armafClubDeNuitIntenseManDecantSizes,
+  armafClubDeNuitIntenseManPerfumeSizes,
+  armafClubDeNuitIntenseManSlugs,
+} from "@/data/armaf-club-de-nuit-intense-man";
+import {
+  armafClubDeNuitUrbanManElixir,
+  armafClubDeNuitUrbanManElixirDecantSizes,
+  armafClubDeNuitUrbanManElixirPerfumeSizes,
+  armafClubDeNuitUrbanManElixirSlugs,
+} from "@/data/armaf-club-de-nuit-urban-man-elixir";
 import type { Product, ProductSize } from "@/types";
 import type { SetItem } from "@/types/content";
 
@@ -911,6 +941,116 @@ const replacements: CatalogReplacement[] = [
     perfumeStock: 10,
     decantStock: 18,
     injectDecantId: "c0000000-0000-4000-8000-000000000068",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "the-most-wanted",
+      "prod-the-most-wanted",
+      "c0000000-0000-4000-8000-000000000069",
+    ]),
+    legacyDecantKeys: new Set([
+      "the-most-wanted-decant",
+      "decant-the-most-wanted",
+      "c0000000-0000-4000-8000-000000000070",
+    ]),
+    perfumeSlug: azzaroTheMostWantedSlugs.perfume,
+    decantSlug: azzaroTheMostWantedSlugs.decant,
+    content: azzaroTheMostWanted,
+    perfumeSizes: azzaroTheMostWantedPerfumeSizes,
+    decantSizes: azzaroTheMostWantedDecantSizes,
+    perfumePrice: 393,
+    decantPrice: 30,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000070",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "eros-flame",
+      "prod-eros-flame",
+      "c0000000-0000-4000-8000-000000000071",
+    ]),
+    legacyDecantKeys: new Set([
+      "eros-flame-decant",
+      "decant-eros-flame",
+      "c0000000-0000-4000-8000-000000000072",
+    ]),
+    perfumeSlug: versaceErosFlameSlugs.perfume,
+    decantSlug: versaceErosFlameSlugs.decant,
+    content: versaceErosFlame,
+    perfumeSizes: versaceErosFlamePerfumeSizes,
+    decantSizes: versaceErosFlameDecantSizes,
+    perfumePrice: 465,
+    decantPrice: 35,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000072",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "eros-eau-de-parfum",
+      "prod-eros-eau-de-parfum",
+      "c0000000-0000-4000-8000-000000000073",
+    ]),
+    legacyDecantKeys: new Set([
+      "eros-eau-de-parfum-decant",
+      "decant-eros-eau-de-parfum",
+      "c0000000-0000-4000-8000-000000000074",
+    ]),
+    perfumeSlug: versaceErosEauDeParfumSlugs.perfume,
+    decantSlug: versaceErosEauDeParfumSlugs.decant,
+    content: versaceErosEauDeParfum,
+    perfumeSizes: versaceErosEauDeParfumPerfumeSizes,
+    decantSizes: versaceErosEauDeParfumDecantSizes,
+    perfumePrice: 365,
+    decantPrice: 30,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000074",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "club-de-nuit-intense-man",
+      "prod-club-de-nuit-intense-man",
+      "c0000000-0000-4000-8000-000000000075",
+    ]),
+    legacyDecantKeys: new Set([
+      "club-de-nuit-intense-man-decant",
+      "decant-club-de-nuit-intense-man",
+      "c0000000-0000-4000-8000-000000000076",
+    ]),
+    perfumeSlug: armafClubDeNuitIntenseManSlugs.perfume,
+    decantSlug: armafClubDeNuitIntenseManSlugs.decant,
+    content: armafClubDeNuitIntenseMan,
+    perfumeSizes: armafClubDeNuitIntenseManPerfumeSizes,
+    decantSizes: armafClubDeNuitIntenseManDecantSizes,
+    perfumePrice: 155,
+    decantPrice: 18,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000076",
+  },
+  {
+    legacyPerfumeKeys: new Set([
+      "club-de-nuit-urban-man-elixir",
+      "prod-club-de-nuit-urban-man-elixir",
+      "c0000000-0000-4000-8000-000000000077",
+    ]),
+    legacyDecantKeys: new Set([
+      "club-de-nuit-urban-man-elixir-decant",
+      "decant-club-de-nuit-urban-man-elixir",
+      "c0000000-0000-4000-8000-000000000078",
+    ]),
+    perfumeSlug: armafClubDeNuitUrbanManElixirSlugs.perfume,
+    decantSlug: armafClubDeNuitUrbanManElixirSlugs.decant,
+    content: armafClubDeNuitUrbanManElixir,
+    perfumeSizes: armafClubDeNuitUrbanManElixirPerfumeSizes,
+    decantSizes: armafClubDeNuitUrbanManElixirDecantSizes,
+    perfumePrice: 173,
+    decantPrice: 19,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000078",
   },
 ];
 

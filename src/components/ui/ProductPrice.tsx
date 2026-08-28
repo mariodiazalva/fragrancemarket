@@ -1,4 +1,4 @@
-import { cn, formatPrice } from "@/lib/utils";
+import { cn, formatCatalogPrice } from "@/lib/utils";
 
 type ProductPriceProps = {
   price: number;
@@ -44,7 +44,7 @@ export function ProductPrice({
           styles.current,
         )}
       >
-        {formatPrice(price, locale, currency)}
+        {formatCatalogPrice(price, locale, currency)}
       </span>
 
       {hasDiscount ? (
