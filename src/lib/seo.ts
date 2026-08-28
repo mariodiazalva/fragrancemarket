@@ -11,6 +11,7 @@ import {
 import { combosComingSoon } from "@/data/combos";
 import { catalogPages, type CatalogRouteId } from "@/lib/catalog";
 import { getProductHref } from "@/lib/product";
+import { socialLinks } from "@/lib/navigation";
 import type { Product } from "@/types/product";
 
 export const INDEXABLE_PATHS = [
@@ -87,11 +88,9 @@ export function verifiedSocialUrls(): string[] {
     "https://wa.me/",
   ]);
 
-  return [
-    process.env.NEXT_PUBLIC_INSTAGRAM_URL,
-    process.env.NEXT_PUBLIC_TIKTOK_URL,
-    process.env.NEXT_PUBLIC_WHATSAPP_URL,
-  ].filter((url): url is string => typeof url === "string" && !placeholders.has(url));
+  return socialLinks
+    .map((link) => link.href)
+    .filter((url) => !placeholders.has(url));
 }
 
 type PageMetadataInput = {

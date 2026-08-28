@@ -118,17 +118,21 @@ export const socialLinks = [
   {
     id: "instagram",
     label: "Instagram",
-    href: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://www.instagram.com/",
+    href:
+      process.env.NEXT_PUBLIC_INSTAGRAM_URL ??
+      "https://www.instagram.com/fragrancemarket_/",
   },
   {
     id: "tiktok",
     label: "TikTok",
-    href: process.env.NEXT_PUBLIC_TIKTOK_URL ?? "https://www.tiktok.com/",
+    href:
+      process.env.NEXT_PUBLIC_TIKTOK_URL ??
+      "https://www.tiktok.com/@fragancemarket",
   },
   {
     id: "whatsapp",
     label: "WhatsApp",
-    href: process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/",
+    href: process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/51973043302",
   },
 ] as const;
 
