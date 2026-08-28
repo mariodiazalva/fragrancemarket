@@ -151,8 +151,10 @@ export function MobileMenu({
             <a
               href={whatsapp.href}
               target="_blank"
-              rel="noreferrer"
-              onClick={onClose}
+              rel="noopener noreferrer"
+              onClick={() => {
+                window.setTimeout(onClose, 0);
+              }}
               className="mb-1 flex min-h-12 items-center gap-3 text-xs uppercase tracking-[0.18em] text-neutral-600 transition-colors duration-200 hover:text-black"
             >
               <WhatsAppIcon className="size-5" />
