@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CatalogToolbar } from "@/components/catalog/CatalogToolbar";
@@ -71,6 +72,48 @@ export function CatalogView({
     </div>
   );
 
+  const filtersOverlay = (
+    <div className="fixed inset-0 z-[60] lg:hidden">
+      <button
+        type="button"
+        aria-label="Cerrar filtros"
+        onClick={() => setFiltersOpen(false)}
+        className="absolute inset-0 bg-elova-black/70"
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="catalog-filters-title"
+        className="absolute inset-x-0 bottom-0 flex max-h-[88svh] w-full flex-col border-t border-elova-border bg-elova-cream"
+      >
+        <div className="flex items-center justify-between border-b border-elova-border px-4 py-3 sm:px-5">
+          <p
+            id="catalog-filters-title"
+            className="text-xs uppercase tracking-[0.2em] text-text-primary"
+          >
+            Filtros
+          </p>
+          <button
+            type="button"
+            aria-label="Cerrar filtros"
+            onClick={() => setFiltersOpen(false)}
+            className="inline-flex size-11 items-center justify-center text-text-primary hover:text-elova-gold"
+          >
+            <CloseIcon className="size-5" />
+          </button>
+        </div>
+        <div className="overflow-y-auto px-4 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-5">
+          <CatalogFilters
+            pathname={pathname}
+            query={query}
+            facets={facets}
+            config={config}
+          />
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Wrapper className={as === "main" ? "pb-20 pt-10 sm:pt-14" : "pb-20 pt-6"}>
       <Container>
@@ -88,7 +131,7 @@ export function CatalogView({
           </div>
         )}
 
-        <div className={hideHeader ? undefined : "mt-10"}>
+        <div className={hideHeader ? "relative z-20" : "relative z-20 mt-10"}>
           <CatalogToolbar
             pathname={pathname}
             query={query}
@@ -107,53 +150,7 @@ export function CatalogView({
         {hideHeader ? catalogBody : <Reveal>{catalogBody}</Reveal>}
       </Container>
 
-      <div
-        className={`fixed inset-0 z-[60] lg:hidden ${filtersOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-      >
-        <button
-          type="button"
-          tabIndex={filtersOpen ? 0 : -1}
-          aria-label="Cerrar filtros"
-          onClick={() => setFiltersOpen(false)}
-          className={`absolute inset-0 bg-elova-black/70 transition-opacity duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-            filtersOpen ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="catalog-filters-title"
-          inert={!filtersOpen}
-          className={`absolute inset-x-0 bottom-0 flex max-h-[88svh] w-full flex-col border-t border-elova-border bg-elova-cream transition-transform duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-            filtersOpen ? "translate-y-0" : "translate-y-full"
-          }`}
-        >
-          <div className="flex items-center justify-between border-b border-elova-border px-4 py-3 sm:px-5">
-            <p
-              id="catalog-filters-title"
-              className="text-xs uppercase tracking-[0.2em] text-text-primary"
-            >
-              Filtros
-            </p>
-            <button
-              type="button"
-              aria-label="Cerrar filtros"
-              onClick={() => setFiltersOpen(false)}
-              className="inline-flex size-11 items-center justify-center text-text-primary hover:text-elova-gold"
-            >
-              <CloseIcon className="size-5" />
-            </button>
-          </div>
-          <div className="overflow-y-auto px-4 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-5">
-            <CatalogFilters
-              pathname={pathname}
-              query={query}
-              facets={facets}
-              config={config}
-            />
-          </div>
-        </div>
-      </div>
+      {filtersOpen ? createPortal(filtersOverlay, document.body) : null}
     </Wrapper>
   );
 }

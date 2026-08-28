@@ -375,6 +375,8 @@ a,
   .cart-line-enter,
   .mobile-nav[data-open="true"] li {
     animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .group:hover {
@@ -384,11 +386,5 @@ a,
 
   .group:hover img {
     transform: none !important;
-  }
-
-  #contenido main > * + *,
-  .site-footer {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 32rem;
   }
 }

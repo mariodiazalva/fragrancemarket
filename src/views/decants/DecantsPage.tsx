@@ -32,7 +32,7 @@ export async function DecantsExperience({ searchParams }: DecantsPageProps) {
       />
       <DecantsHero />
       <DecantsGuide activeSize={query.size} />
-      <div id="catalogo">
+      <div id="catalogo" className="relative z-10">
         <CatalogView
           as="div"
           hideHeader

@@ -166,7 +166,7 @@ export function SearchAutocomplete({
   const listClassName =
     placement === "inline"
       ? "mt-3 max-h-[min(24rem,70vh)] overflow-y-auto border-t border-elova-border"
-      : "elova-fade-in absolute inset-x-0 top-full z-[60] mt-1 max-h-[min(24rem,70vh)] overflow-y-auto border border-elova-border bg-surface shadow-[0_12px_32px_rgba(38,34,32,0.08)]";
+      : "elova-fade-in absolute inset-x-0 top-full z-[70] mt-1 max-h-[min(24rem,70vh)] overflow-y-auto border border-elova-border bg-surface opacity-100 shadow-[0_12px_32px_rgba(38,34,32,0.08)]";
 
   return (
     <div ref={rootRef} className={cn("relative", placement === "overlay" && "z-20")}>
