@@ -84,8 +84,8 @@ on conflict (sku) do update set
   is_full_bottle = excluded.is_full_bottle;
 
 insert into public.product_images (product_id, url, alt, position) values
-  ('c0000000-0000-4000-8000-000000000073', '/images/products/product-eros-eau-de-parfum.jpg', 'Eros Eau de Parfum', 0),
-  ('c0000000-0000-4000-8000-000000000074', '/images/products/product-eros-eau-de-parfum.jpg', 'Eros Eau de Parfum decant', 0)
+  ('c0000000-0000-4000-8000-000000000073', '/images/products/product-eros-eau-de-parfum.png', 'Eros Eau de Parfum', 0),
+  ('c0000000-0000-4000-8000-000000000074', '/images/products/product-eros-eau-de-parfum.png', 'Eros Eau de Parfum decant', 0)
 on conflict (product_id, position) do update set
   url = excluded.url,
   alt = excluded.alt;

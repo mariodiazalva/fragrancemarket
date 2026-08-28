@@ -84,8 +84,8 @@ on conflict (sku) do update set
   is_full_bottle = excluded.is_full_bottle;
 
 insert into public.product_images (product_id, url, alt, position) values
-  ('c0000000-0000-4000-8000-000000000069', '/images/products/product-the-most-wanted.jpg', 'The Most Wanted', 0),
-  ('c0000000-0000-4000-8000-000000000070', '/images/products/product-the-most-wanted.jpg', 'The Most Wanted decant', 0)
+  ('c0000000-0000-4000-8000-000000000069', '/images/products/product-the-most-wanted.png', 'The Most Wanted', 0),
+  ('c0000000-0000-4000-8000-000000000070', '/images/products/product-the-most-wanted.png', 'The Most Wanted decant', 0)
 on conflict (product_id, position) do update set
   url = excluded.url,
   alt = excluded.alt;

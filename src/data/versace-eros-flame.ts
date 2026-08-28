@@ -1,7 +1,7 @@
 import type { ProductSize } from "@/types";
 
 export const VERSACE_EROS_FLAME_IMAGE =
-  "/images/products/product-eros-flame.jpg";
+  "/images/products/product-eros-flame.png";
 
 export const versaceErosFlame = {
   name: "Eros Flame",

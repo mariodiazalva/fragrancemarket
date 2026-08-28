@@ -1,7 +1,7 @@
 import type { ProductSize } from "@/types";
 
 export const ARMAF_CLUB_DE_NUIT_INTENSE_MAN_IMAGE =
-  "/images/products/product-club-de-nuit-intense-man.jpg";
+  "/images/products/product-club-de-nuit-intense-man.png";
 
 export const armafClubDeNuitIntenseMan = {
   name: "Club de Nuit Intense Man",

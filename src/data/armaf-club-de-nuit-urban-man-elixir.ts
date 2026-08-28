@@ -1,7 +1,7 @@
 import type { ProductSize } from "@/types";
 
 export const ARMAF_CLUB_DE_NUIT_URBAN_MAN_ELIXIR_IMAGE =
-  "/images/products/product-club-de-nuit-urban-man-elixir.jpg";
+  "/images/products/product-club-de-nuit-urban-man-elixir.png";
 
 export const armafClubDeNuitUrbanManElixir = {
   name: "Club de Nuit Urban Man Elixir",

@@ -1,7 +1,7 @@
 import type { ProductSize } from "@/types";
 
 export const VERSACE_EROS_EAU_DE_PARFUM_IMAGE =
-  "/images/products/product-eros-eau-de-parfum.jpg";
+  "/images/products/product-eros-eau-de-parfum.png";
 
 export const versaceErosEauDeParfum = {
   name: "Eros Eau de Parfum",

@@ -1,7 +1,7 @@
 import type { ProductSize } from "@/types";
 
 export const AZZARO_THE_MOST_WANTED_IMAGE =
-  "/images/products/product-the-most-wanted.jpg";
+  "/images/products/product-the-most-wanted.png";
 
 export const azzaroTheMostWanted = {
   name: "The Most Wanted",
