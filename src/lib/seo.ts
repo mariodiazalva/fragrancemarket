@@ -22,6 +22,7 @@ export const INDEXABLE_PATHS = [
   "/mujer",
   "/unisex",
   "/arabes",
+  "/promos",
   "/disenador",
   "/nicho",
   ...(combosComingSoon ? [] : ["/combos"]),

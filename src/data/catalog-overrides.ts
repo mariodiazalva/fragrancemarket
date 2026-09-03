@@ -220,6 +220,13 @@ import {
   armafClubDeNuitUrbanManElixirPerfumeSizes,
   armafClubDeNuitUrbanManElixirSlugs,
 } from "@/data/armaf-club-de-nuit-urban-man-elixir";
+import {
+  afnan9pm,
+  afnan9pmDecantSizes,
+  afnan9pmPerfumeSizes,
+  afnan9pmSlugs,
+} from "@/data/afnan-9-pm";
+import { applyArabicWeekndPromo } from "@/data/promos";
 import type { Product, ProductSize } from "@/types";
 import type { SetItem } from "@/types/content";
 
@@ -1052,6 +1059,28 @@ const replacements: CatalogReplacement[] = [
     decantStock: 18,
     injectDecantId: "c0000000-0000-4000-8000-000000000078",
   },
+  {
+    legacyPerfumeKeys: new Set([
+      "9-pm",
+      "prod-9-pm",
+      "c0000000-0000-4000-8000-000000000079",
+    ]),
+    legacyDecantKeys: new Set([
+      "9-pm-decant",
+      "decant-9-pm",
+      "c0000000-0000-4000-8000-000000000080",
+    ]),
+    perfumeSlug: afnan9pmSlugs.perfume,
+    decantSlug: afnan9pmSlugs.decant,
+    content: afnan9pm,
+    perfumeSizes: afnan9pmPerfumeSizes,
+    decantSizes: afnan9pmDecantSizes,
+    perfumePrice: 165,
+    decantPrice: 23,
+    perfumeStock: 10,
+    decantStock: 18,
+    injectDecantId: "c0000000-0000-4000-8000-000000000080",
+  },
 ];
 
 export const productSlugAliases: Record<string, string> = Object.fromEntries(
@@ -1121,7 +1150,7 @@ export function applyProductOverride(product: Product): Product {
       replacement.legacyPerfumeKeys.has(product.slug) ||
       replacement.legacyPerfumeKeys.has(product.id)
     ) {
-      return {
+      return applyArabicWeekndPromo({
         ...product,
         ...replacement.content,
         slug: replacement.perfumeSlug,
@@ -1130,7 +1159,7 @@ export function applyProductOverride(product: Product): Product {
         compareAtPrice: undefined,
         sizes: replacement.perfumeSizes,
         stock: replacement.perfumeStock,
-      };
+      });
     }
 
     if (
@@ -1152,5 +1181,5 @@ export function applyProductOverride(product: Product): Product {
     }
   }
 
-  return product;
+  return applyArabicWeekndPromo(product);
 }

@@ -1,3 +1,8 @@
+import {
+  isArabicWeekndPerfume,
+  SALE_BADGE_LABEL,
+} from "@/data/promos";
+import type { BadgeVariant } from "@/lib/tokens";
 import type { FragranceSet } from "@/types/content";
 import type { FragranceIntensity, Product, ProductSize } from "@/types/product";
 
@@ -10,15 +15,27 @@ export function getProductHref(slug: string): string {
 export function getProductBadges(product: Product): string[] {
   const badges: string[] = [];
 
+  if (isArabicWeekndPerfume(product.slug, product.type)) {
+    badges.push(SALE_BADGE_LABEL);
+  }
+
   if (product.bestseller) {
     badges.push("Bestseller");
   }
 
-  if (product.compareAtPrice !== undefined && product.compareAtPrice > product.price) {
+  if (
+    !isArabicWeekndPerfume(product.slug, product.type) &&
+    product.compareAtPrice !== undefined &&
+    product.compareAtPrice > product.price
+  ) {
     badges.push("Oferta");
   }
 
   return badges;
+}
+
+export function getBadgeVariant(badge: string): BadgeVariant {
+  return badge === SALE_BADGE_LABEL ? "sale" : "gold";
 }
 
 export function getSetIndividualTotal(set: FragranceSet): number {

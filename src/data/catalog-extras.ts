@@ -144,6 +144,7 @@ import {
   armafClubDeNuitUrbanManElixir,
   armafClubDeNuitUrbanManElixirSlugs,
 } from "@/data/armaf-club-de-nuit-urban-man-elixir";
+import { afnan9pm, afnan9pmSlugs } from "@/data/afnan-9-pm";
 import type { Product } from "@/types";
 
 const sharedNotes = {
@@ -1048,6 +1049,28 @@ export const catalogExtraProducts: Product[] = [
     alHaramainAmberOudGoldSlugs.perfume,
     { three: 25, five: 35, ten: 45 },
     "2026-08-21",
+    "arabian",
+  ),
+  decantFrom(
+    {
+      name: afnan9pm.name,
+      brand: afnan9pm.brand,
+      description: afnan9pm.description,
+      gender: afnan9pm.gender,
+      notes: afnan9pm.notes,
+      fragranceFamily: afnan9pm.fragranceFamily,
+      occasions: afnan9pm.occasions,
+      intensity: afnan9pm.intensity,
+      intensityScore: afnan9pm.intensityScore,
+      projection: afnan9pm.projection,
+      longevity: afnan9pm.longevity,
+      rating: afnan9pm.rating,
+      images: afnan9pm.images,
+      bestseller: false,
+    },
+    afnan9pmSlugs.perfume,
+    { three: 15, five: 23, ten: 30 },
+    "2026-09-03",
     "arabian",
   ),
   {

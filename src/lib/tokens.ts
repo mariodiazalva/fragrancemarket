@@ -9,6 +9,7 @@ export const elovaTokens = {
     gold: "#000000",
     goldMuted: "#404040",
     goldHighlight: "#111111",
+    sale: "#dc2626",
     border: "#e5e5e5",
     borderSubtle: "#f0f0f0",
     textPrimary: "#000000",
@@ -27,5 +28,5 @@ export const elovaTokens = {
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "outline";
 export type ButtonSize = "sm" | "md" | "lg";
-export type BadgeVariant = "default" | "gold" | "outline" | "muted";
+export type BadgeVariant = "default" | "gold" | "outline" | "muted" | "sale";
 export type DividerVariant = "default" | "gold" | "subtle";

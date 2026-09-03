@@ -5,7 +5,8 @@ import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { ProductPrice } from "@/components/ui/ProductPrice";
 import { Rating } from "@/components/ui/Rating";
-import { getProductHref } from "@/lib/product";
+import { SALE_BADGE_LABEL } from "@/data/promos";
+import { getBadgeVariant, getProductHref } from "@/lib/product";
 import { cn } from "@/lib/utils";
 
 type ProductCardProps = {
@@ -68,7 +69,7 @@ export function ProductCard({
         {badges.length > 0 ? (
           <div className="absolute left-2 top-2 flex max-w-[calc(100%-1rem)] flex-wrap gap-1.5 sm:left-3 sm:top-3 sm:gap-2">
             {badges.map((badge) => (
-              <Badge key={badge} variant="gold">
+              <Badge key={badge} variant={getBadgeVariant(badge)}>
                 {badge}
               </Badge>
             ))}
@@ -81,10 +82,13 @@ export function ProductCard({
           <p className="text-[0.6rem] uppercase tracking-[0.14em] text-text-secondary sm:text-[0.65rem] sm:tracking-[0.22em]">
             {brand}
           </p>
-          <TitleTag className="font-serif text-lg font-bold leading-tight tracking-[-0.02em] text-text-primary sm:text-xl">
+          <TitleTag className="flex flex-wrap items-center gap-2 font-serif text-lg font-bold leading-tight tracking-[-0.02em] text-text-primary sm:text-xl">
             <Link href={href} className="transition-colors duration-200 hover:text-elova-gold">
               {name}
             </Link>
+            {badges.includes(SALE_BADGE_LABEL) ? (
+              <Badge variant="sale">{SALE_BADGE_LABEL}</Badge>
+            ) : null}
           </TitleTag>
         </div>
 

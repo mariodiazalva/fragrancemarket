@@ -13,6 +13,7 @@ const variantClasses: Record<BadgeVariant, string> = {
   gold: "border-elova-gold/20 bg-elova-gold text-accent-foreground",
   outline: "border-elova-border bg-transparent text-text-secondary",
   muted: "border-transparent bg-surface-elevated text-text-secondary",
+  sale: "border-elova-sale bg-elova-sale font-semibold tracking-[0.14em] text-white",
 };
 
 export function Badge({

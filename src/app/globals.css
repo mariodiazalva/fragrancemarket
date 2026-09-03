@@ -11,6 +11,7 @@
   --elova-gold: #000000;
   --elova-gold-muted: #404040;
   --elova-gold-highlight: #111111;
+  --elova-sale: #dc2626;
   --elova-border: #e5e5e5;
   --elova-border-subtle: #f0f0f0;
   --accent-foreground: #ffffff;
@@ -88,6 +89,7 @@
   --color-elova-gold: var(--elova-gold);
   --color-elova-gold-muted: var(--elova-gold-muted);
   --color-elova-gold-highlight: var(--elova-gold-highlight);
+  --color-elova-sale: var(--elova-sale);
   --color-elova-border: var(--elova-border);
   --color-elova-border-subtle: var(--elova-border-subtle);
   --color-text-primary: var(--text-primary);

@@ -179,6 +179,11 @@ import {
   armafClubDeNuitUrbanManElixirPerfumeSizes,
   armafClubDeNuitUrbanManElixirSlugs,
 } from "@/data/armaf-club-de-nuit-urban-man-elixir";
+import {
+  afnan9pm,
+  afnan9pmPerfumeSizes,
+  afnan9pmSlugs,
+} from "@/data/afnan-9-pm";
 import type { Product } from "@/types";
 
 /**
@@ -1078,6 +1083,31 @@ const featuredPerfumes: Product[] = [
     bestseller: false,
     stock: 10,
     createdAt: "2026-08-28",
+  },
+  {
+    id: "prod-9-pm",
+    name: afnan9pm.name,
+    brand: afnan9pm.brand,
+    slug: afnan9pmSlugs.perfume,
+    description: afnan9pm.description,
+    gender: afnan9pm.gender,
+    category: afnan9pm.category,
+    type: "perfume",
+    price: 165,
+    images: afnan9pm.images,
+    sizes: afnan9pmPerfumeSizes,
+    notes: afnan9pm.notes,
+    fragranceFamily: afnan9pm.fragranceFamily,
+    occasions: afnan9pm.occasions,
+    intensity: afnan9pm.intensity,
+    intensityScore: afnan9pm.intensityScore,
+    projection: afnan9pm.projection,
+    longevity: afnan9pm.longevity,
+    rating: afnan9pm.rating,
+    featured: true,
+    bestseller: false,
+    stock: 10,
+    createdAt: "2026-09-03",
   },
 ];
 

@@ -202,10 +202,15 @@ function HeaderInner({ pathname }: HeaderInnerProps) {
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "relative py-2 text-[0.7rem] uppercase tracking-[0.18em] transition-colors duration-200",
-                        active
-                          ? "text-elova-gold"
-                          : "text-text-secondary hover:text-text-primary",
-                        "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-elova-gold after:transition-transform after:duration-200 after:content-['']",
+                        item.accent === "sale"
+                          ? active
+                            ? "text-elova-sale"
+                            : "text-elova-sale hover:text-red-400"
+                          : active
+                            ? "text-elova-gold"
+                            : "text-text-secondary hover:text-text-primary",
+                        "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:transition-transform after:duration-200 after:content-['']",
+                        item.accent === "sale" ? "after:bg-elova-sale" : "after:bg-elova-gold",
                         active
                           ? "after:scale-x-100"
                           : "after:scale-x-0 hover:after:scale-x-100",
@@ -243,6 +248,7 @@ function HeaderInner({ pathname }: HeaderInnerProps) {
                 "/mujer",
                 "/unisex",
                 "/arabes",
+                "/promos",
                 ...(combosComingSoon ? [] : ["/combos"]),
               ];
               const base = catalogPaths.includes(pathname)

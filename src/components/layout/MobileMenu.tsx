@@ -112,8 +112,12 @@ export function MobileMenu({
                   onClick={onClose}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex min-h-14 touch-manipulation items-center border-b border-elova-border-subtle font-serif text-2xl font-bold tracking-[-0.02em] text-black transition-colors duration-200",
-                    active ? "text-black" : "hover:opacity-60",
+                    "flex min-h-14 touch-manipulation items-center border-b border-elova-border-subtle font-serif text-2xl font-bold tracking-[-0.02em] transition-colors duration-200",
+                    item.accent === "sale"
+                      ? "text-elova-sale hover:opacity-80"
+                      : active
+                        ? "text-black"
+                        : "text-black hover:opacity-60",
                   )}
                 >
                   {item.label}

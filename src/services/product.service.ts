@@ -2,6 +2,7 @@ import { cache } from "react";
 
 import { productSlugAliases } from "@/data/catalog-overrides";
 import { combosComingSoon, withoutHiddenSetProducts } from "@/data/combos";
+import { ARABIC_WEEKND_SLUGS } from "@/data/promos";
 import { listFeaturedProducts, listPublishedProductCards, listPublishedProducts } from "@/data-access/products";
 import { productMatchesQuery } from "@/services/search.service";
 import type {
@@ -150,6 +151,14 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
     products.find((item) => item.slug === resolved || item.slug === slug) ?? null
   );
 });
+
+export async function getPromoProducts(): Promise<Product[]> {
+  const products = await Promise.all(
+    ARABIC_WEEKND_SLUGS.map((slug) => getProductBySlug(slug)),
+  );
+
+  return products.filter((product): product is Product => product !== null);
+}
 
 export async function getFeaturedProducts(limit = 8): Promise<Product[]> {
   const extra = combosComingSoon ? 8 : 0;

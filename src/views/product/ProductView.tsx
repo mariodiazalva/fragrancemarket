@@ -11,8 +11,9 @@ import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { Rating } from "@/components/ui/Rating";
 import { Reveal } from "@/components/ui/Reveal";
+import { SALE_BADGE_LABEL } from "@/data/promos";
 import { genderLabels, typeLabels } from "@/lib/catalog";
-import { getProductBadges } from "@/lib/product";
+import { getBadgeVariant, getProductBadges } from "@/lib/product";
 import type { FragranceSet, Product } from "@/types";
 import type { RelatedProducts } from "@/services/product.service";
 
@@ -74,8 +75,11 @@ export function ProductView({
               <p className="text-[0.7rem] uppercase tracking-[0.22em] text-text-secondary">
                 {product.brand}
               </p>
-              <h1 className="mt-3 font-serif text-[2rem] font-bold tracking-[-0.02em] text-text-primary sm:text-4xl lg:text-5xl">
+              <h1 className="mt-3 flex flex-wrap items-center gap-3 font-serif text-[2rem] font-bold tracking-[-0.02em] text-text-primary sm:text-4xl lg:text-5xl">
                 {product.name}
+                {badges.includes(SALE_BADGE_LABEL) ? (
+                  <Badge variant="sale">{SALE_BADGE_LABEL}</Badge>
+                ) : null}
               </h1>
               <p className="mt-3 text-[0.7rem] uppercase tracking-[0.18em] text-text-secondary">
                 {genderLabels[product.gender]}
@@ -84,11 +88,13 @@ export function ProductView({
                 {product.rating !== undefined ? (
                   <Rating value={product.rating} showValue />
                 ) : null}
-                {badges.map((badge) => (
-                  <Badge key={badge} variant="gold">
-                    {badge}
-                  </Badge>
-                ))}
+                {badges
+                  .filter((badge) => badge !== SALE_BADGE_LABEL)
+                  .map((badge) => (
+                    <Badge key={badge} variant={getBadgeVariant(badge)}>
+                      {badge}
+                    </Badge>
+                  ))}
               </div>
             </div>
 

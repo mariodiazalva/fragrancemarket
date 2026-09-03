@@ -46,6 +46,7 @@ export const collectionCards: HomeLinkCard[] = [
   { id: "unisex", title: "Unisex", href: "/unisex" },
   { id: "disenador", title: "Diseñador", href: "/disenador" },
   { id: "arabes", title: "Árabes", href: "/arabes" },
+  { id: "promos", title: "Promos", href: "/promos" },
   { id: "nicho", title: "Nicho", href: "/nicho" },
 ];
 

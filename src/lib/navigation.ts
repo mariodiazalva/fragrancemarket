@@ -2,11 +2,14 @@ import { withoutHiddenComboLinks } from "@/data/combos";
 
 export type NavMatch = "exact" | "prefix";
 
+export type NavAccent = "sale";
+
 export type NavItem = {
   id: string;
   label: string;
   href: string;
   match?: NavMatch;
+  accent?: NavAccent;
 };
 
 export type HeaderActionType = "search" | "link" | "cart";
@@ -40,6 +43,7 @@ export const mainNavigation: NavItem[] = withoutHiddenComboLinks([
   { id: "hombre", label: "Hombre", href: "/hombre" },
   { id: "mujer", label: "Mujer", href: "/mujer" },
   { id: "arabes", label: "Árabes", href: "/arabes" },
+  { id: "promos", label: "Promos", href: "/promos", accent: "sale" },
   { id: "combos", label: "Combos", href: "/combos" },
   { id: "nosotros", label: "Nosotros", href: "/nosotros" },
 ]);
@@ -51,6 +55,7 @@ export const mobileNavigation: NavItem[] = withoutHiddenComboLinks([
   { id: "hombre", label: "Hombre", href: "/hombre" },
   { id: "mujer", label: "Mujer", href: "/mujer" },
   { id: "arabes", label: "Árabes", href: "/arabes" },
+  { id: "promos", label: "Promos", href: "/promos", accent: "sale" },
   { id: "combos", label: "Combos", href: "/combos" },
 ]);
 
@@ -82,6 +87,7 @@ export const announcementBar: AnnouncementBarConfig = {
   separator: "·",
   items: [
     { id: "shipping", label: "ENVÍOS A TODO EL PERÚ" },
+    { id: "promos", label: "ARABIC WEEKND · 15% OFF", href: "/promos" },
     { id: "decants", label: "DECANTS DESDE S/ 15", href: "/decants" },
   ],
 };
@@ -94,6 +100,7 @@ export const footerNavigation = {
     { id: "hombre", label: "Hombre", href: "/hombre" },
     { id: "mujer", label: "Mujer", href: "/mujer" },
     { id: "arabes", label: "Árabes", href: "/arabes" },
+    { id: "promos", label: "Promos", href: "/promos" },
   ]),
   help: [
     { id: "encontrar", label: "Encontrar mi perfume", href: "/encontrar" },
