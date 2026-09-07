@@ -25,6 +25,7 @@ import {
   subscribeCart,
   updateItemQuantity,
 } from "@/lib/cart-store";
+import { readStoredCoupon, writeStoredCoupon } from "@/services/coupon.storage";
 import type { CartDraft, CartItem, CartTotals, CartVariant } from "@/types/cart";
 
 type AddToCartOptions = {
@@ -42,6 +43,8 @@ type CartContextValue = {
   updateQuantity: (lineId: string, quantity: number) => void;
   changeVariant: (lineId: string, variant: CartVariant) => void;
   clear: () => void;
+  couponCode: string;
+  setCouponCode: (code: string) => void;
   openCart: () => void;
   closeCart: () => void;
 };
@@ -53,10 +56,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const ready = useSyncExternalStore(subscribeCart, isCartHydrated, () => false);
   const [isOpen, setIsOpen] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
+  const [couponCode, setCouponCodeState] = useState("");
   const addedTimer = useRef<number>(0);
 
   useEffect(() => {
     hydrateCart();
+    setCouponCodeState(readStoredCoupon());
   }, []);
 
   useEffect(() => {
@@ -101,6 +106,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     clearCart();
   }, []);
 
+  const setCouponCode = useCallback((next: string) => {
+    setCouponCodeState(next);
+    writeStoredCoupon(next);
+  }, []);
+
   const openCart = useCallback(() => {
     setIsOpen(true);
   }, []);
@@ -123,6 +133,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       updateQuantity,
       changeVariant,
       clear,
+      couponCode,
+      setCouponCode,
       openCart,
       closeCart,
     }),
@@ -131,12 +143,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       changeVariant,
       clear,
       closeCart,
+      couponCode,
       isOpen,
       items,
       justAdded,
       openCart,
       ready,
       remove,
+      setCouponCode,
       totals,
       updateQuantity,
     ],

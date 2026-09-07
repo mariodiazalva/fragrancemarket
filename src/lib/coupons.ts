@@ -75,8 +75,12 @@ export function quoteCoupon(
     arabicSubtotal,
     discountAmount,
     label:
-      arabicSubtotal > 0
-        ? `${coupon.storePercent}% en el total (incluye envío) y +${coupon.arabicExtraPercent}% en Arabic Weeknd`
-        : `${coupon.storePercent}% en el total, incluido el envío`,
+      shippingAmount > 0
+        ? arabicSubtotal > 0
+          ? `${coupon.storePercent}% en el total (incluye envío) y +${coupon.arabicExtraPercent}% en Arabic Weeknd`
+          : `${coupon.storePercent}% en el total, incluido el envío`
+        : arabicSubtotal > 0
+          ? `${coupon.storePercent}% en los productos y +${coupon.arabicExtraPercent}% en Arabic Weeknd`
+          : `${coupon.storePercent}% en los productos, sin envío`,
   };
 }

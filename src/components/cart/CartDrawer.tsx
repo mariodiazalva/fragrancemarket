@@ -1,16 +1,24 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { CartLineItem } from "@/components/cart/CartLineItem";
 import { CartRecommendations } from "@/components/cart/CartRecommendations";
+import { CouponField } from "@/components/checkout/CouponField";
 import { CloseIcon } from "@/components/layout/icons";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
+import { quoteCoupon } from "@/lib/coupons";
 import { cn, formatPrice } from "@/lib/utils";
 
 export function CartDrawer() {
-  const { items, totals, isOpen, justAdded, closeCart, clear } = useCart();
+  const { items, totals, isOpen, justAdded, closeCart, clear, couponCode, setCouponCode } =
+    useCart();
+  const couponQuote = useMemo(
+    () => quoteCoupon(couponCode, items, 0),
+    [couponCode, items],
+  );
+  const previewTotal = Math.max(0, totals.subtotal - (couponQuote?.discountAmount ?? 0));
   const excludeIds = items.map((item) => item.productId);
 
   useEffect(() => {
@@ -130,19 +138,40 @@ export function CartDrawer() {
         </div>
 
         <div className="sticky bottom-0 border-t border-elova-border bg-elova-cream px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:px-5">
-          <div className="mb-4 space-y-2">
+          <div className="mb-4 space-y-3">
             <div className="flex items-baseline justify-between">
               <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
                 Subtotal
               </span>
               <span className="text-sm text-text-primary">{formatPrice(totals.subtotal)}</span>
             </div>
+            {items.length > 0 ? (
+              <CouponField
+                id="drawer-coupon"
+                value={couponCode}
+                quote={couponQuote}
+                onChange={setCouponCode}
+              />
+            ) : null}
+            {couponQuote ? (
+              <div className="flex items-baseline justify-between">
+                <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
+                  Descuento
+                </span>
+                <span className="text-sm text-text-primary">
+                  −{formatPrice(couponQuote.discountAmount)}
+                </span>
+              </div>
+            ) : null}
             <div className="flex items-baseline justify-between">
               <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
                 Total
               </span>
-              <span className="text-lg text-text-primary">{formatPrice(totals.total)}</span>
+              <span className="text-lg text-text-primary">{formatPrice(previewTotal)}</span>
             </div>
+            <p className="text-[0.7rem] leading-relaxed text-text-secondary">
+              Precio sin envío. El flete se suma en el checkout.
+            </p>
           </div>
           <div className="flex flex-col gap-3">
             <ButtonLink href="/carrito" fullWidth onClick={closeCart}>

@@ -1,16 +1,25 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { CartLineItem } from "@/components/cart/CartLineItem";
 import { CartRecommendations } from "@/components/cart/CartRecommendations";
+import { CouponField } from "@/components/checkout/CouponField";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { useCart } from "@/hooks/useCart";
+import { quoteCoupon } from "@/lib/coupons";
 import { formatPrice } from "@/lib/utils";
 
 export function CartView() {
-  const { items, totals, clear } = useCart();
+  const { items, totals, clear, couponCode, setCouponCode } = useCart();
   const excludeIds = items.map((item) => item.productId);
+  const couponQuote = useMemo(
+    () => quoteCoupon(couponCode, items, 0),
+    [couponCode, items],
+  );
+  const previewTotal = Math.max(0, totals.subtotal - (couponQuote?.discountAmount ?? 0));
 
   return (
     <main className="flex-1 pb-28 pt-8 sm:pb-16 sm:pt-12">
@@ -53,10 +62,25 @@ export function CartView() {
               {items.map((item) => (
                 <CartLineItem key={item.lineId} item={item} />
               ))}
+              <div className="mt-8 border border-elova-border bg-surface p-5 lg:hidden">
+                <CartSummary
+                  subtotal={totals.subtotal}
+                  previewTotal={previewTotal}
+                  couponCode={couponCode}
+                  couponQuote={couponQuote}
+                  onCouponChange={setCouponCode}
+                />
+              </div>
             </section>
 
             <aside className="hidden h-fit border border-elova-border bg-surface p-5 lg:block">
-              <CartSummary subtotal={totals.subtotal} total={totals.total} />
+              <CartSummary
+                subtotal={totals.subtotal}
+                previewTotal={previewTotal}
+                couponCode={couponCode}
+                couponQuote={couponQuote}
+                onCouponChange={setCouponCode}
+              />
               <div className="mt-5">
                 <ButtonLink href="/checkout" fullWidth>
                   Continuar
@@ -75,7 +99,13 @@ export function CartView() {
 
       {items.length > 0 ? (
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-elova-border bg-elova-cream/95 px-5 py-3 backdrop-blur-md lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-          <CartSummary subtotal={totals.subtotal} total={totals.total} compact />
+          <CartSummary
+            subtotal={totals.subtotal}
+            previewTotal={previewTotal}
+            couponCode={couponCode}
+            couponQuote={couponQuote}
+            compact
+          />
           <div className="mt-3">
             <ButtonLink href="/checkout" fullWidth>
               Continuar
@@ -89,11 +119,17 @@ export function CartView() {
 
 function CartSummary({
   subtotal,
-  total,
+  previewTotal,
+  couponCode = "",
+  couponQuote = null,
+  onCouponChange,
   compact = false,
 }: {
   subtotal: number;
-  total: number;
+  previewTotal: number;
+  couponCode?: string;
+  couponQuote?: ReturnType<typeof quoteCoupon>;
+  onCouponChange?: (value: string) => void;
   compact?: boolean;
 }) {
   return (
@@ -105,12 +141,35 @@ function CartSummary({
           </span>
           <span className="text-sm text-text-primary">{formatPrice(subtotal)}</span>
         </div>
+        {!compact && onCouponChange ? (
+          <CouponField
+            id="cart-coupon"
+            value={couponCode}
+            quote={couponQuote}
+            onChange={onCouponChange}
+          />
+        ) : null}
+        {couponQuote ? (
+          <div className="flex items-baseline justify-between gap-4">
+            <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
+              Descuento
+            </span>
+            <span className="text-sm text-text-primary">
+              −{formatPrice(couponQuote.discountAmount)}
+            </span>
+          </div>
+        ) : null}
         <div className={`flex items-baseline justify-between gap-4 ${compact ? "" : "border-t border-elova-border pt-3"}`}>
           <span className="text-[0.7rem] uppercase tracking-[0.16em] text-text-secondary">
             Total
           </span>
-          <span className="text-base text-text-primary">{formatPrice(total)}</span>
+          <span className="text-base text-text-primary">{formatPrice(previewTotal)}</span>
         </div>
+        {compact ? null : (
+          <p className="text-[0.7rem] leading-relaxed text-text-secondary">
+            Precio sin envío. El flete se suma en el checkout.
+          </p>
+        )}
       </div>
     </div>
   );
