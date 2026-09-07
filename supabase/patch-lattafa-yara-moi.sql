@@ -19,7 +19,7 @@ insert into public.products (
     'Una fragancia femenina dulce, cremosa y elegante, con un carácter suave y envolvente. Yara Moi combina frutas, flores blancas y acordes gourmand sobre una base cálida de vainilla, almizcle y sándalo, creando un aroma femenino, sofisticado y fácil de llevar.',
     'perfume',
     'feminine',
-    133,
+    143,
     null,
     10,
     array['floral', 'ámbar', 'gourmand', 'almizclado']::text[],
@@ -71,7 +71,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000063', '100 ml', 100, 133, null, 10, 'ELOVA-YARA-MOI-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000063', '100 ml', 100, 143, null, 10, 'ELOVA-YARA-MOI-100', true, 1),
   ('c0000000-0000-4000-8000-000000000064', '3 ml', 3, 15, null, 22, 'ELOVA-YARA-MOI-3', false, 1),
   ('c0000000-0000-4000-8000-000000000064', '5 ml', 5, 17, null, 18, 'ELOVA-YARA-MOI-5', false, 2),
   ('c0000000-0000-4000-8000-000000000064', '10 ml', 10, 22, null, 11, 'ELOVA-YARA-MOI-10', false, 3)

@@ -25,7 +25,7 @@ export const lattafaYaraMoi = {
 };
 
 export const lattafaYaraMoiPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 133, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 143, stock: 10 },
 ];
 
 export const lattafaYaraMoiDecantSizes: ProductSize[] = [

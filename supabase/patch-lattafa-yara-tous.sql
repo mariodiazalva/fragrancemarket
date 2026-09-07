@@ -20,7 +20,7 @@ insert into public.products (
     'Una fragancia femenina tropical, dulce y luminosa que combina frutas exóticas con flores delicadas y un fondo cremoso y cálido. Yara Tous transmite una sensación juvenil, alegre y sensual, perfecta para días cálidos, salidas casuales y citas.',
     'perfume',
     'feminine',
-    128,
+    138,
     null,
     10,
     array['frutal', 'floral', 'tropical', 'gourmand', 'ámbar']::text[],
@@ -72,7 +72,7 @@ on conflict (id) do update set
 insert into public.product_variants (
   product_id, label, volume_ml, price, compare_at_price, stock, sku, is_full_bottle, sort_order
 ) values
-  ('c0000000-0000-4000-8000-000000000067', '100 ml', 100, 128, null, 10, 'ELOVA-YARA-TOUS-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000067', '100 ml', 100, 138, null, 10, 'ELOVA-YARA-TOUS-100', true, 1),
   ('c0000000-0000-4000-8000-000000000068', '3 ml', 3, 15, null, 22, 'ELOVA-YARA-TOUS-3', false, 1),
   ('c0000000-0000-4000-8000-000000000068', '5 ml', 5, 17, null, 18, 'ELOVA-YARA-TOUS-5', false, 2),
   ('c0000000-0000-4000-8000-000000000068', '10 ml', 10, 21, null, 11, 'ELOVA-YARA-TOUS-10', false, 3)

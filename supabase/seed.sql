@@ -273,7 +273,7 @@ insert into public.products (
     'Una fragancia femenina, dulce y cremosa, con un carácter delicado y envolvente. Lattafa Yara combina frutas suaves, flores blancas y acordes de vainilla y almizcle, creando un aroma elegante, juvenil y muy fácil de llevar.',
     'perfume',
     'feminine',
-    140,
+    150,
     null,
     7,
     array['floral', 'gourmand', 'ámbar', 'oriental']::text[],
@@ -316,7 +316,7 @@ insert into public.product_variants (
   ('c0000000-0000-4000-8000-000000000005', '100 ml', 100, 155, null, 14, 'ELOVA-9PM-100', true, 1),
   ('c0000000-0000-4000-8000-000000000006', '100 ml', 100, 165, null, 9, 'ELOVA-QAHWA-100', true, 1),
   ('c0000000-0000-4000-8000-000000000007', '120 ml', 120, 470, null, 11, 'ELOVA-MALE-120', true, 1),
-  ('c0000000-0000-4000-8000-000000000008', '100 ml', 100, 140, null, 7, 'ELOVA-YARA-100', true, 1),
+  ('c0000000-0000-4000-8000-000000000008', '100 ml', 100, 150, null, 7, 'ELOVA-YARA-100', true, 1),
   ('c0000000-0000-4000-8000-000000000009', '3 ml', 3, 25, null, 22, 'ELOVA-SWY-3', false, 1),
   ('c0000000-0000-4000-8000-000000000009', '5 ml', 5, 35, null, 18, 'ELOVA-SWY-5', false, 2),
   ('c0000000-0000-4000-8000-000000000009', '10 ml', 10, 60, null, 11, 'ELOVA-SWY-10', false, 3)

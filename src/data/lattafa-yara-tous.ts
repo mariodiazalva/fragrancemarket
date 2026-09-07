@@ -25,7 +25,7 @@ export const lattafaYaraTous = {
 };
 
 export const lattafaYaraTousPerfumeSizes: ProductSize[] = [
-  { label: "100 ml", volumeMl: 100, price: 128, stock: 10 },
+  { label: "100 ml", volumeMl: 100, price: 138, stock: 10 },
 ];
 
 export const lattafaYaraTousDecantSizes: ProductSize[] = [

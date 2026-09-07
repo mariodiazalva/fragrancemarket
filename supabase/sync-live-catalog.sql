@@ -833,7 +833,7 @@ set
   category_id = 'b0000000-0000-4000-8000-000000000002',
   description = 'Una fragancia femenina, dulce y cremosa, con un carácter delicado y envolvente. Lattafa Yara combina frutas suaves, flores blancas y acordes de vainilla y almizcle, creando un aroma elegante, juvenil y muy fácil de llevar.',
   gender = 'feminine',
-  price = 140,
+  price = 150,
   compare_at_price = null,
   stock = 7,
   fragrance_family = array['floral', 'gourmand', 'ámbar', 'oriental']::text[],
@@ -864,7 +864,7 @@ where id = 'c0000000-0000-4000-8000-000000000016'
    or slug in ('rose-silence-decant', 'yara-decant');
 
 update public.product_variants
-set label = '100 ml', volume_ml = 100, price = 140, compare_at_price = null, stock = 7, sku = 'ELOVA-YARA-100'
+set label = '100 ml', volume_ml = 100, price = 150, compare_at_price = null, stock = 7, sku = 'ELOVA-YARA-100'
 where product_id = 'c0000000-0000-4000-8000-000000000008';
 
 update public.product_variants
