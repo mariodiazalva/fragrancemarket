@@ -1,3 +1,4 @@
+import { roundMoney } from "@/lib/coupons";
 import { storePickupMapEmbedUrl, type BillingAddress, type ShippingAddress } from "@/lib/shipping";
 import { findShalomAgency } from "@/lib/shalom";
 import type { OrderCustomer, OrderPaymentItem, OrderPaymentSummary } from "@/types/order";
@@ -134,6 +135,14 @@ export function orderSubtotal(order: OrderPaymentSummary): number {
   }
 
   return Math.max(0, order.total - order.shippingAmount);
+}
+
+export function orderDiscountAmount(order: OrderPaymentSummary): number {
+  if (order.discountAmount > 0) {
+    return order.discountAmount;
+  }
+
+  return Math.max(0, roundMoney(orderSubtotal(order) + order.shippingAmount - order.total));
 }
 
 export function enrichOrderItems(

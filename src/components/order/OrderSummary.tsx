@@ -1,6 +1,6 @@
 import { formatPrice } from "@/lib/utils";
 import { formatBillingAddress, formatShippingAddress } from "@/lib/shipping";
-import { shippingMethodLabel } from "@/lib/order-confirmation";
+import { orderDiscountAmount, shippingMethodLabel } from "@/lib/order-confirmation";
 import { orderStatusLabel, type OrderPaymentSummary } from "@/types/order";
 
 type OrderSummaryProps = {
@@ -37,6 +37,16 @@ export function OrderSummary({ order }: OrderSummaryProps) {
             {order.shippingAmount === 0 ? "Gratis" : formatPrice(order.shippingAmount)}
           </span>
         </li>
+        {orderDiscountAmount(order) > 0 ? (
+          <li className="flex justify-between text-sm">
+            <span className="uppercase tracking-[0.14em] text-text-secondary">
+              {order.couponCode ? `Cupón ${order.couponCode}` : "Descuento"}
+            </span>
+            <span className="text-text-secondary">
+              −{formatPrice(orderDiscountAmount(order))}
+            </span>
+          </li>
+        ) : null}
         <li className="flex justify-between border-t border-elova-border pt-4 text-sm">
           <span className="uppercase tracking-[0.14em] text-text-secondary">Total</span>
           <span className="text-text-primary">{formatPrice(order.total)}</span>

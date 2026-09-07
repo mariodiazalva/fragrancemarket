@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
       phone: String(body.phone ?? ""),
       dni: String(body.dni ?? ""),
       notes: body.notes ? String(body.notes) : "",
+      coupon: body.coupon ? String(body.coupon) : "",
       shipping: body.shipping,
       billing: body.billing,
       items: Array.isArray(body.items) ? body.items : [],

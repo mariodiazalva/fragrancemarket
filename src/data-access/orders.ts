@@ -1,5 +1,6 @@
 import "server-only";
 
+import { findCoupon } from "@/lib/coupons";
 import { findShalomAgency } from "@/lib/shalom";
 import { STORE_PICKUP, parseBillingAddress, parseShippingAddress } from "@/lib/shipping";
 import { quoteShippingAmount } from "@/lib/shipping-quote";
@@ -28,6 +29,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
   const phoneDigits = (input.phone ?? "").replace(/\D/g, "");
   const dni = (input.dni ?? "").replace(/\D/g, "");
   const extraNotes = input.notes?.trim() ?? "";
+  const coupon = input.coupon?.trim() ?? "";
   let shipping = parseShippingAddress(input.shipping);
   const billing = parseBillingAddress({ ...input.billing, dni });
 
@@ -77,6 +79,10 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
 
   quoteShippingAmount(shipping);
 
+  if (coupon && !findCoupon(coupon)) {
+    throw new Error("Ese código no es válido.");
+  }
+
   if (!billing) {
     throw new Error("Completa la dirección de facturación.");
   }
@@ -114,6 +120,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
     })),
     p_shipping: shipping,
     p_billing: billing,
+    p_coupon: coupon,
   });
 
   if (error) {
@@ -129,6 +136,10 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
 
     if (/invalid_billing/i.test(error.message)) {
       throw new Error("Completa la dirección de facturación.");
+    }
+
+    if (/invalid_coupon/i.test(error.message)) {
+      throw new Error("Ese código no es válido.");
     }
 
     throw new Error("No se pudo registrar el pedido. Inténtalo de nuevo.");
@@ -258,6 +269,16 @@ function mapOrderSummary(value: unknown): OrderPaymentSummary | null {
     total: asNumber(row.total),
     currency,
     shippingAmount: asNumber(row.shippingAmount ?? row.shipping_amount),
+    discountAmount: asNumber(row.discountAmount ?? row.discount_amount),
+    couponCode: (() => {
+      const raw =
+        typeof row.couponCode === "string"
+          ? row.couponCode
+          : typeof row.coupon_code === "string"
+            ? row.coupon_code
+            : "";
+      return raw.trim() || null;
+    })(),
     shipping: parseShippingAddress(row.shipping),
     billing: parseBillingAddress(row.billing),
     customer: mapCustomer(row.customer),

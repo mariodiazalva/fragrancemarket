@@ -12,6 +12,7 @@ export type PlaceOrderInput = {
   phone: string;
   dni: string;
   notes?: string;
+  coupon?: string;
   shipping: ShippingAddress;
   billing: BillingAddress;
   items: PlaceOrderItem[];
@@ -51,6 +52,8 @@ export type OrderPaymentSummary = {
   total: number;
   currency: string;
   shippingAmount: number;
+  discountAmount: number;
+  couponCode: string | null;
   shipping: ShippingAddress | null;
   billing: BillingAddress | null;
   customer: OrderCustomer | null;

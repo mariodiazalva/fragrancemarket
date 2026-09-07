@@ -8,6 +8,7 @@ import {
   billingAddressLines,
   customerFirstName,
   formatPhoneDisplay,
+  orderDiscountAmount,
   orderItemCount,
   orderSubtotal,
   shippingAddressLines,
@@ -40,6 +41,7 @@ export function OrderConfirmation({
   const orderRef = shortOrderNumber(order.id);
   const itemCount = orderItemCount(order.items);
   const subtotal = orderSubtotal(order);
+  const discountAmount = orderDiscountAmount(order);
   const isThankYou =
     phase === "notified" ||
     phase === "paid" ||
@@ -255,6 +257,14 @@ export function OrderConfirmation({
                 {order.shippingAmount === 0 ? "Gratis" : formatPrice(order.shippingAmount)}
               </span>
             </div>
+            {discountAmount > 0 ? (
+              <div className="flex justify-between gap-4">
+                <span className="text-text-secondary">
+                  {order.couponCode ? `Cupón ${order.couponCode}` : "Descuento"}
+                </span>
+                <span className="text-text-primary">−{formatPrice(discountAmount)}</span>
+              </div>
+            ) : null}
             <div className="flex items-baseline justify-between gap-4 border-t border-elova-border pt-4">
               <span className="text-base text-text-primary">Total</span>
               <p className="text-right">

@@ -29,6 +29,7 @@ import {
   SHALOM_SHIPPING_AMOUNT,
   type ShippingMethod,
 } from "@/lib/shipping-quote";
+import { quoteCoupon } from "@/lib/coupons";
 import {
   TRUJILLO_CITY,
   TRUJILLO_DEPARTMENT,
@@ -56,6 +57,7 @@ export function CheckoutView() {
   const [deliveryLine, setDeliveryLine] = useState("");
   const [billingLine, setBillingLine] = useState("");
   const [notes, setNotes] = useState("");
+  const [couponCode, setCouponCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -82,8 +84,15 @@ export function CheckoutView() {
     return null;
   }, [localQuote, method]);
 
-  const payableTotal =
-    shippingAmount === null ? totals.subtotal : totals.subtotal + shippingAmount;
+  const couponQuote = useMemo(
+    () => quoteCoupon(couponCode, items, shippingAmount ?? 0),
+    [couponCode, items, shippingAmount],
+  );
+
+  const payableTotal = useMemo(() => {
+    const base = shippingAmount === null ? totals.subtotal : totals.subtotal + shippingAmount;
+    return Math.max(0, base - (couponQuote?.discountAmount ?? 0));
+  }, [couponQuote, shippingAmount, totals.subtotal]);
 
   useEffect(() => {
     if (!agencyId) {
@@ -207,6 +216,11 @@ export function CheckoutView() {
       return;
     }
 
+    if (couponCode.trim() && !quoteCoupon(couponCode, items, shippingAmount ?? 0)) {
+      setError("Ese código no es válido.");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -219,6 +233,7 @@ export function CheckoutView() {
           phone,
           dni,
           notes,
+          coupon: couponCode,
           shipping,
           billing: {
             line: billingLine,
@@ -545,6 +560,40 @@ export function CheckoutView() {
                       : formatPrice(shippingAmount)}
                 </span>
               </div>
+              <div className="space-y-2">
+                <label
+                  htmlFor="couponCode"
+                  className="text-[0.7rem] uppercase tracking-[0.14em] text-text-secondary"
+                >
+                  Cupón
+                </label>
+                <input
+                  id="couponCode"
+                  name="couponCode"
+                  autoComplete="off"
+                  value={couponCode}
+                  onChange={(event) => setCouponCode(event.target.value)}
+                  placeholder="Código"
+                  className="h-11 w-full min-w-0 border border-elova-black bg-elova-black px-4 text-base text-elova-white caret-elova-white placeholder:text-elova-white/55 focus:border-elova-black focus:outline-none focus:ring-1 focus:ring-elova-white/40 sm:text-sm"
+                />
+                {couponQuote ? (
+                  <p className="text-[0.7rem] leading-relaxed text-text-secondary">
+                    {couponQuote.code}: {couponQuote.label}
+                  </p>
+                ) : couponCode.trim() ? (
+                  <p className="text-[0.7rem] text-red-700">Ese código no es válido.</p>
+                ) : null}
+              </div>
+              {couponQuote ? (
+                <div className="flex justify-between gap-3">
+                  <span className="uppercase tracking-[0.14em] text-text-secondary">
+                    Descuento
+                  </span>
+                  <span className="text-text-secondary">
+                    −{formatPrice(couponQuote.discountAmount)}
+                  </span>
+                </div>
+              ) : null}
               <div className="flex justify-between gap-3">
                 <span className="uppercase tracking-[0.14em] text-text-secondary">Total</span>
                 <span className="text-text-primary">{formatPrice(payableTotal)}</span>
